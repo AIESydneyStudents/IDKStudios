@@ -8,134 +8,133 @@ public class TimeController : Singleton<TimeController>
 {
     [Tooltip("Sets game time scale. Each unit is a second. " +
              "Eg: 60 -> each real world second is a minute ingame.")]
-    [SerializeField] private int m_TimeScale;
-    private float m_TimePassed;
+    [SerializeField] private int timeScale;
+    private float timePassedPrev;
+    private float timePassed;
 
-    [SerializeField] private bool m_TimePaused = false;
+    [SerializeField] private bool timePaused = false;
+    [SerializeField] private int dayStart;
+    [SerializeField] private int dayEnd;
 
-    private int m_DayStart;
-    private int m_DayEnd;
-    private float m_DayLengthInv;
+    private float dayLengthInv;
 
-    private int m_CurrentSecond;
-    private int m_CurrentMinute;
-    private int m_CurrentHour;
-    private int m_CurrentDay;
+    private int prevSecond;
+    private int prevMinute;
+    private int prevHour;
+    private int prevDay;
+
+    [SerializeField] private int currentSecond;
+    [SerializeField] private int currentMinute;
+    [SerializeField] private int currentHour;
+    [SerializeField] private int currentDay;
 
     private void Awake()
     {
-        m_DayLengthInv = 1.0f / (m_DayEnd - m_DayStart);
+        dayLengthInv = 1.0f / (dayEnd - dayStart);
     }
 
     private void Update()
     {
-        if (!m_TimePaused)
+        if (!timePaused)
         {
-            m_TimePassed += Time.deltaTime * m_TimeScale;
+            timePassed += Time.deltaTime * timeScale;
+
+            //NEED CODE TO UPDATE CURRENT_VALUES
         }
     }
 
     public int TimeScale
     {
-        get
-        {
-            return m_TimeScale;
-        }
-        set
-        {
-            m_TimeScale = value;
-        }
+        get { return timeScale; }
+        set { timeScale = value; }
     }
 
-    public int Seconds
+    public int Second
     {
-        get
-        {
-            return m_CurrentSecond;
-        }
+        get { return currentSecond; }
     }
 
     public int TotalSeconds
     {
-        get
-        {
-            return 0;
-        }
+        get { return (int)(timePassed * timeScale); }
     }
 
-    public int Minutes
+    public int Minute
     {
-        get
-        {
-            return m_CurrentMinute;
-        }
+        get { return currentMinute; }
     }
 
     public int TotalMinutes
     {
-        get
-        {
-            return 0;
-        }
+        get { return (int)(TotalSeconds * 0.1666f); }
     }
 
-    public int Hours
+    public int Hour
     {
-        get
-        {
-            return m_CurrentHour;
-        }
+        get { return currentHour; }
     }
 
     public int TotalHours
     {
-        get
-        {
-            return 0;
-        }
+        get { return (int)(TotalMinutes * 0.1666f); }
     }
 
     public int Day
     {
-        get
-        {
-            return m_CurrentDay;
-        }
+        get { return currentDay; }
     }
 
     public int TotalDays
     {
-        get
-        {
-            return 0;
-        }
+        get { return (int)(TotalHours * dayLengthInv); }
     }
 
+    /// <summary>
+    /// Gives a value between 0 and 1 that reflects the 
+    /// progress through the game day window.
+    /// </summary>
     public float DayProgress
     {
-        get
-        {
-            return (Hours - m_DayStart) * m_DayLengthInv;
-        }
+        get { return (Hour - dayStart) * dayLengthInv; }
     }
 
+    /// <summary>
+    /// Pauses game time.
+    /// </summary>
     public void PauseTime()
     {
-        m_TimePaused = true;
+        timePaused = true;
     }
 
+    /// <summary>
+    /// Resumes game time.
+    /// </summary>
     public void ResumeTime()
     {
-        m_TimePaused = false;
+        timePaused = false;
     }
 
+    /// <summary>
+    /// Resets time back to startHour of Day 1
+    /// </summary>
     public void ResetTime()
     {
-        m_TimePassed = 0;
+        timePassed = 0;
     }
 
-    public void StartNextDay()
+    /// <summary>
+    /// If 'a_Day' is not set or 0, next available day will start. 
+    /// Otherwise specified day will start.
+    /// </summary>
+    public void StartDay(int day = 0)
     {
-
+        if (day == 0)
+        {
+            timePassed = 0;
+        }
+        else 
+        { 
+            timePassed = (Day + 1) * (dayEnd - dayStart) * 3600; 
+        }
     }
 }

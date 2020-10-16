@@ -1,35 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Sprites;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TimeController : Singleton<TimeController>
 {
     [Tooltip("Sets game time scale. Each unit is a second. " +
              "Eg: 60 -> each real world second is a minute ingame.")]
-    [SerializeField] private int timeScale;
-    private float timePassedPrev;
-    private float timePassed;
-
+    [SerializeField] private int timeScale = 60;
     [SerializeField] private bool timePaused = false;
-    [SerializeField] private int dayStart;
-    [SerializeField] private int dayEnd;
-
+    [SerializeField] private int dayStart = 0;
+    [SerializeField] private int dayEnd = 10;
+    private float timePassed;
     private float dayLength;
     private float dayLengthInv;
-    private float dayRemainder;
-
-    private int prevSecond;
-    private int prevMinute;
-    private int prevHour;
-    private int prevDay;
-
-    [SerializeField] private int currentSecond;
-    [SerializeField] private int currentMinute;
-    [SerializeField] private int currentHour;
-    [SerializeField] private int currentDay;
+    private int currentSecond;
+    private int currentMinute;
+    private int currentHour;
+    private int currentDay;
 
     private void Awake()
     {
@@ -42,12 +27,30 @@ public class TimeController : Singleton<TimeController>
         if (!timePaused)
         {
             timePassed += Time.deltaTime * timeScale;
-            dayRemainder = timePassed;
 
-            currentDay = (int)(dayRemainder * 0.000278f * dayLengthInv);
-            dayRemainder = currentDay * 3600 * dayLength;
+            if (timePassed > 1.0f)
+            {
+                currentSecond += (int)timePassed;
+                timePassed -= (int)timePassed;
 
-            currentHour = (int)(dayRemainder * 0);
+                if (currentSecond >= 60.0f)
+                {
+                    currentMinute += (int)(currentSecond * 0.01667f);
+                    currentSecond = currentSecond % 60;
+
+                    if (currentMinute >= 60.0f)
+                    {
+                        currentHour += (int)(currentMinute * 0.01667f);
+                        currentMinute = currentMinute % 60;
+
+                        if (currentHour >= dayLength)
+                        {
+                            currentDay += (int)(currentHour * dayLengthInv);
+                            currentHour = currentHour % (int)dayLength;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -64,7 +67,7 @@ public class TimeController : Singleton<TimeController>
 
     public int TotalSeconds
     {
-        get { return (int)(timePassed * timeScale); }
+        get { return TotalMinutes * 60 + currentSecond; }
     }
 
     public int Minute
@@ -74,7 +77,7 @@ public class TimeController : Singleton<TimeController>
 
     public int TotalMinutes
     {
-        get { return (int)(TotalSeconds * 0.1666f); }
+        get { return TotalHours * 60 + currentMinute; }
     }
 
     public int Hour
@@ -84,17 +87,12 @@ public class TimeController : Singleton<TimeController>
 
     public int TotalHours
     {
-        get { return (int)(TotalMinutes * 0.1666f); }
+        get { return currentDay * (int)dayLength + currentHour; }
     }
 
     public int Day
     {
         get { return currentDay; }
-    }
-
-    public int TotalDays
-    {
-        get { return (int)(TotalHours * dayLengthInv); }
     }
 
     /// <summary>
@@ -138,11 +136,17 @@ public class TimeController : Singleton<TimeController>
     {
         if (day == 0)
         {
-            timePassed = 0;
+            currentSecond = 0;
+            currentMinute = 0;
+            currentHour = 0;
+            currentDay = 0;
         }
-        else 
-        { 
-            timePassed = (Day + 1) * (dayEnd - dayStart) * 3600; 
+        else
+        {
+            currentSecond = 0;
+            currentMinute = 0;
+            currentHour = 0;
+            currentDay = day;
         }
     }
 }

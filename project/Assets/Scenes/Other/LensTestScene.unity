@@ -233,14 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f95e40247b504478e6eff08a998c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 60
+  timeScale: 10000
   timePaused: 0
   dayStart: 0
   dayEnd: 10
-  currentSecond: 0
-  currentMinute: 0
-  currentHour: 0
-  currentDay: 0
 --- !u!4 &1085989437
 Transform:
   m_ObjectHideFlags: 0

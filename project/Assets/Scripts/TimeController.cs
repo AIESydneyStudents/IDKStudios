@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Sprites;
 using UnityEngine;
 
 public class TimeController : Singleton<TimeController>
@@ -16,7 +17,9 @@ public class TimeController : Singleton<TimeController>
     [SerializeField] private int dayStart;
     [SerializeField] private int dayEnd;
 
+    private float dayLength;
     private float dayLengthInv;
+    private float dayRemainder;
 
     private int prevSecond;
     private int prevMinute;
@@ -30,7 +33,8 @@ public class TimeController : Singleton<TimeController>
 
     private void Awake()
     {
-        dayLengthInv = 1.0f / (dayEnd - dayStart);
+        dayLength = dayEnd - dayStart;
+        dayLengthInv = 1.0f / dayLength;
     }
 
     private void Update()
@@ -38,8 +42,12 @@ public class TimeController : Singleton<TimeController>
         if (!timePaused)
         {
             timePassed += Time.deltaTime * timeScale;
+            dayRemainder = timePassed;
 
-            //NEED CODE TO UPDATE CURRENT_VALUES
+            currentDay = (int)(dayRemainder * 0.000278f * dayLengthInv);
+            dayRemainder = currentDay * 3600 * dayLength;
+
+            currentHour = (int)(dayRemainder * 0);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(
     fileName = "New Additive", 
@@ -17,39 +18,36 @@ public class Additive : ScriptableObject
     // These are the properties of the additive.
     [Header("Additive Properties")]
     
-    [Tooltip("Additive name. Additive.GetAdditive uses this" +
+    [Tooltip("Additive name. Additive.GetAdditive uses this " +
              "field to find this additive")]
     [SerializeField]
     private string additiveName;
 
-    [Tooltip("List of additives that need to be part of" +
+    [Tooltip("List of additives that need to be part of " +
              "the order before this additive can be added")]
     [SerializeField]
     private string[] additivePrerequisites;
     private Additive[] prerequisites;
 
-    [Tooltip("Determines whether or not it will be added as" +
-             "a persistant ingredient that will also show up" +
-             "on the order docket")]
+    [Tooltip("Sets additive to affect order attributes without " +
+             "being listed as an ingredient in the order")]
+    [SerializeField]
+    private bool useEffectOnly;
+
+    [Tooltip("Sets additive as visible ingredient on docket. Does " +
+             "nothing if useEffectOnly is set to true")]
     [SerializeField]
     private bool isVisibleIngredient;
+    private static int visibleIngredientCount;
 
-    // The specific attributes.
-    [Header("Additive Attributes")]
-
-    [Range(0.0f, 1.0f)]
     [SerializeField]
-    private float effectTaste;
+    private AttributeModifier effectProfile;
 
-    [Range(0.0f, 1.0f)]
-    [SerializeField]
-    private float effectFlavour;
+    #endregion
 
-    [Range(0.0f, 1.0f)]
-    [SerializeField]
-    private float effectTemperature;
+    #region Properties
 
-    private TeaProfile effectProfile;
+    public static int VisibleIngredientsCount { get { return visibleIngredientCount; } }
 
     #endregion
 
@@ -67,6 +65,13 @@ public class Additive : ScriptableObject
         foreach (Additive additive in additives)
         {
             additiveList.Add(additive.additiveName, additive);
+
+            // If additive will appear on docket as visible ingredient,
+            // visible ingredient count is incremented.
+            if (additive.isVisibleIngredient)
+            {
+                visibleIngredientCount++;
+            }
         }
 
         // Every loaded additive is initialized.
@@ -80,20 +85,21 @@ public class Additive : ScriptableObject
     public void Initialize()
     {
         // A prerequisite list is made for this additive.
-        prerequisites = new Additive[additivePrerequisites.Length];
+        //prerequisites = new Additive[additivePrerequisites.Length];
 
         // Each additive in the additive's prerequisite list is
         // found and added to the prerequisites.
-        for (int i = 0; i < additivePrerequisites.Length; i++)
-        {
-            string thisAdditiveName = additivePrerequisites[i];
-            prerequisites[i] = additiveList[thisAdditiveName];
-        }
+        //for (int i = 0; i < additivePrerequisites.Length; i++)
+        //{
+        //    string thisAdditiveName = additivePrerequisites[i];
+        //    prerequisites[i] = additiveList[thisAdditiveName];
+        //}
 
-        effectProfile = new TeaProfile(
-            effectTaste, 
-            effectFlavour, 
-            effectTemperature);
+        // Effect profile is initalized with specified attributes.
+        //effectProfile = new AttributeModifier(
+        //    effectTaste, 
+        //    effectFlavour, 
+        //    effectTemperature);
     }
 
     #endregion

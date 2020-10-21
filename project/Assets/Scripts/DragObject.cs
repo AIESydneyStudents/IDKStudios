@@ -79,7 +79,7 @@ public class DragObject : Singleton<DragObject>
             transform.position = workStationAnchor;
 
             // THIS WILL BE REMOVED, PUT IN FOR TESTING PURPOSES 
-            Destroy(TeleportAnchor);
+            //Destroy(TeleportAnchor);
 
             snappedToStation = true;
         }

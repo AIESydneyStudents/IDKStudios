@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7365591547433055261}
   - component: {fileID: 7365591547433055260}
   - component: {fileID: 7365591547433055263}
-  - component: {fileID: 7467550706724038510}
+  - component: {fileID: 1661478886204849005}
   - component: {fileID: 7365591547433055235}
   m_Layer: 0
   m_Name: Cube
@@ -95,7 +95,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &7467550706724038510
+--- !u!135 &1661478886204849005
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,8 +106,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2158124
-  m_Center: {x: 0, y: 0.21940184, z: 0.0043008327}
+  m_Radius: 1.0969863
+  m_Center: {x: 0.056761503, y: -0.23756123, z: -0.018675089}
 --- !u!54 &7365591547433055235
 Rigidbody:
   m_ObjectHideFlags: 0

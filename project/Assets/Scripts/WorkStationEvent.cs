@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WorkStationEvent : Singleton<WorkStationEvent>
 {
-    private bool inUse;
+    [HideInInspector]
+    public bool inUse;
 
     // Start is called before the first frame update
     void Start()
@@ -15,25 +16,14 @@ public class WorkStationEvent : Singleton<WorkStationEvent>
     // Update is called once per frame
     void Update()
     {
-        //if ()
+        //if (DragObject.instance.onWorkStation == true)
         //{
-
+        //    Destroy(gameObject);
         //}
-    }
 
-    private void IsStationInUse()
-    {
-        if (DragObject.instance.onWorkStation == true)
-        {
-
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        if (collider.gameObject.tag == "Item")
-        {
-            inUse = true;
-        }
+        //else if (DragObject.instance.onWorkStation == false)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }

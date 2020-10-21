@@ -129,7 +129,7 @@ public class TimeController : Singleton<TimeController>
     }
 
     /// <summary>
-    /// If 'a_Day' is not set or 0, next available day will start. 
+    /// If 'day' is not set or 0, next available day will start. 
     /// Otherwise specified day will start.
     /// </summary>
     public void StartDay(int day = 0)

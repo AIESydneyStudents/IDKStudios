@@ -16,14 +16,15 @@ public class WorkStationEvent : Singleton<WorkStationEvent>
     // Update is called once per frame
     void Update()
     {
-        //if (DragObject.instance.onWorkStation == true)
-        //{
-        //    Destroy(gameObject);
-        //}
+        // Enables/Disables colliders if occupied or not
+        if (inUse)
+        {
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+        }
 
-        //else if (DragObject.instance.onWorkStation == false)
-        //{
-        //    Destroy(gameObject);
-        //}
+        else if (!inUse)
+        {
+            gameObject.GetComponent<SphereCollider>().enabled = true;
+        }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class DragObject : Singleton<DragObject>
 {
     private Vector3 originalObjPos;
-    private Vector3 workStationAnchor;
     private Vector3 offset;
 
     [HideInInspector]
@@ -17,6 +16,8 @@ public class DragObject : Singleton<DragObject>
     [SerializeField]
     public GameObject StartAnchor;
     private GameObject TeleportAnchor;
+    private GameObject TargetObject;
+    private GameObject PreviousObject;
 
     private Rigidbody rb;
 
@@ -36,6 +37,7 @@ public class DragObject : Singleton<DragObject>
     {
         Debug.Log(onWorkStation);
 
+        // DEBUGGING PURPOSES ONLY - can remove later
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("DragDropTest");
@@ -45,12 +47,14 @@ public class DragObject : Singleton<DragObject>
     // Returns mouse coordinates
     private Vector3 GetMouseWorldPos()
     {
+        // Raycast between certain layers
         int layerMask = 1 << 9;
         layerMask = ~layerMask;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        // If raycast recieves a hit
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             return hit.point;
@@ -62,33 +66,76 @@ public class DragObject : Singleton<DragObject>
         }
     }
 
-    // When mouse is released
-    void OnMouseUp()
+    // Used to preview object on a nearby workstation
+    private void Preview()
     {
+        // Raycast between certain layers
         int layerMask = 1 << 8;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        // If raycast recieves a hit
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
-            TeleportAnchor = hit.transform.GetChild(0).gameObject;
-            workStationAnchor = TeleportAnchor.transform.position;
+            transform.position = hit.transform.GetChild(0).gameObject.transform.position;
+        }
+    }
 
-            Debug.Log("Snapped to Work Station");
-            transform.position = workStationAnchor;
+    // When mouse is released
+    void OnMouseUp()
+    {
+        // Raycast between certain layers
+        int layerMask = 1 << 8;
 
-            // THIS WILL BE REMOVED, PUT IN FOR TESTING PURPOSES 
-            //Destroy(TeleportAnchor);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-            snappedToStation = true;
+        // If raycast receives a hit
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            // Item's destination
+            TargetObject = hit.transform.gameObject;
+
+            // If workstation is not occupied 
+            if (TargetObject.GetComponent<WorkStationEvent>().inUse == false)
+            {
+                // Sets item's anchor to anchor attchacted to workstation
+                TeleportAnchor = hit.transform.GetChild(0).gameObject;
+
+                // Sets item's position to anchor
+                transform.position = TeleportAnchor.transform.position;
+
+                // Sets the workstation teleported to as occupied 
+                TargetObject.GetComponent<WorkStationEvent>().inUse = true;
+
+                // If item had a previous workstation it is not longer in use
+                if (PreviousObject != null)
+                {
+                    PreviousObject.GetComponent<WorkStationEvent>().inUse = false;
+                }
+
+                // Sets current workstation as previous workstation
+                PreviousObject = TargetObject;
+            }
         }
 
+        // If raycast does not receive a hit
         else
         {
+            // Sets object's position to it's starting position
             transform.position = originalObjPos;
 
-            snappedToStation = false;
+            // Current Workstation is not longer occupied
+            TargetObject.GetComponent<WorkStationEvent>().inUse = false;
+
+            // If item had a previous workstation it is not longer in use
+            if (PreviousObject != null)
+            {
+                PreviousObject.GetComponent<WorkStationEvent>().inUse = false;
+            }
+
+            PreviousObject = null;
         }
     }
 
@@ -102,8 +149,12 @@ public class DragObject : Singleton<DragObject>
     void OnMouseDrag()
     {
         transform.position = GetMouseWorldPos() + offset;
+
+        // Calls function to preview object on workstation
+        Preview();
     }
 
+    // CAN POSSIBLY GET RID OF
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "WorkStation")

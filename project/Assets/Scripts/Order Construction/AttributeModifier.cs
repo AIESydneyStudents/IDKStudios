@@ -30,9 +30,9 @@ public struct AttributeModifier
 
     public AttributeModifier(float taste, float flavour, float temperature)
     {
-        this.effectTaste = taste;
-        this.effectFlavour = flavour;
-        this.effectTemperature = temperature;
+        effectTaste = taste;
+        effectFlavour = flavour;
+        effectTemperature = temperature;
     }
 
     #endregion

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -12,7 +13,7 @@ public class Additive : ScriptableObject
     #region Fields
 
     // Additive dictionary: AdditiveName|Additive
-    private static Dictionary<string, Additive> additiveList = 
+    private static Dictionary<string, Additive> additiveLookup = 
         new Dictionary<string, Additive>();
 
     // These are the properties of the additive.
@@ -23,11 +24,12 @@ public class Additive : ScriptableObject
     [SerializeField]
     private string additiveName;
 
+    private int index;
+
     [Tooltip("List of additives that need to be part of " +
              "the order before this additive can be added")]
     [SerializeField]
-    private string[] additivePrerequisites;
-    private Additive[] prerequisites;
+    public AdditivePrerequisite[] prerequisites;
 
     [Tooltip("Sets additive to affect order attributes without " +
              "being listed as an ingredient in the order")]
@@ -38,7 +40,11 @@ public class Additive : ScriptableObject
              "nothing if useEffectOnly is set to true")]
     [SerializeField]
     private bool isVisibleIngredient;
-    private static int visibleIngredientCount;
+
+    [Tooltip("Sets additive as reversible. Example: Sugar can not " +
+             "be removed. Heat can be removed (cooling down)")]
+    [SerializeField]
+    private bool canBeRemoved;
 
     [SerializeField]
     private AttributeModifier effectProfile;
@@ -47,12 +53,15 @@ public class Additive : ScriptableObject
 
     #region Properties
 
-    public static int VisibleIngredientsCount { get { return visibleIngredientCount; } }
+    public int Index { get { return index; } }
+
+    public static int AdditiveCount { get { return additiveLookup.Count; } }
 
     #endregion
 
     #region Functions
 
+    // Runs at game start. Loads assets into RAM and sets them up.
     [RuntimeInitializeOnLoadMethod(
         RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     private static void InitializeAll()
@@ -64,18 +73,15 @@ public class Additive : ScriptableObject
         // Adds all loaded additives to static additiveList.
         foreach (Additive additive in additives)
         {
-            additiveList.Add(additive.additiveName, additive);
+            // Additive is added to the lookup by it's name.
+            additiveLookup.Add(additive.additiveName, additive);
 
-            // If additive will appear on docket as visible ingredient,
-            // visible ingredient count is incremented.
-            if (additive.isVisibleIngredient)
-            {
-                visibleIngredientCount++;
-            }
+            // Additive's index is set.
+            additive.index = additiveLookup.Count - 1;
         }
 
         // Every loaded additive is initialized.
-        foreach (var additivePair in additiveList)
+        foreach (var additivePair in additiveLookup)
         {
             additivePair.Value.Initialize();
         }
@@ -84,22 +90,26 @@ public class Additive : ScriptableObject
     // Sets up fields.
     public void Initialize()
     {
-        // A prerequisite list is made for this additive.
-        //prerequisites = new Additive[additivePrerequisites.Length];
+        // Each additive prerequisite in the additive's prerequisite 
+        // list is initialized.
+        foreach (AdditivePrerequisite prerequisite in prerequisites)
+        {
+            prerequisite.Initialize();
+        }
+    }
 
-        // Each additive in the additive's prerequisite list is
-        // found and added to the prerequisites.
-        //for (int i = 0; i < additivePrerequisites.Length; i++)
-        //{
-        //    string thisAdditiveName = additivePrerequisites[i];
-        //    prerequisites[i] = additiveList[thisAdditiveName];
-        //}
+    // Get Additive by name. Returns null if additive doesn't exist.
+    public static Additive GetAdditive(string name)
+    {
+        return additiveLookup.TryGetValue(name, out Additive result) ? 
+            result : null;
+    }
 
-        // Effect profile is initalized with specified attributes.
-        //effectProfile = new AttributeModifier(
-        //    effectTaste, 
-        //    effectFlavour, 
-        //    effectTemperature);
+    // Get Additive by index. Returns null if index is out of range.
+    public static Additive GetAdditive(int index)
+    {
+        return additiveLookup.Count > index ? 
+            additiveLookup.ElementAt(index).Value : null;
     }
 
     #endregion

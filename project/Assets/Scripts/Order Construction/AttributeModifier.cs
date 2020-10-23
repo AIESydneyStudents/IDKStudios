@@ -26,6 +26,14 @@ public struct AttributeModifier
 
     #endregion
 
+    #region Properties
+
+    public float Taste { get { return effectTaste; } }
+    public float Flavour { get { return effectFlavour; } }
+    public float Temperature { get { return effectTemperature; } }
+
+    #endregion
+
     #region Functions
 
     public AttributeModifier(float taste, float flavour, float temperature)

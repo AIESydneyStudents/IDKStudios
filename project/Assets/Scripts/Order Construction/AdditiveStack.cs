@@ -4,25 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public struct AdditiveStack
+public class AdditiveStack
 {
     #region Fields
 
-    private int index;
-    private int count;
-    private int countMax;
+    public int index;
+    public int count;
 
     #endregion
 
     #region Properties
 
-    public int Index { get { return index; } }
-
-    public int Count { get { return count; } }
-
-    public int CountMax { get { return countMax; } }
-
     public Additive Additive { get { return Additive.GetAdditive(index); } }
+
+    #endregion
+
+    #region Functions
 
     #endregion
 }

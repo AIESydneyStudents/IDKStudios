@@ -12,6 +12,8 @@ public class DragObject : Singleton<DragObject>
     public bool snappedToStation;
     [HideInInspector]
     public bool onWorkStation;
+    [SerializeField]
+    public bool needsAnchor;
 
     [SerializeField]
     public GameObject StartAnchor;
@@ -123,8 +125,11 @@ public class DragObject : Singleton<DragObject>
         // If raycast does not receive a hit
         else
         {
-            // Sets object's position to it's starting position
-            transform.position = originalObjPos;
+            if (needsAnchor)
+            {
+                // Sets object's position to it's starting position
+                transform.position = originalObjPos;
+            }
 
             // Current Workstation is not longer occupied
             TargetObject.GetComponent<WorkStationEvent>().inUse = false;
@@ -142,7 +147,7 @@ public class DragObject : Singleton<DragObject>
     // When mouse is down
     void OnMouseDown()
     {
-        offset = new Vector3(0, 0.1f, -0.1f);
+        offset = new Vector3(0, 0.05f, -0.1f);
     }
 
     // When mouse is being dragged across screen

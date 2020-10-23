@@ -21,6 +21,7 @@ public struct AdditivePrerequisite : IComparable<AdditivePrerequisite>
 
     [Tooltip("All counts less or equal are valid")]
     [Range(0.0f, 100.0f)]
+    [SerializeField]
     private int countMax;
 
     private int additiveIndex;

@@ -122,5 +122,10 @@ public class Additive : ScriptableObject
             additiveLookup.ElementAt(index).Value : null;
     }
 
+    public static Additive[] GetAllAdditives()
+    {
+        return additiveLookup.Values.ToArray();
+    }
+
     #endregion
 }

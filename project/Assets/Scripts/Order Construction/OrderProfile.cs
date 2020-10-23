@@ -98,21 +98,31 @@ public class OrderProfile
             // Used to keep track of greatest insertion position.
             int beforeIndex = -1;
 
-            //Needs to be inserted in correct location to maintain ordering.
-            for (int i = 0; i < additiveRepository.Count; i++)
+            // Check if additiveRepository is empty. If so, add.
+            if (additiveRepository.Count == 0)
             {
-                // If index after beforeIndex is still less than the additive's
-                // index, move beforeIndex up to new index.
-                if (additiveRepository[beforeIndex + 1].index < additive.index)
-                {
-                    beforeIndex++;
-                }
+                additiveRepository.Insert(0, additive);
+            }
 
-                // If index after beforeIndex is greater than additive's index,
-                // insert here.
-                else
+            // If not, needs to be inserted in correct location to 
+            // maintain ordering.
+            else
+            {
+                for (int i = 0; i < additiveRepository.Count; i++)
                 {
-                    additiveRepository.Insert(beforeIndex + 1, additive);
+                    // If index after beforeIndex is still less than the additive's
+                    // index, move beforeIndex up to new index.
+                    if (additiveRepository[beforeIndex + 1].index < additive.index)
+                    {
+                        beforeIndex++;
+                    }
+
+                    // If index after beforeIndex is greater than additive's index,
+                    // insert here.
+                    else
+                    {
+                        additiveRepository.Insert(beforeIndex + 1, additive);
+                    }
                 }
             }
         }

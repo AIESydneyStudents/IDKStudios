@@ -21,6 +21,12 @@ public class AdditiveStack
 
     #region Functions
 
+    public AdditiveStack(int index, int count)
+    {
+        this.index = index;
+        this.count = count;
+    }
+
     #endregion
 }
 

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -24,38 +27,42 @@ public class Additive : ScriptableObject
     [SerializeField]
     private string additiveName;
 
-    private int index;
+    private int additiveIndex;
+
+    private int additiveCountMax;
+
+    [SerializeField]
+    public AttributeModifier effectProfile;
 
     [Tooltip("List of additives that need to be part of " +
              "the order before this additive can be added")]
-    [SerializeField]
-    public AdditivePrerequisite[] prerequisites;
+    public AdditivePrerequisite[] additivePrerequisites;
+
+    [Tooltip("Attributes that order profile needs before " +
+             "this additive can be added")]
+    public AttributePrerequisite attributePrerequisite;
 
     [Tooltip("Sets additive to affect order attributes without " +
              "being listed as an ingredient in the order")]
-    [SerializeField]
-    private bool useEffectOnly;
+    public bool useEffectOnly;
 
     [Tooltip("Sets additive as visible ingredient on docket. Does " +
              "nothing if useEffectOnly is set to true")]
-    [SerializeField]
-    private bool isVisibleIngredient;
-
-    [Tooltip("Sets additive as reversible. Example: Sugar can not " +
-             "be removed. Heat can be removed (cooling down)")]
-    [SerializeField]
-    private bool canBeRemoved;
-
-    [SerializeField]
-    private AttributeModifier effectProfile;
+    public bool exposeIngredient;
 
     #endregion
 
     #region Properties
 
-    public int Index { get { return index; } }
+    // Gets the index of this additive.
+    public int Index { get { return additiveIndex; } }
 
+    // Gets the count of all loaded additives.
     public static int AdditiveCount { get { return additiveLookup.Count; } }
+
+    // Gets the maximum amount of this additive that can be
+    // contained in an order profile.
+    public int AdditiveCountMax { get { return additiveCountMax; } }
 
     #endregion
 
@@ -77,7 +84,7 @@ public class Additive : ScriptableObject
             additiveLookup.Add(additive.additiveName, additive);
 
             // Additive's index is set.
-            additive.index = additiveLookup.Count - 1;
+            additive.additiveIndex = additiveLookup.Count - 1;
         }
 
         // Every loaded additive is initialized.
@@ -90,9 +97,12 @@ public class Additive : ScriptableObject
     // Sets up fields.
     public void Initialize()
     {
+        // Sort list of additive prerequisites by index.
+        Array.Sort(additivePrerequisites);
+
         // Each additive prerequisite in the additive's prerequisite 
         // list is initialized.
-        foreach (AdditivePrerequisite prerequisite in prerequisites)
+        foreach (AdditivePrerequisite prerequisite in additivePrerequisites)
         {
             prerequisite.Initialize();
         }

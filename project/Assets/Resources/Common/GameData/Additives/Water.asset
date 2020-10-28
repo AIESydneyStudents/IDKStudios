@@ -17,10 +17,7 @@ MonoBehaviour:
     effectTaste: 0
     effectFlavour: 0
     effectTemperature: -0.1
-  additivePrerequisites:
-  - additiveName: Cup
-    countMin: 0
-    countMax: 100
+  additivePrerequisites: []
   attributePrerequisite:
     tasteMin: 0
     tasteMax: 0

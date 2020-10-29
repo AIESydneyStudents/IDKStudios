@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4873785125707792812}
   - component: {fileID: -7293159481721850534}
   - component: {fileID: 7907156183478760107}
-  - component: {fileID: 6102403678748038863}
+  - component: {fileID: 7160726252846776731}
   m_Layer: 9
   m_Name: CupTest
   m_TagString: Item
@@ -112,7 +112,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &7907156183478760107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   onWorkStation: 0
   needsAnchor: 0
   StartAnchor: {fileID: 0}
---- !u!114 &6102403678748038863
+--- !u!114 &7160726252846776731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,6 +138,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2205129607112864168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ea7a1bc852942bd9f6cfc234409c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1335336bc0966e14b8011cfe023fc70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SnapToSaucer : MonoBehaviour
 {
+    private bool onSaucer = false;
+
+    private GameObject saucer;
+
     private void Preview()
     {
         // Raycast between certain layers
@@ -19,11 +23,23 @@ public class SnapToSaucer : MonoBehaviour
         }
     }
 
+    private void OnMouseUp()
+    {
+        if (onSaucer)
+        {
+            transform.parent = saucer.transform;
+        }
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Saucer")
         {
             Preview();
+
+            saucer = collider.gameObject;
+
+            onSaucer = true;
         }
     }
 
@@ -32,6 +48,10 @@ public class SnapToSaucer : MonoBehaviour
         if (collider.gameObject.tag == "Saucer")
         {
             Preview();
+
+            saucer = null;
+
+            onSaucer = false;
         }
     }
 }

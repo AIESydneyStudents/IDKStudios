@@ -20,15 +20,15 @@ public class AttributePrerequisite
     [SerializeField]
     private float tasteMax;
 
-    [Tooltip("All flavour values greater or equal are valid")]
+    [Tooltip("All strength values greater or equal are valid")]
     [Range(0.0f, 1.0f)]
     [SerializeField]
-    private float flavourMin;
+    private float strengthMin;
 
-    [Tooltip("All flavour values less or equal are valid")]
+    [Tooltip("All strength values less or equal are valid")]
     [Range(0.0f, 1.0f)]
     [SerializeField]
-    private float flavourMax;
+    private float strengthMax;
 
     [Tooltip("All temperature values greater or equal are valid")]
     [Range(0.0f, 1.0f)]
@@ -60,15 +60,15 @@ public class AttributePrerequisite
         }
     }
 
-    public bool IsFlavourValid(float flavour)
+    public bool IsStrengthValid(float strength)
     {
-        if (flavourMin <= flavourMax)
+        if (strengthMin <= strengthMax)
         {
-            return (flavour >= flavourMin && flavour <= flavourMax);
+            return (strength >= strengthMin && strength <= strengthMax);
         }
         else
         {
-            return (flavour <= flavourMax || flavour >= flavourMin);
+            return (strength <= strengthMax || strength >= strengthMin);
         }
     }
 

@@ -15,15 +15,18 @@ MonoBehaviour:
   additiveName: Water
   effectProfile:
     effectTaste: 0
-    effectFlavour: 0
+    effectStrength: 0
     effectTemperature: -0.1
   additivePrerequisites: []
   attributePrerequisite:
     tasteMin: 0
-    tasteMax: 0
-    flavourMin: 0
-    flavourMax: 0
+    tasteMax: 1
+    strengthMin: 0
+    strengthMax: 1
     temperatureMin: 0
-    temperatureMax: 0
+    temperatureMax: 1
+  collectiveWhitelist:
+  - collectiveName: Kettle
+    collectiveMax: 4
   useEffectOnly: 0
   exposeIngredient: 0

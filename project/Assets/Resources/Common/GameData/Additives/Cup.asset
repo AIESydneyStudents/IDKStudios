@@ -15,15 +15,16 @@ MonoBehaviour:
   additiveName: Cup
   effectProfile:
     effectTaste: 0
-    effectFlavour: 0
+    effectStrength: 0
     effectTemperature: 0
   additivePrerequisites: []
   attributePrerequisite:
     tasteMin: 0
     tasteMax: 0
-    flavourMin: 0
-    flavourMax: 0
+    strengthMin: 0
+    strengthMax: 0
     temperatureMin: 0
     temperatureMax: 0
+  collectiveWhitelist: []
   useEffectOnly: 0
   exposeIngredient: 0

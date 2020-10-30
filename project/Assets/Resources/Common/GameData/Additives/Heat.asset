@@ -15,18 +15,21 @@ MonoBehaviour:
   additiveName: Heat
   effectProfile:
     effectTaste: 0
-    effectFlavour: 0
+    effectStrength: 0
     effectTemperature: 0.1
   additivePrerequisites:
   - additiveName: Water
-    countMin: 0
+    countMin: 1
     countMax: 100
   attributePrerequisite:
     tasteMin: 0
-    tasteMax: 0
-    flavourMin: 0
-    flavourMax: 0
+    tasteMax: 1
+    strengthMin: 0
+    strengthMax: 1
     temperatureMin: 0
-    temperatureMax: 0
+    temperatureMax: 1
+  collectiveWhitelist:
+  - collectiveName: Kettle
+    collectiveMax: 0
   useEffectOnly: 1
   exposeIngredient: 0

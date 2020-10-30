@@ -18,7 +18,7 @@ public struct AttributeModifier
 
     [Range(-1.0f, 1.0f)]
     [SerializeField]
-    private float effectFlavour;
+    private float effectStrength;
 
     [Range(-1.0f, 1.0f)]
     [SerializeField]
@@ -29,17 +29,17 @@ public struct AttributeModifier
     #region Properties
 
     public float Taste { get { return effectTaste; } }
-    public float Flavour { get { return effectFlavour; } }
+    public float Strength { get { return effectStrength; } }
     public float Temperature { get { return effectTemperature; } }
 
     #endregion
 
     #region Functions
 
-    public AttributeModifier(float taste, float flavour, float temperature)
+    public AttributeModifier(float taste, float strength, float temperature)
     {
         effectTaste = taste;
-        effectFlavour = flavour;
+        effectStrength = strength;
         effectTemperature = temperature;
     }
 

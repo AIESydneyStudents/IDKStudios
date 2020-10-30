@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -27,9 +28,8 @@ public class Additive : ScriptableObject
     [SerializeField]
     private string additiveName;
 
+    // Index for this additive in additiveLookup.
     private int additiveIndex;
-
-    private int additiveCountMax;
 
     [SerializeField]
     public AttributeModifier effectProfile;
@@ -41,6 +41,11 @@ public class Additive : ScriptableObject
     [Tooltip("Attributes that order profile needs before " +
              "this additive can be added")]
     public AttributePrerequisite attributePrerequisite;
+
+    [Tooltip("Collectives that this additive can be added to")]
+    public List<CollectiveWhitelistEntry> collectiveWhitelist;
+
+    private List<int> collectiveWhitelistIndices = new List<int>();
 
     [Tooltip("Sets additive to affect order attributes without " +
              "being listed as an ingredient in the order")]
@@ -60,18 +65,12 @@ public class Additive : ScriptableObject
     // Gets the count of all loaded additives.
     public static int AdditiveCount { get { return additiveLookup.Count; } }
 
-    // Gets the maximum amount of this additive that can be
-    // contained in an order profile.
-    public int AdditiveCountMax { get { return additiveCountMax; } }
-
     #endregion
 
     #region Functions
 
     // Runs at game start. Loads assets into RAM and sets them up.
-    [RuntimeInitializeOnLoadMethod(
-        RuntimeInitializeLoadType.AfterAssembliesLoaded)]
-    private static void InitializeAll()
+    public static void InitializeAll()
     {
         // Loads all additives in Resources folder.
         Additive[] additives =
@@ -80,11 +79,12 @@ public class Additive : ScriptableObject
         // Adds all loaded additives to static additiveList.
         foreach (Additive additive in additives)
         {
+            Additive newAdditive = Instantiate(additive);
             // Additive is added to the lookup by it's name.
-            additiveLookup.Add(additive.additiveName, additive);
+            additiveLookup.Add(additive.additiveName, newAdditive);
 
             // Additive's index is set.
-            additive.additiveIndex = additiveLookup.Count - 1;
+            newAdditive.additiveIndex = additiveLookup.Count - 1;
         }
 
         // Every loaded additive is initialized.
@@ -106,6 +106,39 @@ public class Additive : ScriptableObject
         {
             prerequisite.Initialize();
         }
+
+        // Each whitelist entry is added to collectiveIndexWhitelist
+        foreach (CollectiveWhitelistEntry whitelistEntry in collectiveWhitelist)
+        {
+            whitelistEntry.Initialize();
+            collectiveWhitelistIndices.Add(whitelistEntry.Index);
+        }
+    }
+
+    // Determine if given index is in collective whitelist.
+    public bool InWhitelist(int index)
+    {
+        return collectiveWhitelistIndices.Contains(index);
+    }
+
+    // Determines max count of this additive that given
+    // collective can contain.
+    public int GetMaxCount(Collective collective)
+    {
+        if (!collectiveWhitelistIndices.Contains(collective.Index))
+        {
+            return 0;
+        }
+
+        foreach (CollectiveWhitelistEntry entry in collectiveWhitelist)
+        {
+            if (entry.Index == collective.Index)
+            {
+                return entry.CollectiveMax;
+            }
+        }
+
+        return 0;
     }
 
     // Get Additive by name. Returns null if additive doesn't exist.
@@ -122,6 +155,7 @@ public class Additive : ScriptableObject
             additiveLookup.ElementAt(index).Value : null;
     }
 
+    // Get an array of all additives loaded.
     public static Additive[] GetAllAdditives()
     {
         return additiveLookup.Values.ToArray();

@@ -27,6 +27,12 @@ public class AdditiveStack
         this.count = count;
     }
 
+    public AdditiveStack(string name, int count)
+    {
+        this.index = Additive.GetAdditive(name).Index;
+        this.count = count;
+    }
+
     #endregion
 }
 

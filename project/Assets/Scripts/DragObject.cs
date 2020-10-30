@@ -21,8 +21,6 @@ public class DragObject : Singleton<DragObject>
     private GameObject TargetObject;
     private GameObject PreviousObject;
 
-    private Rigidbody rb;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,20 +28,6 @@ public class DragObject : Singleton<DragObject>
         originalObjPos = transform.position;
         onWorkStation = false;
         snappedToStation = false;
-
-        rb = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(onWorkStation);
-
-        // DEBUGGING PURPOSES ONLY - can remove later
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("DragDropTest");
-        }
     }
 
     // Returns mouse coordinates

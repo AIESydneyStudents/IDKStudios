@@ -6,12 +6,15 @@ public class SnapToSaucer : MonoBehaviour
 {
     private bool onSaucer = false;
 
-    private GameObject saucer;
+    [SerializeField]
+    public GameObject ServingStation;
+    private GameObject TeleportAnchor;
+    private GameObject Saucer;
 
     private void Preview()
     {
         // Raycast between certain layers
-        int layerMask = 1 << 9;
+        int layerMask = 1 << 8;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -27,7 +30,13 @@ public class SnapToSaucer : MonoBehaviour
     {
         if (onSaucer)
         {
-            transform.parent = saucer.transform;
+            transform.parent = Saucer.transform;
+
+            ServingStation.GetComponent<WorkStationEvent>().inUse = true;
+
+            TeleportAnchor = ServingStation.transform.GetChild(0).gameObject;
+
+            Saucer.transform.position = TeleportAnchor.transform.position;
         }
     }
 
@@ -37,7 +46,7 @@ public class SnapToSaucer : MonoBehaviour
         {
             Preview();
 
-            saucer = collider.gameObject;
+            Saucer = collider.gameObject;
 
             onSaucer = true;
         }
@@ -49,7 +58,7 @@ public class SnapToSaucer : MonoBehaviour
         {
             Preview();
 
-            saucer = null;
+            Saucer = null;
 
             onSaucer = false;
         }

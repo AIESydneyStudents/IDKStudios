@@ -47,6 +47,10 @@ public class Additive : ScriptableObject
 
     private List<int> collectiveWhitelistIndices = new List<int>();
 
+    [Tooltip("Does this additive affect weighting when two collectives " +
+             "merge with either or both containing this additive.")]
+    public bool isVolumetric;
+
     [Tooltip("Sets additive to affect order attributes without " +
              "being listed as an ingredient in the order")]
     public bool useEffectOnly;

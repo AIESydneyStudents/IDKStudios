@@ -131,7 +131,7 @@ public class DragObject : Singleton<DragObject>
     // When mouse is down
     void OnMouseDown()
     {
-        offset = new Vector3(0, 0.05f, -0.1f);
+        offset = new Vector3(0, 0.05f, 0.1f);
     }
 
     // When mouse is being dragged across screen

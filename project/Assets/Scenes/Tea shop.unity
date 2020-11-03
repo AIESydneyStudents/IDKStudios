@@ -3597,12 +3597,42 @@ PrefabInstance:
     - target: {fileID: 504544944373441930, guid: d4c565f91658e2441917326149e8fef8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.411
+      value: -0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 504544944373441930, guid: d4c565f91658e2441917326149e8fef8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 504544944373441930, guid: d4c565f91658e2441917326149e8fef8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 504544944373441930, guid: d4c565f91658e2441917326149e8fef8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 504544944373441930, guid: d4c565f91658e2441917326149e8fef8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 504544944373441930, guid: d4c565f91658e2441917326149e8fef8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544693320621803597, guid: d4c565f91658e2441917326149e8fef8,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4628647265098167099, guid: d4c565f91658e2441917326149e8fef8,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6375129908410436647, guid: d4c565f91658e2441917326149e8fef8,
         type: 3}
@@ -6776,6 +6806,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ServingStation
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412109828577463833, guid: aac139a2fb86baf43b3dccd5c8ac0921,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655421325750427845, guid: aac139a2fb86baf43b3dccd5c8ac0921,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655421325750427845, guid: aac139a2fb86baf43b3dccd5c8ac0921,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3142
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aac139a2fb86baf43b3dccd5c8ac0921, type: 3}

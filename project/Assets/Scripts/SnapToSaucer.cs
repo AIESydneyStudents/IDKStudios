@@ -7,9 +7,9 @@ public class SnapToSaucer : MonoBehaviour
     private bool onSaucer = false;
 
     [SerializeField]
-    public GameObject ServingStation;
-    private GameObject TeleportAnchor;
-    private GameObject Saucer;
+    public GameObject servingStation;
+    private GameObject teleportAnchor;
+    private GameObject saucer;
 
     private void Preview()
     {
@@ -30,13 +30,13 @@ public class SnapToSaucer : MonoBehaviour
     {
         if (onSaucer)
         {
-            transform.parent = Saucer.transform;
+            transform.parent = saucer.transform;
 
-            ServingStation.GetComponent<WorkStationEvent>().inUse = true;
+            servingStation.GetComponent<WorkStationEvent>().inUse = true;
 
-            TeleportAnchor = ServingStation.transform.GetChild(0).gameObject;
+            teleportAnchor = servingStation.transform.GetChild(0).gameObject;
 
-            Saucer.transform.position = TeleportAnchor.transform.position;
+            saucer.transform.position = teleportAnchor.transform.position;
         }
     }
 
@@ -46,7 +46,7 @@ public class SnapToSaucer : MonoBehaviour
         {
             Preview();
 
-            Saucer = collider.gameObject;
+            saucer = collider.gameObject;
 
             onSaucer = true;
         }
@@ -58,7 +58,7 @@ public class SnapToSaucer : MonoBehaviour
         {
             Preview();
 
-            Saucer = null;
+            saucer = null;
 
             onSaucer = false;
         }

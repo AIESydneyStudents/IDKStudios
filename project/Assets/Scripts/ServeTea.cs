@@ -6,7 +6,7 @@ public class ServeTea : MonoBehaviour
 {
     [SerializeField]
     public GameObject servedUI;
-    private GameObject Teacup;
+    private GameObject teacup;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class ServeTea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Teacup == null)
+        if (teacup == null)
         {
             servedUI.SetActive(false);
         }
@@ -27,7 +27,7 @@ public class ServeTea : MonoBehaviour
     {
         if (collider.gameObject.tag == "Saucer")
         {
-            Teacup = collider.gameObject;
+            teacup = collider.gameObject;
 
             // TEMPORARY TEXT APPEARS TO INDICATE ACTION
 
@@ -35,7 +35,7 @@ public class ServeTea : MonoBehaviour
 
             // WILL ADD ANIMATION HERE
 
-            Destroy(Teacup, 1.0f);
+            Destroy(teacup, 1.0f);
         }
     }
 }

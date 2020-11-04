@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using CustomEditor;
 
 public class DragObject : Singleton<DragObject>
 {
@@ -15,16 +17,16 @@ public class DragObject : Singleton<DragObject>
     [SerializeField]
     public bool needsAnchor;
 
-    [SerializeField]
-    public GameObject StartAnchor;
-    private GameObject TeleportAnchor;
-    private GameObject TargetObject;
-    private GameObject PreviousObject;
+    [ConditionalField("needsAnchor", false)]
+    public GameObject startAnchor;
+    private GameObject teleportAnchor;
+    private GameObject targetObject;
+    private GameObject previousObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = StartAnchor.transform.position;
+        transform.position = startAnchor.transform.position;
         originalObjPos = transform.position;
         onWorkStation = false;
         snappedToStation = false;
@@ -81,28 +83,28 @@ public class DragObject : Singleton<DragObject>
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             // Item's destination
-            TargetObject = hit.transform.gameObject;
+            targetObject = hit.transform.gameObject;
 
             // If workstation is not occupied 
-            if (TargetObject.GetComponent<WorkStationEvent>().inUse == false)
+            if (targetObject.GetComponent<WorkStationEvent>().inUse == false)
             {
                 // Sets item's anchor to anchor attchacted to workstation
-                TeleportAnchor = hit.transform.GetChild(0).gameObject;
+                teleportAnchor = hit.transform.GetChild(0).gameObject;
 
                 // Sets item's position to anchor
-                transform.position = TeleportAnchor.transform.position;
+                transform.position = teleportAnchor.transform.position;
 
                 // Sets the workstation teleported to as occupied 
-                TargetObject.GetComponent<WorkStationEvent>().inUse = true;
+                targetObject.GetComponent<WorkStationEvent>().inUse = true;
 
                 // If item had a previous workstation it is not longer in use
-                if (PreviousObject != null)
+                if (previousObject != null)
                 {
-                    PreviousObject.GetComponent<WorkStationEvent>().inUse = false;
+                    previousObject.GetComponent<WorkStationEvent>().inUse = false;
                 }
 
                 // Sets current workstation as previous workstation
-                PreviousObject = TargetObject;
+                previousObject = targetObject;
             }
         }
 
@@ -116,15 +118,15 @@ public class DragObject : Singleton<DragObject>
             }
 
             // Current Workstation is not longer occupied
-            TargetObject.GetComponent<WorkStationEvent>().inUse = false;
+            targetObject.GetComponent<WorkStationEvent>().inUse = false;
 
             // If item had a previous workstation it is not longer in use
-            if (PreviousObject != null)
+            if (previousObject != null)
             {
-                PreviousObject.GetComponent<WorkStationEvent>().inUse = false;
+                previousObject.GetComponent<WorkStationEvent>().inUse = false;
             }
 
-            PreviousObject = null;
+            previousObject = null;
         }
     }
 
@@ -160,3 +162,19 @@ public class DragObject : Singleton<DragObject>
         }
     }
 }
+
+//[CustomEditor(typeof(DragObject))]
+//public class DragObjectEditor : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        var dragObject = target as DragObject;
+
+//        dragObject.needsAnchor = GUILayout.Toggle(dragObject.needsAnchor, "Needs Anchor");
+
+//        if (dragObject.needsAnchor)
+//        {
+//            dragObject.startAnchor = (GameObject)EditorGUILayout.ObjectField("Start Anchor", dragObject.startAnchor, typeof(GameObject), true);
+//        }
+//    }
+//}

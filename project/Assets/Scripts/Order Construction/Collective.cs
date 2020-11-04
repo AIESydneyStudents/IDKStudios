@@ -107,6 +107,7 @@ public class Collective : ScriptableObject
     // returns false if prerequisites not met. If additive is already
     // part of repository, count will be incremented instead.
     public bool InsertAdditive(ref AdditiveStack additive,
+           bool applyEffect = true,
            bool ignoreAdditivePrerequisites = false,
            bool ignoreAttributePrerequisite = false,
            bool ignoreCollectivePrerequisite = false)
@@ -130,9 +131,13 @@ public class Collective : ScriptableObject
         // If additive is effect only, exit function here.
         if (additive.Additive.useEffectOnly)
         {
-            // Apply additiveStack attributes.
-            ApplyModifierFromStack(additive);
-
+            // If apply effect is enabled only.
+            if (applyEffect)
+            {
+                // Apply additiveStack attributes.
+                ApplyModifierFromStack(additive);
+            }
+            
             return true;
         }
 
@@ -205,16 +210,24 @@ public class Collective : ScriptableObject
             // Transfer highest possible amount.
             if (leftoverSpace >= additive.count)
             {
-                // Apply all of stack modifier.
-                ApplyModifierFromStack(additive);
+                // If apply effect is enabled only.
+                if (applyEffect)
+                {
+                    // Apply all of stack modifier.
+                    ApplyModifierFromStack(additive);
+                }
 
                 stack.count += additive.count;
                 additive.count = 0;
             }
             else
             {
-                // Apply partial amount of stack modifier.
-                ApplyModifierFromStack(additive, leftoverSpace);
+                // If apply effect is enabled only.
+                if (applyEffect)
+                {
+                    // Apply partial amount of stack modifier.
+                    ApplyModifierFromStack(additive, leftoverSpace);
+                }
 
                 stack.count = additiveCountMax;
                 additive.count -= leftoverSpace;
@@ -234,13 +247,44 @@ public class Collective : ScriptableObject
     // Will merge one collective with another, leaving left leftovers.
     public void MergeCollective(Collective collective)
     {
+        List<AdditiveStack> thisCollective = GetAllVolumetric();
+        List<AdditiveStack> thatCollective = collective.GetAllVolumetric();
+        int thisVolume = 0;
+        int thatVolume = 0;
+        float totalVolumeInv = 0;
+
+        // Find total volume of this collective.
+        foreach(AdditiveStack stack in thisCollective)
+        {
+            thisVolume += stack.count;
+        }
+
+        // Find total volume of that collective.
+        foreach (AdditiveStack stack in thatCollective)
+        {
+            thatVolume += stack.count;
+        }
+
+        // Find total volume of both collectives.
+        totalVolumeInv = 1.0f / (thisVolume + thatVolume);
+
+        collectiveTaste = Math.Min(Taste + collective.Taste, 1);
+        collectiveStrength = Math.Min(Strength + collective.Strength, 1);
+        collectiveTemperature = Math.Min(Temperature * (thisVolume * totalVolumeInv)
+            + collective.Temperature * (thatVolume * totalVolumeInv), 1);
+
         // For each additive stack in collective, insert into this
         // collective.
         for (int i = 0; i < collective.additiveRepository.Count; i++)
-        {// NEED TO INSERT ADDITIVES WITHOUT EFFECT, AND ACRUE THE EFFECTS AT THE END
+        {
             AdditiveStack stack = collective.additiveRepository[i];
-            InsertAdditive(ref stack);
+            InsertAdditive(ref stack, false);
         }
+
+        // NEED TO FIGURE OUT HOW TO MERGE ATTRIBUTES
+        // assemble a list of volumetric additives in both collectives. Use count as weighting
+        // for adding attributes.
+
     }
 
     public bool Empty()
@@ -373,6 +417,22 @@ public class Collective : ScriptableObject
         collectiveTaste       = Math.Max(Math.Min(collectiveTaste +       amount * stack.Additive.effectProfile.Taste,       1.0f), 0.0f);
         collectiveStrength    = Math.Max(Math.Min(collectiveStrength +    amount * stack.Additive.effectProfile.Strength,    1.0f), 0.0f);
         collectiveTemperature = Math.Max(Math.Min(collectiveTemperature + amount * stack.Additive.effectProfile.Temperature, 1.0f), 0.0f);
+    }
+
+    // Get all volumetric additives in this collective.
+    public List<AdditiveStack> GetAllVolumetric()
+    {
+        List<AdditiveStack> volumetricAdditives = new List<AdditiveStack>();
+
+        foreach (AdditiveStack stack in additiveRepository)
+        {
+            if (stack.Additive.isVolumetric)
+            {
+                volumetricAdditives.Add(stack);
+            }
+        }
+
+        return volumetricAdditives;
     }
 
     // Get Collective by name. Returns null if collective doesn't exist.

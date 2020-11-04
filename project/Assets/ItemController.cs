@@ -12,11 +12,12 @@ public class ItemController : MonoBehaviour
         Collective teapot = Collective.GetCollective("Teapot");
 
         AdditiveStack water = new AdditiveStack("Water", 5);
-        AdditiveStack heat = new AdditiveStack("Heat", 1);
+        AdditiveStack heat = new AdditiveStack("Heat", 8);
 
         kettle.InsertAdditive(ref water);
         kettle.InsertAdditive(ref heat);
 
+        teapot.InsertAdditive(ref water);
         teapot.MergeCollective(kettle);
     }
 }

@@ -11,12 +11,20 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
+<<<<<<< Updated upstream
     second: {fileID: 2100000, guid: c4b55edab2455ee419ed32c63adbcbcd, type: 2}
+=======
+    second: {fileID: 2100000, guid: d7ead7099756ae3449115f4c7ba75d5e, type: 2}
+>>>>>>> Stashed changes
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: milk_carton
+<<<<<<< Updated upstream
     second: {fileID: 2100000, guid: 7c36d06f4f8d02645aaf1b7606dc1a64, type: 2}
+=======
+    second: {fileID: 2100000, guid: 8f1a15c1aaa9c2141ab27a90a06e4b80, type: 2}
+>>>>>>> Stashed changes
   materials:
     materialImportMode: 1
     materialName: 3

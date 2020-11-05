@@ -162,19 +162,3 @@ public class DragObject : Singleton<DragObject>
         }
     }
 }
-
-//[CustomEditor(typeof(DragObject))]
-//public class DragObjectEditor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        var dragObject = target as DragObject;
-
-//        dragObject.needsAnchor = GUILayout.Toggle(dragObject.needsAnchor, "Needs Anchor");
-
-//        if (dragObject.needsAnchor)
-//        {
-//            dragObject.startAnchor = (GameObject)EditorGUILayout.ObjectField("Start Anchor", dragObject.startAnchor, typeof(GameObject), true);
-//        }
-//    }
-//}

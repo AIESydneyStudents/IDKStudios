@@ -10,18 +10,6 @@ public class SpawnObject : MonoBehaviour
     public GameObject objToSpawn;
     private GameObject obj;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private Vector3 GetMouseWorldPos()
     {
         // Raycast between certain layers
@@ -45,7 +33,7 @@ public class SpawnObject : MonoBehaviour
 
     void OnMouseDown()
     {
-        offset = new Vector3(0, 0.05f, -0.1f);
+        offset = new Vector3(0, 0.05f, 0.1f);
 
         // Spawning Object
         obj = GameObject.Instantiate(objToSpawn);

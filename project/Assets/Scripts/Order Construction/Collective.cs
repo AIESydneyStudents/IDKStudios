@@ -30,9 +30,27 @@ public class Collective : ScriptableObject
     // Index for this collective in collectiveLookup.
     private int collectiveIndex;
 
+    [SerializeField]
+    [Tooltip("Allows collective to contain water. Water will 'consume' " +
+             "additives in the additive repository and move them to the " +
+             "graveyard.")]
+    private bool isWet;
+
+    [Range(0, 10)]
+    [SerializeField]
+    [Tooltip("This is how much water is currently in this " +
+             "collective")]
+    private int waterCount;
+
+    [Range(0, 10)]
+    [SerializeField]
+    [Tooltip("This is how much water can be contained in this " +
+             "collective")]
+    private int maxWaterCount;
+
     [Header("Collective Attributes")]
 
-    [Range(0.0f, 1.0f)]
+    [Range(-1.0f, 1.0f)]
     [SerializeField]
     private float collectiveTaste;
 
@@ -44,8 +62,16 @@ public class Collective : ScriptableObject
     [SerializeField]
     private float collectiveTemperature;
 
+    // These are the additives with attribute modifiers yet to be applied.
     private List<AdditiveStack> additiveRepository =
         new List<AdditiveStack>();
+
+    // These are the additives which have been consumed by the addition
+    // of water.
+    private List<AdditiveStack> additiveGraveyard =
+        new List<AdditiveStack>();
+
+    [Header("Whitelist")]
 
     [Tooltip("Collectives that this collective can be merged " +
              "with")]
@@ -106,133 +132,27 @@ public class Collective : ScriptableObject
     // Inserts AdditiveStack into Additive Profile. Returns true if success,
     // returns false if prerequisites not met. If additive is already
     // part of repository, count will be incremented instead.
-    public bool InsertAdditive(ref AdditiveStack additive,
-           bool applyEffect = true,
-           bool ignoreAdditivePrerequisites = false,
-           bool ignoreAttributePrerequisite = false,
-           bool ignoreCollectivePrerequisite = false)
+    public bool InsertAdditive(ref AdditiveStack additive)
     {
-        // Used to keep track of if there is an additive stack
-        // with the same index already in the repository and
-        // where it is.
-        int foundIndex = -1;
+        // Inserting additives to collective will first check that the collective is allowed to
+        // accept the additive. This includes having space for it even if it is accepted.
 
-        // Check if additive can be added to the order repository.
-        if (!PrerequisitesMet(additive,
-                               ref foundIndex,
-                               ignoreAdditivePrerequisites,
-                               ignoreAttributePrerequisite,
-                               ignoreCollectivePrerequisite))
-        {
-            // If not, exit function, additive can not be added.
-            return false;
-        }
+        // Once it is accepted, it will be consumed if there is water in the collective.
+        // Once consumed, it will apply it's attribute modifier which will be inversely proportional
+        // to the amount of water in the collective. For example, applying a tea to a collective
+        // with two water will make it apply a 0.5 * modifier to the modifier.
 
-        // If additive is effect only, exit function here.
-        if (additive.Additive.useEffectOnly)
-        {
-            // If apply effect is enabled only.
-            if (applyEffect)
-            {
-                // Apply additiveStack attributes.
-                ApplyModifierFromStack(additive);
-            }
-            
-            return true;
-        }
+        // After an additive has been consumed, it will be added to an additive graveyard IF it isn't
+        // effectOnly. If it is effectOnly, it'll disappear.
+        
+        // Merging two collectives will combine their attributes based on how much water they contribute
+        // to the merge result. Partial amounts of water contribution will have the same attributes as 
+        // the source. It's just less water.
 
-        // Check if additive is already part of repository. If found index
-        // remains -1, additive stack is not a part of repository.
-        if (foundIndex == -1)
-        {
-            // Used to keep track of greatest insertion position.
-            int beforeIndex = -1;
+        // When a merge occurs, if additives in the graveyard are isPersistant, they will duplicate
+        // into the mergee's graveyard.
 
-            // Check if additiveRepository is empty. If so, add.
-            if (additiveRepository.Count == 0)
-            {
-                AdditiveStack newStack = new AdditiveStack(additive.index, 0);
 
-                newStack.count = Math.Min(
-                    additive.Additive.GetMaxCount(this),
-                    additive.count);
-                additive.count -= newStack.count;
-
-                additiveRepository.Insert(0, newStack);
-            }
-
-            // If not, needs to be inserted in correct location to 
-            // maintain ordering.
-            else
-            {
-                for (int i = 0; i < additiveRepository.Count; i++)
-                {
-                    // If index after beforeIndex is still less than the additive's
-                    // index, move beforeIndex up to new index.
-                    if (additiveRepository[beforeIndex + 1].index < additive.index)
-                    {
-                        beforeIndex++;
-                    }
-
-                    // If index after beforeIndex is greater than additive's index,
-                    // insert here.
-                    else
-                    {
-                        AdditiveStack newStack = new AdditiveStack(additive.index, 0);
-
-                        newStack.count = Math.Min(
-                            additive.Additive.GetMaxCount(this),
-                            additive.count);
-                        additive.count -= newStack.count;
-
-                        additiveRepository.Insert(beforeIndex + 1, newStack);
-                    }
-                }
-            }
-        }
-        else
-        {
-            // Insert at the found index.
-            AdditiveStack stack = additiveRepository[foundIndex];
-
-            // Store max count for additive.
-            int additiveCountMax = stack.Additive.GetMaxCount(this);
-
-            // Check if there's space at all, return if not.
-            if (stack.count == additiveCountMax)
-            {
-                return false;
-            }
-
-            // Find left over space in the pre-existing additive stack.
-            int leftoverSpace = additiveCountMax - stack.count;
-
-            // Transfer highest possible amount.
-            if (leftoverSpace >= additive.count)
-            {
-                // If apply effect is enabled only.
-                if (applyEffect)
-                {
-                    // Apply all of stack modifier.
-                    ApplyModifierFromStack(additive);
-                }
-
-                stack.count += additive.count;
-                additive.count = 0;
-            }
-            else
-            {
-                // If apply effect is enabled only.
-                if (applyEffect)
-                {
-                    // Apply partial amount of stack modifier.
-                    ApplyModifierFromStack(additive, leftoverSpace);
-                }
-
-                stack.count = additiveCountMax;
-                additive.count -= leftoverSpace;
-            }
-        }
 
         return false;
     }
@@ -278,7 +198,7 @@ public class Collective : ScriptableObject
         for (int i = 0; i < collective.additiveRepository.Count; i++)
         {
             AdditiveStack stack = collective.additiveRepository[i];
-            InsertAdditive(ref stack, false);
+            //InsertAdditive(ref stack, false);
         }
 
         // NEED TO FIGURE OUT HOW TO MERGE ATTRIBUTES
@@ -426,7 +346,7 @@ public class Collective : ScriptableObject
 
         foreach (AdditiveStack stack in additiveRepository)
         {
-            if (stack.Additive.isVolumetric)
+            //if (stack.Additive.isVolumetric)
             {
                 volumetricAdditives.Add(stack);
             }

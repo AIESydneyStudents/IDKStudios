@@ -20,7 +20,6 @@ public class Additive : ScriptableObject
     private static Dictionary<string, Additive> additiveLookup = 
         new Dictionary<string, Additive>();
 
-    // These are the properties of the additive.
     [Header("Additive Properties")]
     
     [Tooltip("Additive name. Additive.GetAdditive uses this " +
@@ -47,17 +46,17 @@ public class Additive : ScriptableObject
 
     private List<int> collectiveWhitelistIndices = new List<int>();
 
-    [Tooltip("Does this additive affect weighting when two collectives " +
-             "merge with either or both containing this additive.")]
-    public bool isVolumetric;
-
     [Tooltip("Sets additive to affect order attributes without " +
              "being listed as an ingredient in the order")]
     public bool useEffectOnly;
 
+    [Tooltip("Enabling this will make sure additive stays in a collective " +
+             "even after a merge. It will also disable stack counting")]
+    public bool isPersistant;
+
     [Tooltip("Sets additive as visible ingredient on docket. Does " +
              "nothing if useEffectOnly is set to true")]
-    public bool exposeIngredient;
+    public bool exposeToDocket;
 
     #endregion
 

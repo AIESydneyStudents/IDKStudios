@@ -128,7 +128,7 @@ MonoBehaviour:
   snappedToStation: 0
   onWorkStation: 0
   needsAnchor: 0
-  StartAnchor: {fileID: 0}
+  startAnchor: {fileID: 0}
 --- !u!114 &7160726252846776731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1335336bc0966e14b8011cfe023fc70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ServingStation: {fileID: 7412109828577463833, guid: aac139a2fb86baf43b3dccd5c8ac0921,
+  servingStation: {fileID: 7412109828577463833, guid: aac139a2fb86baf43b3dccd5c8ac0921,
     type: 3}

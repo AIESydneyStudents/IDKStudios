@@ -10,21 +10,18 @@ public class ObjectPopUp : MonoBehaviour
     void Start()
     {
         objectMenu.SetActive(false);
-        Time.timeScale = 1.0f;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1))
         {
             objectMenu.SetActive(false);
-            Time.timeScale = 1.0f;
         }
     }
 
     private void OnMouseDown()
     {
         objectMenu.SetActive(true);
-        Time.timeScale = 0.0f;
     }
 }

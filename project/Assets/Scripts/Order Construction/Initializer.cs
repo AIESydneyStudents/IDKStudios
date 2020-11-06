@@ -8,7 +8,6 @@ public class Initializer
         RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     private static void InitializeAll()
     {
-        Collective.InitializeAll();
         Additive.InitializeAll();
     }
 }

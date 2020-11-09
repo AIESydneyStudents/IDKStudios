@@ -36,14 +36,22 @@ public class Container : MonoBehaviour
         return additiveRepository.Contains(additive);
     }
 
+    public bool ContainsType(Additive.Type type)
+    {
+        foreach (Additive additive in additiveRepository)
+        {
+            if (additive.additiveType == type)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void InsertAdditiveToRepo(Additive additive)
     {
         additiveRepository.Add(additive);
-    }
-
-    public bool AdditivePrerequisitesMet(Additive additive)
-    {
-        return false;
     }
 
     #endregion

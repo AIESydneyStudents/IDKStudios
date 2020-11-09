@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d324c155bc5e1b469899efca869a136, type: 3}
-  m_Name: Cup
+  m_Name: Black Tea
   m_EditorClassIdentifier: 
-  additiveName: Cup
-  effectProfile:
+  additiveName: Black Tea
+  container: 1
+  initialEffect:
+    effectTaste: 0
+    effectStrength: 0
+    effectTemperature: 0
+  steepEffect:
     effectTaste: 0
     effectStrength: 0
     effectTemperature: 0
@@ -25,6 +30,4 @@ MonoBehaviour:
     strengthMax: 0
     temperatureMin: 0
     temperatureMax: 0
-  collectiveWhitelist: []
-  useEffectOnly: 0
-  exposeIngredient: 0
+  hideFromDocket: 0

@@ -43,6 +43,11 @@ public class Cup : Container
 
     #region Functions
 
+    public Cup()
+    {
+        containerType = Type.CUP;
+    }
+
     private void Update()
     {
         Cooldown();
@@ -61,23 +66,78 @@ public class Cup : Container
         }
 
         cupTemperature -= cooldownRate * Time.deltaTime;
+        cupTemperature = Math.Max(cupTemperature, 0.0f);
+    }
+
+    public float PreviewTaste(float taste)
+    {
+        return Math.Min(Math.Max(cupTaste + taste, -1.0f), 1.0f);
+    }
+
+    public float PreviewStrength(float strength)
+    {
+        return Math.Min(Math.Max(cupStrength + strength, 0.0f), 1.0f);
+    }
+
+    public float PreviewTemperature(float temperature)
+    {
+        return Math.Min(Math.Max(cupTemperature + temperature, 0.0f), 1.0f);
     }
 
     public bool CanInsertAdditive(Additive additive)
     {
-        // Check if can insert
+        // Checks if additive can be added to this container.
+        if (additive.container != containerType)
+        {
+            return false;
+        }
 
-        return false;
+        // If tea is required for additive, check if it contains tea.
+        // Ignores check completely if it's tea in the first place.
+        if (additive.additiveType == Additive.Type.CONDIMENT &&
+            additive.teaRequirement &&
+            !ContainsType(Additive.Type.TEA))
+        {
+            return false;
+        }
+
+        // Check if attribute ceiling will be hit by adding this additive.
+        float resultTaste = cupTaste + additive.initialEffect.Taste;
+        float resultStrength = cupStrength + additive.initialEffect.Strength;
+        float resultTemperature = cupTemperature + additive.initialEffect.Temperature;
+
+        if (resultTaste > 1.0f || resultTaste < -1.0f)
+        {
+            return false;
+        }
+
+        if (resultStrength > 1.0f || resultStrength < 0.0f)
+        {
+            return false;
+        }
+
+        if (resultTemperature > 1.0f || resultTemperature < 0.0f)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void InsertAdditive(Additive additive)
     {
+        // Check if additive can be inserted
         if (!CanInsertAdditive(additive))
         {
             return;
         }
 
-        // Insert code
+        InsertAdditiveToRepo(additive);
+
+        // Apply modifier
+        cupTaste += additive.initialEffect.Taste;
+        cupStrength += additive.initialEffect.Strength;
+        cupTemperature = additive.initialEffect.Temperature;
     }
 
     public void ServeToOrder(Order order)

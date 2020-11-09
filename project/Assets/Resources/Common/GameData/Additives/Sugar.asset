@@ -10,23 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d324c155bc5e1b469899efca869a136, type: 3}
-  m_Name: Water
+  m_Name: Sugar
   m_EditorClassIdentifier: 
-  additiveName: Water
-  effectProfile:
+  additiveName: Sugar
+  additiveType: 0
+  container: 2
+  initialEffect:
+    effectTaste: 0.567
+    effectStrength: 0
+    effectTemperature: 0
+  steepEffect:
     effectTaste: 0
     effectStrength: 0
-    effectTemperature: -0.1
-  additivePrerequisites: []
-  attributePrerequisite:
-    tasteMin: 0
-    tasteMax: 1
-    strengthMin: 0
-    strengthMax: 1
-    temperatureMin: 0
-    temperatureMax: 1
-  collectiveWhitelist:
-  - collectiveName: Kettle
-    collectiveMax: 4
-  useEffectOnly: 0
-  exposeIngredient: 0
+    effectTemperature: 0
+  teaRequirement: 1
+  hideFromDocket: 0

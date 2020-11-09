@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomEditor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections.LowLevel.Unsafe;
@@ -12,6 +13,12 @@ using UnityEngine;
 public class Additive : ScriptableObject, IComparable<Additive>
 {
     #region Fields
+
+    public enum Type
+    {
+        TEA,
+        CONDIMENT
+    }
 
     // Additive dictionary: AdditiveName|Additive
     private static Dictionary<string, Additive> additiveLookup =
@@ -27,8 +34,10 @@ public class Additive : ScriptableObject, IComparable<Additive>
     // Index for this additive in additiveLookup.
     private int additiveIndex;
 
+    [Tooltip("What sort of additive is this?")]
+    public Type additiveType;
+
     [Tooltip("What container can this additive be put into?")]
-    [SerializeField]
     public Container.Type container;
 
     [SerializeField]
@@ -39,14 +48,8 @@ public class Additive : ScriptableObject, IComparable<Additive>
     [SerializeField]
     public AttributeModifier steepEffect;
 
-    [Tooltip("List of additives that need to be part of " +
-             "the order before this additive can be added")]
-    public AdditivePrerequisite[] additivePrerequisites;
-
-    [Tooltip("Attributes that order profile needs before " +
-             "this additive can be added")]
-    [SerializeField]
-    public AttributePrerequisite attributePrerequisite;
+    [Tooltip("Does this additive require tea to be added first?")]
+    public bool teaRequirement;
 
     [Tooltip("Sets additive as invisible ingredient to docket.")]
     [SerializeField]
@@ -67,6 +70,7 @@ public class Additive : ScriptableObject, IComparable<Additive>
     #region Functions
 
     // Runs at game start. Loads assets into RAM and sets them up.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void InitializeAll()
     {
         // Loads all additives in Resources folder.
@@ -83,26 +87,6 @@ public class Additive : ScriptableObject, IComparable<Additive>
             // Additive's index is set.
             newAdditive.additiveIndex = additiveLookup.Count - 1;
         }
-
-        // Every loaded additive is initialized.
-        foreach (var additivePair in additiveLookup)
-        {
-            additivePair.Value.Initialize();
-        }
-    }
-
-    // Sets up fields.
-    public void Initialize()
-    {
-        // Each additive prerequisite in the additive's prerequisite 
-        // list is initialized.
-        foreach (AdditivePrerequisite prerequisite in additivePrerequisites)
-        {
-            prerequisite.Initialize();
-        }
-
-        // Sort list of additive prerequisites by index.
-        Array.Sort(additivePrerequisites);
     }
 
     public static Additive GetAdditive(string name)

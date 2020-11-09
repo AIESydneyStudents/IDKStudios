@@ -10,26 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d324c155bc5e1b469899efca869a136, type: 3}
-  m_Name: Heat
+  m_Name: Honey
   m_EditorClassIdentifier: 
-  additiveName: Heat
-  effectProfile:
+  additiveName: Honey
+  additiveType: 0
+  container: 2
+  initialEffect:
+    effectTaste: 0.244
+    effectStrength: 0
+    effectTemperature: 0
+  steepEffect:
     effectTaste: 0
     effectStrength: 0
-    effectTemperature: 0.1
-  additivePrerequisites:
-  - additiveName: Water
-    countMin: 1
-    countMax: 100
-  attributePrerequisite:
-    tasteMin: 0
-    tasteMax: 1
-    strengthMin: 0
-    strengthMax: 1
-    temperatureMin: 0
-    temperatureMax: 1
-  collectiveWhitelist:
-  - collectiveName: Kettle
-    collectiveMax: 0
-  useEffectOnly: 1
-  exposeIngredient: 0
+    effectTemperature: 0
+  teaRequirement: 1
+  hideFromDocket: 0

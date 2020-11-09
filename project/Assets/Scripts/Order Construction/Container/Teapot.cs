@@ -44,6 +44,11 @@ public class Teapot : Container
 
     #region Functions
 
+    public Teapot()
+    {
+        containerType = Type.TEAPOT;
+    }
+
     private void Update()
     {
         Steep();
@@ -79,6 +84,7 @@ public class Teapot : Container
         }
 
         teapotTemperature -= cooldownRate * Time.deltaTime;
+        teapotTemperature = Math.Max(teapotTemperature, 0.0f);
     }
 
     public bool CanDispenseToCup(Cup cup)
@@ -114,52 +120,50 @@ public class Teapot : Container
         teapotTaste = 0;
         teapotStrength = 0;
         teapotTemperature = 0;
+
+        foreach (Additive additive in additiveRepository)
+        {
+            cup.InsertAdditiveToRepo(additive);
+        }
+
+        additiveRepository.Clear();
     }
 
     public bool CanInsertAdditive(Additive additive)
     {
-        if (containerType != additive.container)
+        // Checks if additive can be added to this container.
+        if (additive.container != containerType)
         {
             return false;
         }
 
-        if (teapotTaste + additive.initialEffect.Taste > 1)
+        // If tea is required for additive, check if it contains tea.
+        // Ignores check completely if it's tea in the first place.
+        if (additive.additiveType == Additive.Type.CONDIMENT && 
+            additive.teaRequirement && 
+            !ContainsType(Additive.Type.TEA))
         {
             return false;
         }
 
-        if (teapotStrength + additive.initialEffect.Strength > 1)
+        // Check if attribute ceiling will be hit by adding this additive.
+        float resultTaste = teapotTaste + additive.initialEffect.Taste;
+        float resultStrength = teapotStrength + additive.initialEffect.Strength;
+        float resultTemperature = teapotTemperature + additive.initialEffect.Temperature;
+
+        if (resultTaste > 1.0f || resultTaste < -1.0f)
         {
             return false;
         }
 
-        if (teapotTemperature + additive.initialEffect.Temperature > 1)
+        if (resultStrength > 1.0f || resultStrength < 0.0f)
         {
             return false;
         }
 
-        // CHECK ATTRIBUTE PREREQUISITES
-
-        if (!additive.attributePrerequisite.IsTasteValid(teapotTaste))
+        if (resultTemperature > 1.0f || resultTemperature < 0.0f)
         {
             return false;
-        }
-
-        if (!additive.attributePrerequisite.IsStrengthValid(teapotStrength))
-        {
-            return false;
-        }
-
-        if (!additive.attributePrerequisite.IsTemperatureValid(teapotTemperature))
-        {
-            return false;
-        }
-
-        // CHECK ADDITIVE PREREQUISITES
-
-        foreach (AdditivePrerequisite prerequisite in additive.additivePrerequisites)
-        {
-
         }
 
         return true;
@@ -167,6 +171,7 @@ public class Teapot : Container
 
     public void InsertAdditive(Additive additive)
     {
+        // Check if additive can be inserted
         if (!CanInsertAdditive(additive))
         {
             return;
@@ -174,7 +179,10 @@ public class Teapot : Container
 
         InsertAdditiveToRepo(additive);
 
-        // APPLY ATTRIBUTE EFFECTS
+        // Apply modifier
+        teapotTaste += additive.initialEffect.Taste;
+        teapotStrength += additive.initialEffect.Strength;
+        teapotTemperature += additive.initialEffect.Temperature;
     }
 
     #endregion

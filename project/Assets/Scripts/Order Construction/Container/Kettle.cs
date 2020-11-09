@@ -58,6 +58,11 @@ public class Kettle : Container
 
     #region Functions
 
+    public Kettle()
+    {
+        containerType = Type.KETTLE;
+    }
+
     private void Update()
     {
         Cooldown();
@@ -76,7 +81,13 @@ public class Kettle : Container
             return;
         }
 
+        if (isActive)
+        {
+            return;
+        }
+
         kettleTemperature -= cooldownRate * Time.deltaTime;
+        kettleTemperature = Math.Max(kettleTemperature, 0.0f);
     }
 
     public void Heatup()
@@ -88,10 +99,12 @@ public class Kettle : Container
 
         if (kettleTemperature >= temperatureSetting)
         {
+            isActive = false;
             return;
         }
 
         kettleTemperature += heatupRate * Time.deltaTime;
+        kettleTemperature = Math.Min(kettleTemperature, 1.0f);
     }
 
     public bool SetToActive()

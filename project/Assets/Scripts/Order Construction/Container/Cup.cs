@@ -50,10 +50,15 @@ public class Cup : Container
 
     private void Update()
     {
-        Cooldown();
+        Simulate(Time.deltaTime);
     }
 
-    private void Cooldown()
+    public void Simulate(float deltaTime)
+    {
+        Cooldown(deltaTime);
+    }
+
+    public void Cooldown(float deltaTime)
     {
         if (!isFull)
         {
@@ -65,7 +70,7 @@ public class Cup : Container
             return;
         }
 
-        cupTemperature -= cooldownRate * Time.deltaTime;
+        cupTemperature -= cooldownRate * deltaTime;
         cupTemperature = Math.Max(cupTemperature, 0.0f);
     }
 
@@ -137,12 +142,7 @@ public class Cup : Container
         // Apply modifier
         cupTaste += additive.initialEffect.Taste;
         cupStrength += additive.initialEffect.Strength;
-        cupTemperature = additive.initialEffect.Temperature;
-    }
-
-    public void ServeToOrder(Order order)
-    {
-
+        cupTemperature += additive.initialEffect.Temperature;
     }
 
     #endregion

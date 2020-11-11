@@ -13,23 +13,8 @@ public class ItemController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cup cup = cupObject.GetComponent<Cup>();
-        Teapot teapot = teapotObject.GetComponent<Teapot>();
-        Kettle kettle = kettleObject.GetComponent<Kettle>();
+        Customer[] customers = Customer.GetAllCustomers();
 
-        if (true)
-        {
-            Additive[] additives = Additive.GetAllAdditives();
-
-            kettle.FillFromTap(1);
-            kettle.DispenseToTeapot(teapot);
-
-            teapot.InsertAdditive(Additive.GetAdditive("Green Tea"));
-
-            teapot.DispenseToCup(cup);
-        }
-
-
-
+        Order order = customers[0].GenerateOrder();
     }
 }

@@ -51,19 +51,22 @@ public class Teapot : Container
 
     private void Update()
     {
-        Steep();
-        Cooldown();
+        Simulate(Time.deltaTime);
     }
 
-    private void Steep()
+    public void Simulate(float deltaTime)
+    {
+        Steep(deltaTime);
+        Cooldown(deltaTime);
+    }
+
+    public void Steep(float deltaTime)
     {
         foreach (Additive additive in additiveRepository)
         {
-            float delta = Time.deltaTime;
-
-            teapotTaste       += additive.steepEffect.Taste       * delta;
-            teapotStrength    += additive.steepEffect.Strength    * delta;
-            teapotTemperature += additive.steepEffect.Temperature * delta;
+            teapotTaste       += additive.steepEffect.Taste       * deltaTime;
+            teapotStrength    += additive.steepEffect.Strength    * deltaTime;
+            teapotTemperature += additive.steepEffect.Temperature * deltaTime;
 
             teapotTaste       = Math.Max(-1.0f, Math.Min(1.0f, teapotTaste));
             teapotStrength    = Math.Max( 0.0f, Math.Min(1.0f, teapotStrength));
@@ -71,7 +74,7 @@ public class Teapot : Container
         }
     }
 
-    private void Cooldown()
+    public void Cooldown(float deltaTime)
     {
         if (!isFull)
         {
@@ -83,7 +86,7 @@ public class Teapot : Container
             return;
         }
 
-        teapotTemperature -= cooldownRate * Time.deltaTime;
+        teapotTemperature -= cooldownRate * deltaTime;
         teapotTemperature = Math.Max(teapotTemperature, 0.0f);
     }
 

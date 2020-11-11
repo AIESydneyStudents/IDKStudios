@@ -65,11 +65,16 @@ public class Kettle : Container
 
     private void Update()
     {
-        Cooldown();
-        Heatup();
+        Simulate(Time.deltaTime);
     }
 
-    public void Cooldown()
+    public void Simulate(float deltaTime)
+    {
+        Cooldown(deltaTime);
+        Heatup(deltaTime);
+    }
+
+    public void Cooldown(float deltaTime)
     {
         if (waterVolume == 0)
         {
@@ -86,11 +91,11 @@ public class Kettle : Container
             return;
         }
 
-        kettleTemperature -= cooldownRate * Time.deltaTime;
+        kettleTemperature -= cooldownRate * deltaTime;
         kettleTemperature = Math.Max(kettleTemperature, 0.0f);
     }
 
-    public void Heatup()
+    public void Heatup(float deltaTime)
     {
         if (!isActive || waterVolume == 0)
         {
@@ -103,7 +108,7 @@ public class Kettle : Container
             return;
         }
 
-        kettleTemperature += heatupRate * Time.deltaTime;
+        kettleTemperature += heatupRate * deltaTime;
         kettleTemperature = Math.Min(kettleTemperature, 1.0f);
     }
 

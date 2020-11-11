@@ -59,6 +59,8 @@ public class Additive : ScriptableObject, IComparable<Additive>
 
     #region Properties
 
+    public string Name { get { return additiveName; } }
+
     // Gets the index of this additive.
     public int Index { get { return additiveIndex; } }
 
@@ -106,6 +108,21 @@ public class Additive : ScriptableObject, IComparable<Additive>
     public static Additive[] GetAllAdditives()
     {
         return additiveLookup.Values.ToArray();
+    }
+
+    public static Additive[] GetAllAdditives(Type type)
+    {
+        List<Additive> additiveList = new List<Additive>();
+
+        foreach (var value in additiveLookup)
+        {
+            if (value.Value.additiveType == type)
+            {
+                additiveList.Add(value.Value);
+            }
+        }
+
+        return additiveList.ToArray();
     }
 
     int IComparable<Additive>.CompareTo(Additive other)

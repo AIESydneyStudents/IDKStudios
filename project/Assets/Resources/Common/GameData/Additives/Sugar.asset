@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sugar
   m_EditorClassIdentifier: 
   additiveName: Sugar
-  additiveType: 0
+  additiveType: 1
   container: 2
   initialEffect:
     effectTaste: 0.567

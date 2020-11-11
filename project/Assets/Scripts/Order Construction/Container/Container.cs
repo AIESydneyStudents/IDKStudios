@@ -20,7 +20,7 @@ public class Container : MonoBehaviour
     [SerializeField]
     public Type containerType;
 
-    protected SortedSet<Additive> additiveRepository =
+    public SortedSet<Additive> additiveRepository =
         new SortedSet<Additive>();
 
     #endregion

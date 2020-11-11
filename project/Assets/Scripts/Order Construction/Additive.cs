@@ -51,10 +51,6 @@ public class Additive : ScriptableObject, IComparable<Additive>
     [Tooltip("Does this additive require tea to be added first?")]
     public bool teaRequirement;
 
-    [Tooltip("Sets additive as invisible ingredient to docket.")]
-    [SerializeField]
-    private bool hideFromDocket;
-
     #endregion
 
     #region Properties

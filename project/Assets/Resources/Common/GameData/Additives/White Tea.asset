@@ -16,12 +16,12 @@ MonoBehaviour:
   additiveType: 0
   container: 1
   initialEffect:
-    effectTaste: 0
-    effectStrength: 0
+    effectTaste: -0.33
+    effectStrength: 0.36
     effectTemperature: 0
   steepEffect:
-    effectTaste: 0
-    effectStrength: 0
+    effectTaste: 0.14
+    effectStrength: 0.27
     effectTemperature: 0
   teaRequirement: 0
   hideFromDocket: 0

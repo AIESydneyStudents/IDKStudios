@@ -31,7 +31,7 @@ MonoBehaviour:
     weighting: 0.8
     percentile: 0
     customerSelected: 0
-  toleranceTaste: 0
-  toleranceStrength: 0
-  toleranceTemperature: 0
+  toleranceTaste: 0.1
+  toleranceStrength: 0.2
+  toleranceTemperature: 0.05
   popularity: 0

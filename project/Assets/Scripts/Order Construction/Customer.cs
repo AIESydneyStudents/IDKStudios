@@ -270,6 +270,7 @@ public class Customer : ScriptableObject
     public Order GenerateOrder()
     {
         Order newOrder = new Order(toleranceTaste, toleranceStrength, toleranceTemperature);
+        SortedSet<Additive> showOnDocket = new SortedSet<Additive>();
         System.Random randomGenerator = new System.Random();
 
         Teapot teapot = new Teapot();
@@ -279,18 +280,22 @@ public class Customer : ScriptableObject
         //Choose and add tea
         float teaPercentile = 0.001f * randomGenerator.Next(0, 999);
 
-        Additive selectedTea = null;
-
         for (int i = 0; i < teaPreferences.Length; i++)
         {
             if (teaPercentile < teaPreferences[i].percentile)
             {
-                selectedTea = Additive.GetAdditive(teaPreferences[i].additiveIndex);
+                Additive additive = Additive.GetAdditive(teaPreferences[i].additiveIndex);
+                teapot.InsertAdditive(additive);
+
+                if (teaPreferences[i].customerSelected)
+                {
+                    showOnDocket.Add(additive);
+                }
+
                 break;
             }
         }
 
-        teapot.InsertAdditive(selectedTea);
         teapot.Simulate(randomGenerator.Next(0, 10));
 
         Cup cup = new Cup();
@@ -298,33 +303,33 @@ public class Customer : ScriptableObject
         teapot.DispenseToCup(cup);
 
         //Choose and add condiment/s
-        int condiments = 2;// randomGenerator.Next(1, 3);
+        int condiments = randomGenerator.Next(1, 3);
 
         for (int i = 0; i < condiments; i++)
         {
-            float condimentPercentile = 0.8f;// 0.001f * randomGenerator.Next(0, 999);
-
-            Additive selectedCondiment = null;
+            float condimentPercentile = 0.001f * randomGenerator.Next(0, 999);
 
             for (int j = 0; j < condimentPreferences.Length; j++)
             {
                 if (condimentPercentile < condimentPreferences[j].percentile)
                 {
-                    selectedCondiment = Additive.GetAdditive(condimentPreferences[j].additiveIndex);
+                    Additive additive = Additive.GetAdditive(condimentPreferences[j].additiveIndex);
+                    cup.InsertAdditive(additive);
+
+                    if (condimentPreferences[j].customerSelected)
+                    {
+                        showOnDocket.Add(additive);
+                    }
+
                     break;
                 }
             }
-
-            cup.InsertAdditive(selectedCondiment);
         }
 
         cup.Simulate(randomGenerator.Next(0, 10));
-
         newOrder.SetTarget(cup.Taste, cup.Strength, cup.Temperature);
 
-        newOrder.additiveRepository.Clear();
-
-        foreach (Additive additive in cup.additiveRepository)
+        foreach (Additive additive in showOnDocket)
         {
             newOrder.additiveRepository.Add(additive);
         }

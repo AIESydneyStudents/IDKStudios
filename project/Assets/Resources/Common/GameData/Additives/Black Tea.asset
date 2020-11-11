@@ -13,21 +13,15 @@ MonoBehaviour:
   m_Name: Black Tea
   m_EditorClassIdentifier: 
   additiveName: Black Tea
+  additiveType: 0
   container: 1
   initialEffect:
-    effectTaste: 0
-    effectStrength: 0
+    effectTaste: 0.5
+    effectStrength: 0.6
     effectTemperature: 0
   steepEffect:
-    effectTaste: 0
-    effectStrength: 0
+    effectTaste: -0.05
+    effectStrength: 0.05
     effectTemperature: 0
-  additivePrerequisites: []
-  attributePrerequisite:
-    tasteMin: 0
-    tasteMax: 0
-    strengthMin: 0
-    strengthMax: 0
-    temperatureMin: 0
-    temperatureMax: 0
+  teaRequirement: 0
   hideFromDocket: 0

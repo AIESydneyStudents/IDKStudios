@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using CustomEditor;
 
 public class DragObject : Singleton<DragObject>
 {
@@ -17,7 +15,7 @@ public class DragObject : Singleton<DragObject>
     [SerializeField]
     public bool needsAnchor;
 
-    [ConditionalField("needsAnchor", false)]
+    [SerializeField]
     public GameObject startAnchor;
     private GameObject teleportAnchor;
     private GameObject targetObject;

@@ -204,6 +204,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 14.5, y: 0, z: 0}
+--- !u!1 &459841001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459841003}
+  - component: {fileID: 459841002}
+  m_Layer: 0
+  m_Name: Additive
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &459841002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459841001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containedAdditive: {fileID: 11400000, guid: 76216d4680629bc449197e3cb29822e1, type: 2}
+--- !u!4 &459841003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459841001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5465093, y: -0.87901324, z: -3.021087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &529537580
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,16 +274,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 529537580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07ba7e3897c49fc4c9580861617402c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f899cd5f2694e44dbad7655e314d8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerType: 0
-  waterVolume: 1
-  kettleTemperature: 1
-  cooldownRate: 0.01
-  heatupRate: 0
-  isActive: 0
-  temperatureSetting: 0
+  kettle:
+    containerType: 0
+    waterVolume: 0
+    kettleTemperature: 0
+    cooldownRate: 0.01
+    heatupRate: 0.05
+    isActive: 0
+    temperatureSetting: 0
 --- !u!4 &529537582
 Transform:
   m_ObjectHideFlags: 0
@@ -280,15 +325,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 536444486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fcce37f10896f48af84a24b4411f6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 003e314293d2aae4796918d20c52b91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerType: 2
-  isFull: 0
-  cupTaste: 0
-  cupStrength: 0
-  cupTemperature: 1
-  cooldownRate: 0
+  cup:
+    containerType: 2
+    isFull: 0
+    cupTaste: 0
+    cupStrength: 0
+    cupTemperature: 0
+    cooldownRate: 0
 --- !u!4 &536444488
 Transform:
   m_ObjectHideFlags: 0
@@ -451,7 +497,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1620734242}
-  - component: {fileID: 1620734241}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -459,21 +504,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1620734241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620734240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c966e8a4ee13154c8b4376ea5ac600d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cupObject: {fileID: 536444486}
-  teapotObject: {fileID: 1743742698}
-  kettleObject: {fileID: 529537580}
 --- !u!4 &1620734242
 Transform:
   m_ObjectHideFlags: 0
@@ -514,15 +544,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1743742698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54bc7605bb4500b4eafcc64005077266, type: 3}
+  m_Script: {fileID: 11500000, guid: 681e69cc5700a5f4ea2cc80a9dea77a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerType: 1
-  isFull: 0
-  teapotTaste: 0
-  teapotStrength: 0
-  teapotTemperature: 0
-  cooldownRate: 0
+  teapot:
+    containerType: 1
+    isFull: 0
+    teapotTaste: 0
+    teapotStrength: 0
+    teapotTemperature: 0
+    cooldownRate: 0
 --- !u!4 &1743742700
 Transform:
   m_ObjectHideFlags: 0

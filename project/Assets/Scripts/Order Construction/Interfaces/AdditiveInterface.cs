@@ -112,19 +112,6 @@ public class AdditiveInterface : MonoBehaviour
         }
     }
 
-    // Gets the attribute info of the enclosed additive. Used to fill out the 
-    // attribute tooltip that floats above an object being moved.
-    public AttributeInfo GetAttributeInfo()
-    {
-        AttributeInfo attributeInfo = new AttributeInfo();
-
-        attributeInfo.infoTaste = containedAdditive.initialEffect.Taste;
-        attributeInfo.infoStrength = containedAdditive.initialEffect.Strength;
-        attributeInfo.infoTemperature = containedAdditive.initialEffect.Temperature;
-
-        return attributeInfo;
-    }
-
     // Will initiate an insert.
     public void InsertAdditive()
     {
@@ -150,5 +137,18 @@ public class AdditiveInterface : MonoBehaviour
                     return;
                 }
         }
+    }
+
+    // Gets the attribute info of the enclosed additive. Used to fill out the 
+    // attribute tooltip that floats above an object being moved.
+    public AttributeInfo GetAttributeInfo()
+    {
+        AttributeInfo attributeInfo = new AttributeInfo();
+
+        attributeInfo.infoTaste = containedAdditive.initialEffect.Taste;
+        attributeInfo.infoStrength = containedAdditive.initialEffect.Strength;
+        attributeInfo.infoTemperature = containedAdditive.initialEffect.Temperature;
+
+        return attributeInfo;
     }
 }

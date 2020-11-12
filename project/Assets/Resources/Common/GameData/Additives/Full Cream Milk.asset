@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d324c155bc5e1b469899efca869a136, type: 3}
-  m_Name: Milk
+  m_Name: Full Cream Milk
   m_EditorClassIdentifier: 
-  additiveName: Milk
+  additiveName: Full Cream Milk
   additiveType: 1
   container: 2
   initialEffect:
@@ -24,4 +24,3 @@ MonoBehaviour:
     effectStrength: 0
     effectTemperature: 0
   teaRequirement: 1
-  hideFromDocket: 0

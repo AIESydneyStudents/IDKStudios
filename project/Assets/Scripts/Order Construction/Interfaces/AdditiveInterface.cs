@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class AdditiveInterface : MonoBehaviour
 {
+    private bool canInsert = false;
+
     // This is the additive that the gameObject that owns
     // this component should represent.
     public Additive containedAdditive;
@@ -152,11 +154,27 @@ public class AdditiveInterface : MonoBehaviour
         }
     }
 
+    private void OnMouseUp()
+    {
+        if (canInsert)
+        {
+            InsertAdditive();
+        }
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Item")
         {
-            SetContainerObject(collider.gameObject);
+            if (SetContainerObject(collider.gameObject))
+            {
+                AttributeInfo info = new AttributeInfo();
+
+                if (CanInsertAdditive(ref info))
+                {
+                    canInsert = true;
+                }
+            }
         }
     }
 
@@ -165,6 +183,7 @@ public class AdditiveInterface : MonoBehaviour
         if (collider.gameObject.tag == "Item")
         {
             ClearContainerObject();
+            canInsert = false;
         }
     }
 }

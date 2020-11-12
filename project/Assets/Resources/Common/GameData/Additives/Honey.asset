@@ -24,4 +24,3 @@ MonoBehaviour:
     effectStrength: 0
     effectTemperature: 0
   teaRequirement: 1
-  hideFromDocket: 0

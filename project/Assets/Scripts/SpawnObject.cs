@@ -35,13 +35,24 @@ public class SpawnObject : MonoBehaviour
     {
         offset = new Vector3(0, 0.05f, 0.1f);
 
-        // Spawning Object
-        obj = GameObject.Instantiate(objToSpawn);
+        if (obj == null)
+        {
+            // Spawning Object
+            obj = GameObject.Instantiate(objToSpawn);
+        }
+
+        else
+        {
+            obj = null;
+        }
     }
 
     // When mouse is being dragged across screen
     void OnMouseDrag()
     {
-        obj.transform.position = GetMouseWorldPos() + offset;
+        if (obj != null)
+        {
+            obj.transform.position = GetMouseWorldPos() + offset;
+        }
     }
 }

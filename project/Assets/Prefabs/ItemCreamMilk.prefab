@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 6435844827531658397}
   - component: {fileID: -1689787005036224134}
   - component: {fileID: -5314088467071865419}
+  - component: {fileID: 2841296954502516254}
   m_Layer: 9
   m_Name: ItemCreamMilk
   m_TagString: Item
@@ -594,3 +595,16 @@ MonoBehaviour:
   onWorkStation: 0
   needsAnchor: 0
   startAnchor: {fileID: 0}
+--- !u!114 &2841296954502516254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001752072013330062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containedAdditive: {fileID: 11400000, guid: 00090879481be904fab22f6ef2e3fc86, type: 2}

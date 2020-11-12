@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4977540199616112445}
   - component: {fileID: 9148079577076204185}
   - component: {fileID: -1927485867910111977}
+  - component: {fileID: 480016415484961059}
   m_Layer: 9
   m_Name: ItemKettle
   m_TagString: Item
@@ -128,3 +129,23 @@ MonoBehaviour:
   onWorkStation: 0
   needsAnchor: 1
   startAnchor: {fileID: 0}
+--- !u!114 &480016415484961059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775203455388592914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f899cd5f2694e44dbad7655e314d8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kettle:
+    containerType: 0
+    waterVolume: 0
+    kettleTemperature: 0
+    cooldownRate: 0
+    heatupRate: 0
+    isActive: 0
+    temperatureSetting: 0

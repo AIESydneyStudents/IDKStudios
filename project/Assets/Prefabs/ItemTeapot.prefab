@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4934735288186051817}
   - component: {fileID: 1471798989335651959}
   - component: {fileID: 7919699593342541231}
+  - component: {fileID: 5031877663903046703}
   m_Layer: 9
   m_Name: ItemTeapot
   m_TagString: Item
@@ -128,3 +129,22 @@ MonoBehaviour:
   onWorkStation: 0
   needsAnchor: 0
   startAnchor: {fileID: 0}
+--- !u!114 &5031877663903046703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8802761445796191670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681e69cc5700a5f4ea2cc80a9dea77a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teapot:
+    containerType: 1
+    isFull: 0
+    teapotTaste: 0
+    teapotStrength: 0
+    teapotTemperature: 0
+    cooldownRate: 0

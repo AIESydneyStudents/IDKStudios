@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 4509202230463644501}
   - component: {fileID: 1103376307852322482}
   - component: {fileID: 5873751634857585277}
+  - component: {fileID: 6488922897686225782}
   m_Layer: 9
   m_Name: ItemAlmondMilk
   m_TagString: Item
@@ -127,6 +128,19 @@ MonoBehaviour:
   onWorkStation: 0
   needsAnchor: 0
   startAnchor: {fileID: 0}
+--- !u!114 &6488922897686225782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632965003833094470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containedAdditive: {fileID: 11400000, guid: c41b546a1404efa4ea526464d2110671, type: 2}
 --- !u!1 &763646717457194047
 GameObject:
   m_ObjectHideFlags: 0

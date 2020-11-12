@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5804705774123495854}
   - component: {fileID: 295864797663819676}
   - component: {fileID: 836131148811748758}
+  - component: {fileID: -2282464257408923865}
   m_Layer: 0
   m_Name: SugarCube
   m_TagString: Item
@@ -127,3 +128,16 @@ MonoBehaviour:
   onWorkStation: 0
   needsAnchor: 0
   startAnchor: {fileID: 0}
+--- !u!114 &-2282464257408923865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121837270278377442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containedAdditive: {fileID: 11400000, guid: 867b0644830be4a4ba6c1f4f71d793ee, type: 2}

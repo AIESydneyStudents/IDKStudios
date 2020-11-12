@@ -151,4 +151,20 @@ public class AdditiveInterface : MonoBehaviour
                 }
         }
     }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Item")
+        {
+            SetContainerObject(collider.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.gameObject.tag == "Item")
+        {
+            ClearContainerObject();
+        }
+    }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectPopUp : MonoBehaviour
 {
+    private int count = 0;
+
     [SerializeField]
     public GameObject objectMenu;
 
@@ -22,6 +24,15 @@ public class ObjectPopUp : MonoBehaviour
 
     private void OnMouseDown()
     {
-        objectMenu.SetActive(true);
+        if (count == 0)
+        {
+            objectMenu.SetActive(true);
+            count++;
+        }
+
+        else if (count > 0)
+        {
+            count = 0;
+        }
     }
 }

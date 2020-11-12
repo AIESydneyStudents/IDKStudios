@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DragObject : Singleton<DragObject>
+public class DragObject : MonoBehaviour
 {
     private Vector3 originalObjPos;
     private Vector3 offset;
@@ -15,7 +15,6 @@ public class DragObject : Singleton<DragObject>
     [SerializeField]
     public bool needsAnchor;
 
-    [SerializeField]
     public GameObject startAnchor;
     private GameObject teleportAnchor;
     private GameObject targetObject;

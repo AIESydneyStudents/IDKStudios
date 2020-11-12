@@ -66,7 +66,7 @@ public class AdditiveInterface : MonoBehaviour
     // Will check and see if this additive can be inserted into the container.
     // Will also set a reference attributeInfo as a preview of result if action
     // is confirmed.
-    public bool IsValidContainer(ref AttributeInfo mergedInfo)
+    public bool CanInsertAdditive(ref AttributeInfo mergedInfo)
     {
         if (containerObject == null)
         {

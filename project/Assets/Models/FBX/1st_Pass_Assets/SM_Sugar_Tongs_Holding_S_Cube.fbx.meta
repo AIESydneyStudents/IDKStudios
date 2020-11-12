@@ -1,8 +1,16 @@
 fileFormatVersion: 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream:project/Assets/Models/FBX/1st_Pass_Assets/SM_Sugar_Tongs_Holding_S_Cube.fbx.meta
 guid: 07b2ef9d1673e284ab19cd725f9a29ce
 =======
+<<<<<<< Updated upstream
+guid: 559b648da8cf66742a34334bdc6bd0e8
+>>>>>>> Stashed changes:project/Assets/Models/FBX/1st_Pass_Assets/SM_Sugar_Tong_Holding_Cube.fbx.meta
+=======
 guid: 7529660e9695711469fe62d2b97d0574
+>>>>>>> Stashed changes
+=======
+guid: 6b99e95d197634a44a41775140b2db2e
 >>>>>>> Stashed changes
 ModelImporter:
   serializedVersion: 19300

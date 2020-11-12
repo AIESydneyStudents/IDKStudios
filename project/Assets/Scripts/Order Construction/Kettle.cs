@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
+[Serializable]
 public class Kettle : Container
 {
     #region Fields
@@ -61,11 +62,6 @@ public class Kettle : Container
     public Kettle()
     {
         containerType = Type.KETTLE;
-    }
-
-    private void Update()
-    {
-        Simulate(Time.deltaTime);
     }
 
     public void Simulate(float deltaTime)

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[Serializable]
 public class Teapot : Container
 {
     #region Fields
@@ -47,11 +48,6 @@ public class Teapot : Container
     public Teapot()
     {
         containerType = Type.TEAPOT;
-    }
-
-    private void Update()
-    {
-        Simulate(Time.deltaTime);
     }
 
     public void Simulate(float deltaTime)

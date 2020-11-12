@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkStationEvent : Singleton<WorkStationEvent>
+public class WorkStationEvent : MonoBehaviour
 {
     [HideInInspector]
     public bool inUse;
@@ -20,11 +20,13 @@ public class WorkStationEvent : Singleton<WorkStationEvent>
         if (inUse)
         {
             gameObject.GetComponent<SphereCollider>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
 
         else if (!inUse)
         {
             gameObject.GetComponent<SphereCollider>().enabled = true;
+            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

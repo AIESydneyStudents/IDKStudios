@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Xml.Schema;
 using UnityEngine;
 
 [CreateAssetMenu(
@@ -37,7 +34,11 @@ public class Customer : ScriptableObject
     private float toleranceTemperature;
 
     [SerializeField]
-    private float popularity;
+    private float weight;
+
+    private float percentile;
+
+    private bool hasVisitedToday;
 
     #endregion
 
@@ -65,9 +66,50 @@ public class Customer : ScriptableObject
             newCustomer.customerIndex = customerLookup.Count - 1;
         }
 
-        foreach (var pair in customerLookup)
+        float totalWeight = 0.0f;
+        int customersDefinedWeight = 0;
+
+        foreach (Customer customer in customerLookup.Values)
         {
-            pair.Value.Initialize();
+            customer.Initialize();
+
+            if (customer.weight > 0.0f)
+            {
+                totalWeight += customer.weight;
+                customersDefinedWeight++;
+            }
+        }
+
+        if (totalWeight > 1.0f)
+        {
+            float normalise = 1.0f / totalWeight;
+
+            foreach (Customer customer in customerLookup.Values)
+            {
+                customer.weight *= normalise;
+            }
+        }
+        else
+        {
+            float remainingWeight = 1.0f - totalWeight;
+            float remainingWeightAverage = remainingWeight /
+                (customerLookup.Count - customersDefinedWeight);
+
+            foreach (Customer customer in customerLookup.Values)
+            {
+                if (customer.weight == 0.0f)
+                {
+                    customer.weight = remainingWeightAverage;
+                }
+            }
+        }
+
+        float aggregateWeight = 0.0f;
+
+        foreach (Customer customer in customerLookup.Values)
+        {
+            aggregateWeight += customer.weight;
+            customer.percentile = aggregateWeight;
         }
     }
 
@@ -104,10 +146,10 @@ public class Customer : ScriptableObject
         {
             // Sort preferences by index.
             Array.Sort(teaPreferences, TeaPreference.CompareByIndex);
-            
+
             // Get all inclusive list of tea additives.
             Additive[] allTeaAdditives = Additive.GetAllAdditives(Additive.Type.TEA);
-            
+
             // Calculate average weight of remaining 
             int remainingTeaCount = allTeaAdditives.Length - teaPreferences.Length;
             float remainingWeight = 1.0f - teaWeighting;
@@ -274,7 +316,7 @@ public class Customer : ScriptableObject
         Teapot teapot = new Teapot();
         teapot.IsFull = true;
         teapot.Temperature = 0.01f * randomGenerator.Next(70, 100);
-        
+
         //Choose and add tea
         float teaPercentile = 0.001f * randomGenerator.Next(0, 999);
 
@@ -338,6 +380,63 @@ public class Customer : ScriptableObject
     public static Customer[] GetAllCustomers()
     {
         return customerLookup.Values.ToArray();
+    }
+
+    public static Customer[] GetAllUnvisitedCustomers()
+    {
+        List<Customer> unvisitedCustomers = new List<Customer>();
+
+        foreach (Customer customer in customerLookup.Values)
+        {
+            if (!customer.hasVisitedToday)
+            {
+                unvisitedCustomers.Add(customer);
+            }
+        }
+
+        return unvisitedCustomers.ToArray();
+    }
+
+    public static Customer[] GetAllVisitedCustomers()
+    {
+        List<Customer> visitedCustomers = new List<Customer>();
+
+        foreach (Customer customer in customerLookup.Values)
+        {
+            if (!customer.hasVisitedToday)
+            {
+                visitedCustomers.Add(customer);
+            }
+        }
+
+        return visitedCustomers.ToArray();
+    }
+
+    public static void SetAllCustomersToUnvisited()
+    {
+        foreach (Customer customer in customerLookup.Values)
+        {
+            customer.hasVisitedToday = false;
+        }
+    }
+
+    public static Customer GetRandomCustomer()
+    {
+        System.Random randomGenerator = new System.Random();
+
+        float customerPercentile = 0.001f * randomGenerator.Next(0, 999);
+
+        Customer[] unvisitedCustomers = GetAllUnvisitedCustomers();
+
+        foreach (Customer customer in unvisitedCustomers)
+        {
+            if (customerPercentile < customer.percentile)
+            {
+                return customer;
+            }
+        }
+
+        return null;
     }
 
     #endregion

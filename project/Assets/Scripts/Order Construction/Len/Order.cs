@@ -34,6 +34,10 @@ public class Order
     public SortedSet<Additive> additiveRepository =
         new SortedSet<Additive>();
 
+    public bool isOpen;
+    public float evaluationScore;
+    public Customer belongsTo;
+
     #endregion
 
     #region Properties

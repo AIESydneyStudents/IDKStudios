@@ -114,19 +114,6 @@ public class AdditiveInterface : MonoBehaviour
         }
     }
 
-    // Gets the attribute info of the enclosed additive. Used to fill out the 
-    // attribute tooltip that floats above an object being moved.
-    public AttributeInfo GetAttributeInfo()
-    {
-        AttributeInfo attributeInfo = new AttributeInfo();
-
-        attributeInfo.infoTaste = containedAdditive.initialEffect.Taste;
-        attributeInfo.infoStrength = containedAdditive.initialEffect.Strength;
-        attributeInfo.infoTemperature = containedAdditive.initialEffect.Temperature;
-
-        return attributeInfo;
-    }
-
     // Will initiate an insert.
     public void InsertAdditive()
     {
@@ -154,6 +141,9 @@ public class AdditiveInterface : MonoBehaviour
         }
     }
 
+    // Gets the attribute info of the enclosed additive. Used to fill out the 
+    // attribute tooltip that floats above an object being moved.
+    public AttributeInfo GetAttributeInfo()
     private void OnMouseUp()
     {
         if (canInsert)
@@ -164,6 +154,7 @@ public class AdditiveInterface : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        AttributeInfo attributeInfo = new AttributeInfo();
         if (collider.gameObject.tag == "Item")
         {
             if (SetContainerObject(collider.gameObject))
@@ -178,6 +169,11 @@ public class AdditiveInterface : MonoBehaviour
         }
     }
 
+        attributeInfo.infoTaste = containedAdditive.initialEffect.Taste;
+        attributeInfo.infoStrength = containedAdditive.initialEffect.Strength;
+        attributeInfo.infoTemperature = containedAdditive.initialEffect.Temperature;
+
+        return attributeInfo;
     private void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.tag == "Item")

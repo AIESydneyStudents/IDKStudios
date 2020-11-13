@@ -49,7 +49,9 @@ public class Kettle : Container
 
     public float TemperatureSetting { get { return temperatureSetting; } set { temperatureSetting = value; } }
 
-    public float WaterVolume { get { return waterVolume; } }
+    public int WaterVolume { get { return waterVolume; } }
+
+    public int WaterVolumeMax { get { return maxWaterVolume; } }
 
     public bool IsFull { get { return waterVolume == maxWaterVolume; } }
 

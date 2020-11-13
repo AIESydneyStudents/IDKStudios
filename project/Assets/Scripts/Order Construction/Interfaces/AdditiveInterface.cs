@@ -158,6 +158,8 @@ public class AdditiveInterface : MonoBehaviour
         if (canInsert)
         {
             InsertAdditive();
+
+            Destroy(gameObject, 0.1f);
         }
     }
 

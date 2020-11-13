@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6168364506028276109}
   - component: {fileID: 479325211279918452}
   - component: {fileID: -6699724582906292580}
+  - component: {fileID: 6037864594392573136}
   - component: {fileID: -7293159481721850534}
   - component: {fileID: 7907156183478760107}
   - component: {fileID: 7160726252846776731}
@@ -98,6 +99,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1111983561948126351, guid: 92e5182b263d6e94da108e917c94d114, type: 3}
+--- !u!135 &6037864594392573136
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205129607112864168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.13317648
+  m_Center: {x: 0.01619044, y: 0.010970712, z: 0.00000029802322}
 --- !u!54 &-7293159481721850534
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cup:
     containerType: 2
-    isFull: 0
-    cupTaste: 0
-    cupStrength: 0
-    cupTemperature: 0
+    isFull: 1
+    cupTaste: 0.52
+    cupStrength: 0.79
+    cupTemperature: 0.41
     cooldownRate: 0

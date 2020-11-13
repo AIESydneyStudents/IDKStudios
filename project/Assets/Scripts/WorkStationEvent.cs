@@ -20,13 +20,11 @@ public class WorkStationEvent : MonoBehaviour
         if (inUse)
         {
             gameObject.GetComponent<SphereCollider>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
 
         else if (!inUse)
         {
             gameObject.GetComponent<SphereCollider>().enabled = true;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

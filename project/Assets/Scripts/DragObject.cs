@@ -23,10 +23,16 @@ public class DragObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = startAnchor.transform.position;
+        if (startAnchor != null)
+        {
+            transform.position = startAnchor.transform.position;
+        }
+
         originalObjPos = transform.position;
         onWorkStation = false;
         snappedToStation = false;
+
+        offset = new Vector3(0, 0.05f, 0.1f);
     }
 
     // Returns mouse coordinates
@@ -125,12 +131,6 @@ public class DragObject : MonoBehaviour
 
             previousObject = null;
         }
-    }
-
-    // When mouse is down
-    void OnMouseDown()
-    {
-        offset = new Vector3(0, 0.05f, 0.1f);
     }
 
     // When mouse is being dragged across screen

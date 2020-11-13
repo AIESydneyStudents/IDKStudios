@@ -17,10 +17,10 @@ MonoBehaviour:
   container: 2
   initialEffect:
     effectTaste: 0.176
-    effectStrength: -0.127
+    effectStrength: -0.21
     effectTemperature: -0.195
   steepEffect:
     effectTaste: 0
     effectStrength: 0
     effectTemperature: 0
-  teaRequirement: 1
+  teaRequirement: 0

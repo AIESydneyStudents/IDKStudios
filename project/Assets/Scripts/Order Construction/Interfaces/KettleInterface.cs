@@ -2,15 +2,32 @@
 
 public class KettleInterface : MonoBehaviour
 {
+    private bool canUse = false;
     public Kettle kettle;
 
     public GameObject validObject;
     private TapInterface tapInterface;
     private TeapotInterface teapotInterface;
 
+    private MeshRenderer renderer;
+
+    private void Start()
+    {
+        renderer = gameObject.GetComponent<MeshRenderer>();
+    }
+
     private void Update()
     {
         kettle.Simulate(Time.deltaTime);
+
+        Color color = renderer.material.color;
+        color.r = kettle.Temperature;
+        renderer.material.color = color;
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            kettle.IsActive = true;
+        }
     }
 
     public bool SetValidObject(GameObject validObject)
@@ -105,5 +122,54 @@ public class KettleInterface : MonoBehaviour
         attributeInfo.infoTemperature = kettle.Temperature;
 
         return attributeInfo;
+    }
+
+    private void OnMouseUp()
+    {
+        if (canUse)
+        {
+            if (teapotInterface != null)
+            {
+                DispenseToTeapot();
+            }
+
+            else
+            {
+                // FIX VALUE
+                FillFromTap(1);
+            }
+
+            canUse = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (SetValidObject(collider.gameObject))
+        {
+            if (teapotInterface != null)
+            {
+                if (CanDispenseToTeapot())
+                {
+                    canUse = true;
+                }
+            }
+
+            else
+            {
+                int rubbish = 0;
+
+                if (CanFillFromTap(1, ref rubbish))
+                {
+                    canUse = true;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        ClearValidObject();
+        canUse = false;
     }
 }

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Xml.Schema;
-using UnityEditor.AnimatedValues;
-using UnityEditorInternal;
 using UnityEngine;
 
 [CreateAssetMenu(

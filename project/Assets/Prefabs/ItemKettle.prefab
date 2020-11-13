@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2370948661670208311}
   - component: {fileID: 8348482206754250702}
   - component: {fileID: 4977540199616112445}
+  - component: {fileID: 8018285374301970340}
   - component: {fileID: 9148079577076204185}
   - component: {fileID: -1927485867910111977}
   - component: {fileID: 480016415484961059}
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7775203455388592914}
   m_LocalRotation: {x: -0, y: 0.72510225, z: -0, w: 0.6886413}
-  m_LocalPosition: {x: 0.667, y: 1.104, z: -0.191}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,6 +98,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5076798556035486163, guid: 643018f4ffa74224d84bfe9661e4402e, type: 3}
+--- !u!135 &8018285374301970340
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775203455388592914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15061304
+  m_Center: {x: 3.3998776e-12, y: 0.08397174, z: -0.0064490736}
 --- !u!54 &9148079577076204185
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -145,7 +159,8 @@ MonoBehaviour:
     containerType: 0
     waterVolume: 0
     kettleTemperature: 0
-    cooldownRate: 0
-    heatupRate: 0
+    cooldownRate: 0.01
+    heatupRate: 0.49
     isActive: 0
-    temperatureSetting: 0
+    temperatureSetting: 1
+  validObject: {fileID: 0}

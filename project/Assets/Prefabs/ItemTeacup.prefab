@@ -172,8 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cup:
     containerType: 2
-    isFull: 1
-    cupTaste: 0.52
-    cupStrength: 0.79
-    cupTemperature: 0.41
-    cooldownRate: 0
+    isFull: 0
+    cupTaste: 0
+    cupStrength: 0
+    cupTemperature: 0
+    cooldownRate: 0.09
+  saucerObject: {fileID: 0}

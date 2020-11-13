@@ -109,8 +109,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.20181581
-  m_Center: {x: -0.00016659498, y: 0.0001810193, z: 0}
+  m_Radius: 0.26944458
+  m_Center: {x: 0.011123776, y: 0.022056669, z: 0}
 --- !u!54 &1471798989335651959
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,3 +162,4 @@ MonoBehaviour:
     teapotStrength: 0
     teapotTemperature: 0
     cooldownRate: 0
+  validObject: {fileID: 0}

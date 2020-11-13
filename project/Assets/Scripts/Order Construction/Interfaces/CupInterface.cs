@@ -10,9 +10,20 @@ public class CupInterface : MonoBehaviour
 
     private SaucerInterface saucerInterface;
 
+    private MeshRenderer renderer;
+
+    private void Start()
+    {
+        renderer = gameObject.GetComponent<MeshRenderer>();
+    }
+
     private void Update()
     {
         cup.Simulate(Time.deltaTime);
+
+        Color color = renderer.material.color;
+        color.r = cup.Temperature;
+        renderer.material.color = color;
     }
 
     public bool SetSaucerObject(GameObject saucerObject)

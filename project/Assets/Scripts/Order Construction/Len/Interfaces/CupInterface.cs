@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CupInterface : MonoBehaviour
+public class CupInterface : Interface
 {
     public Cup cup;
 
@@ -24,6 +24,11 @@ public class CupInterface : MonoBehaviour
         Color color = renderer.material.color;
         color.r = cup.Temperature;
         renderer.material.color = color;
+    }
+
+    public CupInterface()
+    {
+        interfaceType = InterfaceType.CUP_INTERFACE;
     }
 
     public bool SetSaucerObject(GameObject saucerObject)
@@ -62,6 +67,13 @@ public class CupInterface : MonoBehaviour
         attributeInfo.infoTaste = cup.Taste;
         attributeInfo.infoStrength = cup.Strength;
         attributeInfo.infoTemperature = cup.Temperature;
+
+        attributeInfo.containedAdditives = new List<string>();
+
+        foreach (Additive additive in cup.additiveRepository)
+        {
+            attributeInfo.containedAdditives.Add(additive.name);
+        }
 
         return attributeInfo;
     }

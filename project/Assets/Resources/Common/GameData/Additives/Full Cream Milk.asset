@@ -23,8 +23,4 @@ MonoBehaviour:
     effectTaste: 0
     effectStrength: 0
     effectTemperature: 0
-<<<<<<< Updated upstream
   teaRequirement: 0
-=======
-  teaRequirement: 1
->>>>>>> Stashed changes

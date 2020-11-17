@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class TapInterface : MonoBehaviour
+public class TapInterface : Interface
 {
-
+    public TapInterface()
+    {
+        interfaceType = InterfaceType.TAP_INTERFACE;
+    }
 }

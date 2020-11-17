@@ -58,6 +58,11 @@ public class Teapot : Container
 
     public void Steep(float deltaTime)
     {
+        if (!isFull)
+        {
+            return;
+        }
+
         foreach (Additive additive in additiveRepository)
         {
             teapotTaste       += additive.steepEffect.Taste       * deltaTime;

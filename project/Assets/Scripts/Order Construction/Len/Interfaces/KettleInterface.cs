@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class KettleInterface : MonoBehaviour
+public class KettleInterface : Interface
 {
     private bool canUse = false;
     public Kettle kettle;
@@ -28,6 +28,11 @@ public class KettleInterface : MonoBehaviour
         {
             kettle.IsActive = true;
         }
+    }
+
+    public KettleInterface()
+    {
+        interfaceType = InterfaceType.KETTLE_INTERFACE;
     }
 
     public bool SetValidObject(GameObject validObject)
@@ -122,54 +127,5 @@ public class KettleInterface : MonoBehaviour
         attributeInfo.infoTemperature = kettle.Temperature;
 
         return attributeInfo;
-    }
-
-    private void OnMouseUp()
-    {
-        if (canUse)
-        {
-            if (teapotInterface != null)
-            {
-                DispenseToTeapot();
-            }
-
-            else
-            {
-                // FIX VALUE
-                FillFromTap(1);
-            }
-
-            canUse = false;
-        }
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (SetValidObject(collider.gameObject))
-        {
-            if (teapotInterface != null)
-            {
-                if (CanDispenseToTeapot())
-                {
-                    canUse = true;
-                }
-            }
-
-            else
-            {
-                int rubbish = 0;
-
-                if (CanFillFromTap(1, ref rubbish))
-                {
-                    canUse = true;
-                }
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        ClearValidObject();
-        canUse = false;
     }
 }

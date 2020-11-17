@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdditiveInterface : MonoBehaviour
+public class AdditiveInterface : Interface
 {
     private bool canInsert = false;
 
@@ -16,6 +16,11 @@ public class AdditiveInterface : MonoBehaviour
     private GameObject containerObject;
     private TeapotInterface teapotInterface;
     private CupInterface cupInterface;
+
+    public AdditiveInterface()
+    {
+        interfaceType = InterfaceType.ADDITIVE_INTERFACE;
+    }
 
     // Will look and see if the gameObject is of the correct type.
     // Will return true if correct will return false if not. If it's true,

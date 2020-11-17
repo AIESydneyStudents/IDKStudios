@@ -9,5 +9,5 @@ public class AttributeInfo
     public float infoTaste;
     public float infoStrength;
     public float infoTemperature;
-    List<string> containedAdditives;
+    public List<string> containedAdditives;
 }

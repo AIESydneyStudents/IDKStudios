@@ -6,8 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class SaucerInterface : MonoBehaviour
+public class SaucerInterface : Interface
 {
     public Saucer saucer;
+
+    public SaucerInterface()
+    {
+        interfaceType = InterfaceType.SAUCER_INTERFACE;
+    }
 }
 

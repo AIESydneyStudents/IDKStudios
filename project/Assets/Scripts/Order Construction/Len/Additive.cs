@@ -83,6 +83,7 @@ public class Additive : ScriptableObject, IComparable<Additive>
 
             // Additive's index is set.
             newAdditive.additiveIndex = additiveLookup.Count - 1;
+            additive.additiveIndex = newAdditive.additiveIndex;
         }
     }
 

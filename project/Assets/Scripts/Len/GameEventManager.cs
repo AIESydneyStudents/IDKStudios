@@ -18,15 +18,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public int customersEachDay;
     public int completedCustomers;
 
-
-
-
-
-
-
-
     public GameObject customerSpawnPoint;
-    public 
 
     public CupInterface cup1;
     public CupInterface cup2;

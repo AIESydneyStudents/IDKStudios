@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 1249163747777629897}
   - component: {fileID: 2142300151808287953}
   - component: {fileID: 1942663727392851550}
-  - component: {fileID: 7529800342048291487}
-  - component: {fileID: 1629182267118107652}
   m_Layer: 0
-  m_Name: WorkStationFridge
+  m_Name: Fridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7774485249496355298, guid: 4cbd05acb2859d74a855bb34fb9c9b2a, type: 3}
+  - {fileID: 2100000, guid: a753d044a5aac83438e98ff9129f2e35, type: 2}
   - {fileID: 6367379032633132538, guid: 4cbd05acb2859d74a855bb34fb9c9b2a, type: 3}
   - {fileID: -2908222291521736502, guid: 4cbd05acb2859d74a855bb34fb9c9b2a, type: 3}
   m_StaticBatchInfo:
@@ -97,29 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8202855, y: 0.6531448, z: 0.7740776}
   m_Center: {x: 0, y: 0.3265724, z: 0}
---- !u!114 &7529800342048291487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2914702026361651305}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eebea1de489fb0146abdb50533c2a65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objToSpawn: {fileID: 0}
---- !u!114 &1629182267118107652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2914702026361651305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4428efd09911de346a8542c8fbbf9686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectMenu: {fileID: 0}

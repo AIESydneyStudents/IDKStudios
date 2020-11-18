@@ -10,32 +10,31 @@ public class Order
 
     [Range(0.0f, 1.0f)]
     [SerializeField]
-    private float targetTaste;
+    public float targetTaste;
 
     [Range(0.0f, 1.0f)]
     [SerializeField]
-    private float targetStrength;
+    public float targetStrength;
 
     [Range(0.0f, 1.0f)]
     [SerializeField]
-    private float targetTemperature;
+    public float targetTemperature;
 
     [Header("Attribute Tolerances")]
 
     [SerializeField]
-    private float toleranceTaste;
+    public float toleranceTaste;
 
     [SerializeField]
-    private float toleranceStrength;
+    public float toleranceStrength;
 
     [SerializeField]
-    private float toleranceTemperature;
+    public float toleranceTemperature;
 
     public SortedSet<Additive> additiveRepository =
         new SortedSet<Additive>();
 
-    public bool isOpen;
-    public float evaluationScore;
+    public OrderEvaluation evaluation;
     public Customer belongsTo;
 
     #endregion

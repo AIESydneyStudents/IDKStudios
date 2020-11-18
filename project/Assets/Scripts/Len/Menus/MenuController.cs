@@ -7,7 +7,8 @@ public class MenuController : MonoBehaviour
     public enum MenuType
     {
         TAP_MENU,
-        KETTLE_MENU
+        KETTLE_MENU,
+        FRIDGE_MENU
     }
 
     public MenuType menuType;

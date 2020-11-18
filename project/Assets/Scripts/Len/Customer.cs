@@ -44,6 +44,12 @@ public class Customer : ScriptableObject
 
     #region Properties
 
+    public float ToleranceTaste { get { return toleranceTaste; } }
+
+    public float ToleranceStrength { get { return toleranceStrength; } }
+
+    public float ToleranceTemperature { get { return toleranceTemperature; } }
+
     #endregion
 
     #region Functions

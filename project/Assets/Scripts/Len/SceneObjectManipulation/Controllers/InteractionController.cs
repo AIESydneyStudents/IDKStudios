@@ -33,7 +33,6 @@ public class InteractionController : MonoBehaviour
     public GameObject compatibleGameObject;
     public InteractionController compatibleController;
 
-    public GameObject informationPanel;
     public MenuController menuController;
     public ProgressBarController progressBarController;
     public Vector3 progressBarOffset;

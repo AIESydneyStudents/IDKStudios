@@ -139,9 +139,12 @@ public class InputController : Singleton<InputController>
                     Additive sourcedAdditive = additiveSourceController.containedAdditive;
                     AttributeModifier modifier = sourcedAdditive.initialEffect;
 
-                    // DO STUFF WITH IT
+                    additiveReadoutController.gameObject.SetActive(true);
 
-                    
+                    additiveReadoutController.SetAttributeFields(
+                        modifier.Taste,
+                        modifier.Strength,
+                        modifier.Temperature);
 
                     break;
                 }
@@ -250,6 +253,9 @@ public class InputController : Singleton<InputController>
         {
             case InteractionController.ControllerType.ADDITIVE_SOURCE:
                 {
+                    Vector3 screenCoordinates = Input.mousePosition;
+                    additiveReadoutController.SetPosition(screenCoordinates);
+
                     break;
                 }
             case InteractionController.ControllerType.CONTAINER:

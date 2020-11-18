@@ -19,4 +19,10 @@ public class Evaluation
 
     public Error error;
     public string additiveName;
+
+    public Evaluation(Error error, string additiveName = null)
+    {
+        this.error = error;
+        this.additiveName = additiveName;
+    }
 }

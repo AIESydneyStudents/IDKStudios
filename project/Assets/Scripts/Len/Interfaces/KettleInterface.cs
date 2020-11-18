@@ -2,32 +2,15 @@
 
 public class KettleInterface : Interface
 {
-    private bool canUse = false;
     public Kettle kettle;
 
     public GameObject validObject;
     private TapInterface tapInterface;
     private TeapotInterface teapotInterface;
 
-    private MeshRenderer renderer;
-
-    private void Start()
-    {
-        renderer = gameObject.GetComponent<MeshRenderer>();
-    }
-
     private void Update()
     {
         kettle.Simulate(Time.deltaTime);
-
-        Color color = renderer.material.color;
-        color.r = kettle.Temperature;
-        renderer.material.color = color;
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            kettle.IsActive = true;
-        }
     }
 
     public KettleInterface()

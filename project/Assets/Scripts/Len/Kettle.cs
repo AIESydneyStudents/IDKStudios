@@ -199,5 +199,12 @@ public class Kettle : Container
         }
     }
 
+    public void ResetKettle()
+    {
+        waterVolume = 0;
+        isActive = false;
+        temperatureSetting = 0;
+    }
+
     #endregion
 }

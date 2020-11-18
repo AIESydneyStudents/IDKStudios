@@ -14,6 +14,8 @@ public class Evaluation
         TOO_STRONG,
         TOO_COLD,
         TOO_HOT,
+        EMPTY_CUP,
+        JUST_WATER,
         NO_ADDITIVE
     }
 

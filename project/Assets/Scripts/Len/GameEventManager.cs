@@ -22,6 +22,8 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public CustomerLoader customerLoader;
     public CustomerSpeechUIController customerSpeechUI;
+    public DocketUIController docket1;
+    public DocketUIController docket2;
 
     public GameObject teapotObject1;
     public GameObject teapotObject2;
@@ -36,11 +38,12 @@ public class GameEventManager : Singleton<GameEventManager>
 
     private void Start()
     {
-        StartNewCustomer();
+        BeginNewDay();
     }
 
     public void BeginNewDay()
     {
+        InputController.Instance.DisableInteraction();
         currentDay++;
         openCustomer = null;
         openCustomerOrders.Clear();
@@ -66,7 +69,6 @@ public class GameEventManager : Singleton<GameEventManager>
         cupObject1.GetComponent<CupInterface>().cup.ResetCup();
         cupObject2.GetComponent<CupInterface>().cup.ResetCup();
 
-        
         openCustomer = Customer.GetRandomCustomer();
         customerLoader.SetCustomer(openCustomer);
 
@@ -81,7 +83,7 @@ public class GameEventManager : Singleton<GameEventManager>
         customerSpeechUI.gameObject.SetActive(false);
         
         System.Random randomGenerator = new System.Random();
-        int orderCount = randomGenerator.Next(1, 100) % 2 + 1;
+        int orderCount = 2;// randomGenerator.Next(1, 100) % 2 + 1;
 
         for (int i = 0; i < orderCount; i++)
         {
@@ -89,18 +91,19 @@ public class GameEventManager : Singleton<GameEventManager>
             openCustomerOrders.Add(newOrder);
         }
 
+        // Show dockets somewhere.
         saucerMenu1.SetOrder(openCustomerOrders[0]);
         saucerObject1.SetActive(true);
         cupObject1.SetActive(true);
+        docket1.SetDocket(openCustomerOrders[0]);
 
         if (orderCount == 2)
         {
             saucerMenu2.SetOrder(openCustomerOrders[1]);
             saucerObject2.SetActive(true);
             cupObject2.SetActive(true);
+            docket2.SetDocket(openCustomerOrders[1]);
         }
-
-        // Show dockets somewhere.
 
         openCustomerTimer.StartTimer();
 
@@ -197,9 +200,13 @@ public class GameEventManager : Singleton<GameEventManager>
         closedCustomerOrders.Add(order);
 
         // Show customer reaction
+        customerSpeechUI.PushReactionDialogue(openCustomer, newEvaluation.GetRandomEvaluation());
 
         if (openCustomerOrders.Count == 0)
         {
+            // Show final reaction
+            customerSpeechUI.PushFinalComment();
+
             completedCustomers++;
         }
 
@@ -207,7 +214,9 @@ public class GameEventManager : Singleton<GameEventManager>
         {
             EndDay();
         }
+        else
+        {
+            StartNewCustomer();
+        }
     }
-
-    
 }

@@ -8,9 +8,9 @@ public class GameEventManager : Singleton<GameEventManager>
     public int currentDay;
 
     public Customer openCustomer;
-    public Timer openCustomerTimer;
-    public List<Order> openCustomerOrders;
-    public List<Order> closedCustomerOrders;
+    private Timer openCustomerTimer = new Timer();
+    public List<Order> openCustomerOrders = new List<Order>();
+    public List<Order> closedCustomerOrders = new List<Order>();
 
     private bool proceedWithCustomerOrder;
 
@@ -21,7 +21,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public int completedCustomers;
 
     public CustomerLoader customerLoader;
-    public GameObject customerSpeechUI;
+    public CustomerSpeechUIController customerSpeechUI;
 
     public GameObject teapotObject1;
     public GameObject teapotObject2;
@@ -31,9 +31,12 @@ public class GameEventManager : Singleton<GameEventManager>
     public GameObject saucerObject2;
     public GameObject kettleObject;
 
+    public SaucerMenuController saucerMenu1;
+    public SaucerMenuController saucerMenu2;
+
     private void Start()
     {
-        //StartNewCustomer();
+        StartNewCustomer();
     }
 
     public void BeginNewDay()
@@ -63,27 +66,45 @@ public class GameEventManager : Singleton<GameEventManager>
         cupObject1.GetComponent<CupInterface>().cup.ResetCup();
         cupObject2.GetComponent<CupInterface>().cup.ResetCup();
 
-        openCustomerTimer.StartTimer();
+        
         openCustomer = Customer.GetRandomCustomer();
         customerLoader.SetCustomer(openCustomer);
 
-        // Show greeting dialogue.
-        customerSpeechUI.SetActive(true);
+        customerSpeechUI.gameObject.SetActive(true);
 
-        // Wait on button press to recieve order.
-        while (!proceedWithCustomerOrder);
-        proceedWithCustomerOrder = false;
+        // Push customer greeting
+        //customerSpeechUI.Pus
+    }
 
-        customerSpeechUI.SetActive(false);
-
+    public void ProceedWithOrder()
+    {
+        customerSpeechUI.gameObject.SetActive(false);
+        
         System.Random randomGenerator = new System.Random();
-        int orderCount = randomGenerator.Next(1, 2);
+        int orderCount = randomGenerator.Next(1, 100) % 2 + 1;
 
         for (int i = 0; i < orderCount; i++)
         {
             Order newOrder = openCustomer.GenerateOrder();
             openCustomerOrders.Add(newOrder);
         }
+
+        saucerMenu1.SetOrder(openCustomerOrders[0]);
+        saucerObject1.SetActive(true);
+        cupObject1.SetActive(true);
+
+        if (orderCount == 2)
+        {
+            saucerMenu2.SetOrder(openCustomerOrders[1]);
+            saucerObject2.SetActive(true);
+            cupObject2.SetActive(true);
+        }
+
+        // Show dockets somewhere.
+
+        openCustomerTimer.StartTimer();
+
+        // Show timer at top of screen
     }
 
     public void EndCustomer()
@@ -175,6 +196,8 @@ public class GameEventManager : Singleton<GameEventManager>
         openCustomerOrders.Remove(order);
         closedCustomerOrders.Add(order);
 
+        // Show customer reaction
+
         if (openCustomerOrders.Count == 0)
         {
             completedCustomers++;
@@ -186,8 +209,5 @@ public class GameEventManager : Singleton<GameEventManager>
         }
     }
 
-    public void ProceedWithOrder()
-    {
-        proceedWithCustomerOrder = true;
-    }
+    
 }

@@ -8,7 +8,8 @@ public class MenuController : MonoBehaviour
     {
         TAP_MENU,
         KETTLE_MENU,
-        FRIDGE_MENU
+        FRIDGE_MENU,
+        SAUCER_MENU
     }
 
     public MenuType menuType;

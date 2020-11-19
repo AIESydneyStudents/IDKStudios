@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7950001219936320855}
   - component: {fileID: 7950001219936320848}
   - component: {fileID: 7950001219936320852}
-  - component: {fileID: 3420060068154529529}
   - component: {fileID: 3552033859258745537}
+  - component: {fileID: 3420060068154529529}
   m_Layer: 8
   m_Name: TeaObject
   m_TagString: interact
@@ -109,6 +109,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3552033859258745537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7950001219936320849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceType: 5
+  containedAdditive: {fileID: 11400000, guid: de59e1e874cb87a47ab90d09a4f86b46, type: 2}
 --- !u!114 &3420060068154529529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,17 +150,3 @@ MonoBehaviour:
   anchorController: {fileID: 0}
   atAnchor: 0
   additiveInterface: {fileID: 3552033859258745537}
---- !u!114 &3552033859258745537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7950001219936320849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interfaceType: 5
-  containedAdditive: {fileID: 11400000, guid: de59e1e874cb87a47ab90d09a4f86b46, type: 2}

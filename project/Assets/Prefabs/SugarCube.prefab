@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4845713042290947660}
   - component: {fileID: 5155057350158842802}
   - component: {fileID: 5804705774123495854}
+  - component: {fileID: 8668459749288458521}
   - component: {fileID: 295864797663819676}
-  - component: {fileID: 836131148811748758}
   - component: {fileID: -2282464257408923865}
+  - component: {fileID: -1148037662509182366}
   m_Layer: 9
   m_Name: SugarCube
   m_TagString: Item
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2121837270278377442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0653, y: 1.113, z: 0.2162}
-  m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,6 +97,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &8668459749288458521
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121837270278377442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.92320544
+  m_Center: {x: 0, y: 0.009738406, z: 0}
 --- !u!54 &295864797663819676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,24 +124,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &836131148811748758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121837270278377442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c51040d6bdee1b40813c1bbe9992082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snappedToStation: 0
-  onWorkStation: 0
-  needsAnchor: 0
-  startAnchor: {fileID: 0}
 --- !u!114 &-2282464257408923865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +140,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interfaceType: 5
   containedAdditive: {fileID: 11400000, guid: 867b0644830be4a4ba6c1f4f71d793ee, type: 2}
+--- !u!114 &-1148037662509182366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121837270278377442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17763a756fdd9042945488e42dd8066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 0
+  meshRenderer: {fileID: 5155057350158842802}
+  interactionTrigger: {fileID: 8668459749288458521}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9056604, g: 0.2691349, b: 0.2691349, a: 0}
+  interactHightlightColor: {r: 0.5756547, g: 0.9811321, b: 0.31933072, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  additiveInterface: {fileID: -2282464257408923865}

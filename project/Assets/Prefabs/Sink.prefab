@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 6511848957958542578}
   - component: {fileID: 676161490546731019}
   - component: {fileID: 7097407282355126263}
-  m_Layer: 0
-  m_Name: SM_Sink
+  - component: {fileID: 1165741455629101582}
+  - component: {fileID: 2882264933710400437}
+  - component: {fileID: 7128611083442845987}
+  m_Layer: 8
+  m_Name: Sink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,3 +99,56 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4839720369742406581, guid: a4b6ae34df9ba9447b15f0667b4a2d04, type: 3}
+--- !u!65 &1165741455629101582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251687643679562967}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.71747434, y: 0.47275043, z: 0.7609575}
+  m_Center: {x: 0, y: 0.23332405, z: 0}
+--- !u!114 &2882264933710400437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251687643679562967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bca27bd9531bd4291aca9da71cfa19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceType: 0
+--- !u!114 &7128611083442845987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251687643679562967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a9e18530cafa49800c93eb33c879e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 3
+  meshRenderer: {fileID: 676161490546731019}
+  interactionTrigger: {fileID: 0}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9339623, g: 0.2863564, b: 0.2863564, a: 0}
+  interactHightlightColor: {r: 0.5650625, g: 0.9150943, b: 0.2460395, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  associatedInterface: {fileID: 2882264933710400437}

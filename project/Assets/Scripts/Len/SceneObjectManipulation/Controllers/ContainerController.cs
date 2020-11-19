@@ -6,6 +6,14 @@ public class ContainerController : InteractionController
 {
     public Interface associatedInterface;
 
+    //private void Start()
+    //{
+    //    if (anchorController != null)
+    //    {
+    //        ReturnToAnchor();
+    //    }
+    //}
+
     private void Update()
     {
         UpdateProgressBar();

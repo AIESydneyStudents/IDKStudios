@@ -537,6 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6435844827531658397}
   - component: {fileID: -1689787005036224134}
+  - component: {fileID: 8292377629170190236}
   m_Layer: 9
   m_Name: FullCreamMilk
   m_TagString: Item
@@ -577,3 +578,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!65 &8292377629170190236
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001752072013330062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.106959835, y: 0.22237548, z: 0.14990628}
+  m_Center: {x: -0.0012375414, y: 0.07708505, z: -0.003079598}

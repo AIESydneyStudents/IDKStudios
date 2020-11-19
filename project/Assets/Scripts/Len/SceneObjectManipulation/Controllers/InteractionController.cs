@@ -40,7 +40,7 @@ public class InteractionController : MonoBehaviour
     public AnchorController anchorController;
     public bool atAnchor;
 
-    void Start()
+    public void Start()
     {
         allControllers.Add(gameObject, this);
         originalColor = meshRenderer.material.color;
@@ -400,13 +400,13 @@ public class InteractionController : MonoBehaviour
 
     }
 
-#if UNITY_EDITOR
-    private void OnGUI()
-    {
-        Vector2 cam = Camera.main.WorldToScreenPoint(transform.position);
-        cam.y = Screen.height - cam.y;
-        Rect rect = new Rect(cam, new Vector2(200, 200));
-        GUI.Label(rect, gameObject.name);
-    }
-#endif
+//#if UNITY_EDITOR
+//    private void OnGUI()
+//    {
+//        Vector2 cam = Camera.main.WorldToScreenPoint(transform.position);
+//        cam.y = Screen.height - cam.y;
+//        Rect rect = new Rect(cam, new Vector2(200, 200));
+//        GUI.Label(rect, gameObject.name);
+//    }
+//#endif
 }

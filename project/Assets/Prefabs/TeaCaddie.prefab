@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2399952762060595591}
   - component: {fileID: -1921198269541312557}
+  - component: {fileID: 5108920018044494982}
   - component: {fileID: 8794335075946310773}
   m_Layer: 0
   m_Name: TeaCaddie
@@ -50,6 +51,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 3
+--- !u!65 &5108920018044494982
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663237332750308244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2359457, y: 0.22962594, z: 0.2384181}
+  m_Center: {x: -0.00013518333, y: 0.114843965, z: 0.004268408}
 --- !u!114 &8794335075946310773
 MonoBehaviour:
   m_ObjectHideFlags: 0

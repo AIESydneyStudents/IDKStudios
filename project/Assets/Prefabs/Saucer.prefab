@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -8324006843874228141}
   - component: {fileID: 9161927958533529788}
   - component: {fileID: 7260017998300022494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Saucer
-  m_TagString: Untagged
+  m_TagString: interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7096161353049986414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AnchorPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

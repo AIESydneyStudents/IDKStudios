@@ -70,6 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4509202230463644501}
   - component: {fileID: 1103376307852322482}
+  - component: {fileID: 8691843232732523845}
   m_Layer: 9
   m_Name: AlmondMilk
   m_TagString: Item
@@ -110,6 +111,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!65 &8691843232732523845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632965003833094470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13478808, y: 0.22925466, z: 0.16928026}
+  m_Center: {x: -0.0064140186, y: 0.09934688, z: 0.0045340816}
 --- !u!1 &763646717457194047
 GameObject:
   m_ObjectHideFlags: 0

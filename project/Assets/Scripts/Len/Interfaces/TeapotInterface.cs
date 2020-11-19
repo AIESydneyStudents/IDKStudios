@@ -4,26 +4,14 @@ using UnityEngine;
 
 public class TeapotInterface : Interface
 {
-    private bool canUse = false;
     public Teapot teapot;
 
     public GameObject validObject;
     private CupInterface cupInterface;
 
-    private MeshRenderer renderer;
-
-    private void Start()
-    {
-        renderer = gameObject.GetComponent<MeshRenderer>();
-    }
-
     private void Update()
     {
         teapot.Simulate(Time.deltaTime);
-
-        Color color = renderer.material.color;
-        color.r = teapot.Temperature;
-        renderer.material.color = color;
     }
 
     public TeapotInterface()

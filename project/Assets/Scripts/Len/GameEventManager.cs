@@ -73,7 +73,7 @@ public class GameEventManager : Singleton<GameEventManager>
         customerSpeechUI.gameObject.SetActive(true);
 
         // Push customer greeting
-        //customerSpeechUI.Pus
+        customerSpeechUI.PushGreeting(openCustomer);
     }
 
     public void ProceedWithOrder()

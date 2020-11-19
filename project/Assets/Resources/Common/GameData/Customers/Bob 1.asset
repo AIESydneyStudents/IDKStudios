@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d64daad60573132408f4b22d894f0fe9, type: 3}
-  m_Name: Bob
+  m_Name: Bob 1
   m_EditorClassIdentifier: 
-  customerName: Bob
+  customerName: Joe
   customerIndex: 0
   teaPreferences:
   - teaName: Black Tea
@@ -35,6 +35,6 @@ MonoBehaviour:
   toleranceStrength: 0.2
   toleranceTemperature: 0.05
   weight: 0
-  customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
+  customerMesh: {fileID: -1111983561948126351, guid: 92e5182b263d6e94da108e917c94d114,
     type: 3}
-  customerMaterial: {fileID: 2100000, guid: 00cbb46b68a19b54e839b48e25008190, type: 2}
+  customerMaterial: {fileID: 2100000, guid: 50619f27abb078e42b0c83a25f2d2d5e, type: 2}

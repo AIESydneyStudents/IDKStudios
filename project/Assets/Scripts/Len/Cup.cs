@@ -141,6 +141,15 @@ public class Cup : Container
         cupTemperature += additive.initialEffect.Temperature;
     }
 
+    public void ResetCup()
+    {
+        isFull = false;
+        cupTaste = 0.0f;
+        cupStrength = 0.0f;
+        cupTemperature = 0.0f;
+        ResetContainer();
+    }
+
     #endregion
 }
 

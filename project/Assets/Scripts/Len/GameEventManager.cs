@@ -12,28 +12,30 @@ public class GameEventManager : Singleton<GameEventManager>
     public List<Order> openCustomerOrders;
     public List<Order> closedCustomerOrders;
 
+    private bool proceedWithCustomerOrder;
+
     public float totalDayScore;
     public float totalDayTime;
 
     public int customersEachDay;
     public int completedCustomers;
 
+    public CustomerLoader customerLoader;
+    public GameObject customerSpeechUI;
 
+    public GameObject teapotObject1;
+    public GameObject teapotObject2;
+    public GameObject cupObject1;
+    public GameObject cupObject2;
+    public GameObject saucerObject1;
+    public GameObject saucerObject2;
+    public GameObject kettleObject;
 
+    private void Start()
+    {
+        //StartNewCustomer();
+    }
 
-
-
-
-
-    public GameObject customerSpawnPoint;
-    public 
-
-    public CupInterface cup1;
-    public CupInterface cup2;
-
-    public SaucerMenuController saucer1;
-    public SaucerMenuController saucer2;
-    
     public void BeginNewDay()
     {
         currentDay++;
@@ -42,6 +44,9 @@ public class GameEventManager : Singleton<GameEventManager>
         closedCustomerOrders.Clear();
         totalDayScore = 0.0f;
         totalDayTime = 0.0f;
+
+        //Show day # fade in/out title
+        StartNewCustomer();
     }
 
     public void EndDay()
@@ -51,8 +56,26 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public void StartNewCustomer()
     {
+        // Reset containers.
+        kettleObject.GetComponent<KettleInterface>().kettle.ResetKettle();
+        teapotObject1.GetComponent<TeapotInterface>().teapot.ResetTeapot();
+        teapotObject2.GetComponent<TeapotInterface>().teapot.ResetTeapot();
+        cupObject1.GetComponent<CupInterface>().cup.ResetCup();
+        cupObject2.GetComponent<CupInterface>().cup.ResetCup();
+
         openCustomerTimer.StartTimer();
         openCustomer = Customer.GetRandomCustomer();
+        customerLoader.SetCustomer(openCustomer);
+
+        // Show greeting dialogue.
+        customerSpeechUI.SetActive(true);
+
+        // Wait on button press to recieve order.
+        while (!proceedWithCustomerOrder);
+        proceedWithCustomerOrder = false;
+
+        customerSpeechUI.SetActive(false);
+
         System.Random randomGenerator = new System.Random();
         int orderCount = randomGenerator.Next(1, 2);
 
@@ -161,5 +184,10 @@ public class GameEventManager : Singleton<GameEventManager>
         {
             EndDay();
         }
+    }
+
+    public void ProceedWithOrder()
+    {
+        proceedWithCustomerOrder = true;
     }
 }

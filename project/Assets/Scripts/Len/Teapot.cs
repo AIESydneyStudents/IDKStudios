@@ -189,5 +189,14 @@ public class Teapot : Container
         teapotTemperature += additive.initialEffect.Temperature;
     }
 
+    public void ResetTeapot()
+    {
+        isFull = false;
+        teapotTaste = 0.0f;
+        teapotStrength = 0.0f;
+        teapotTemperature = 0.0f;
+        ResetContainer();
+    }
+
     #endregion
 }

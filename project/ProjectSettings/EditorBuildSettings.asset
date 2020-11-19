@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tea shop.unity
     guid: 45584b69b2f0dcf4c897a240dee1134b
+  - enabled: 1
+    path: Assets/Scenes/Other/LensTeaShop.unity
+    guid: 074a4f0375b289749bc60cc5fab71e0e
   m_configObjects: {}

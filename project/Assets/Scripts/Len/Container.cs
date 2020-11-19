@@ -55,5 +55,10 @@ public class Container
         additiveRepository.Add(additive);
     }
 
+    protected void ResetContainer()
+    {
+        additiveRepository.Clear();
+    }
+
     #endregion
 }

@@ -40,6 +40,9 @@ public class Customer : ScriptableObject
 
     private bool hasVisitedToday;
 
+    public Mesh customerMesh;
+    public Material customerMaterial;
+
     #endregion
 
     #region Properties

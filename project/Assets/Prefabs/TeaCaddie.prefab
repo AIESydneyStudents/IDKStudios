@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2399952762060595591}
   - component: {fileID: -1921198269541312557}
+  - component: {fileID: 8794335075946310773}
   m_Layer: 0
   m_Name: TeaCaddie
   m_TagString: Untagged
@@ -49,6 +50,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 3
+--- !u!114 &8794335075946310773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663237332750308244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d4b93d8ccea4449918f9b1ac14f892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 1
+  meshRenderer: {fileID: 7344241584218489580}
+  interactionTrigger: {fileID: 0}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9528302, g: 0.24719654, b: 0.24719654, a: 0}
+  interactHightlightColor: {r: 0.7476733, g: 0.9716981, b: 0.2062567, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  additiveObjectToSpawn: {fileID: 0}
+  containedAdditive: {fileID: 0}
 --- !u!1 &2313495584898757850
 GameObject:
   m_ObjectHideFlags: 0

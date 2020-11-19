@@ -199,6 +199,9 @@ GameObject:
   - component: {fileID: 6480734764653122474}
   - component: {fileID: 3179753550745398833}
   - component: {fileID: 3074875443145618090}
+  - component: {fileID: 2814949409416378669}
+  - component: {fileID: 1835853897988716792}
+  - component: {fileID: 1724234145564324425}
   m_Layer: 0
   m_Name: Kettle
   m_TagString: Untagged
@@ -253,3 +256,65 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 3
+--- !u!135 &2814949409416378669
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8046639742331806137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 44.370686
+  m_Center: {x: 0, y: 30.691433, z: 0}
+--- !u!114 &1835853897988716792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8046639742331806137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f899cd5f2694e44dbad7655e314d8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceType: 1
+  kettle:
+    containerType: 0
+    waterVolume: 0
+    kettleTemperature: 0
+    cooldownRate: 0.01
+    heatupRate: 0.1
+    isActive: 0
+    temperatureSetting: 1
+  validObject: {fileID: 0}
+--- !u!114 &1724234145564324425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8046639742331806137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a9e18530cafa49800c93eb33c879e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 3
+  meshRenderer: {fileID: 2611879848325135429}
+  interactionTrigger: {fileID: 2814949409416378669}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.8396226, g: 0.1544589, b: 0.21145698, a: 0}
+  interactHightlightColor: {r: 0.589202, g: 0.8490566, b: 0.244304, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  associatedInterface: {fileID: 1835853897988716792}

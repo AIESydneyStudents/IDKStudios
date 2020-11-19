@@ -12,9 +12,12 @@ GameObject:
   - component: {fileID: 8276745314912718659}
   - component: {fileID: 2441058098598359994}
   - component: {fileID: 307174034655289426}
+  - component: {fileID: -1658463461201202972}
   - component: {fileID: 4436037672850637716}
+  - component: {fileID: 455044127863880483}
+  - component: {fileID: 8851086915607728692}
   m_Layer: 9
-  m_Name: Teacup1
+  m_Name: TeaCup
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,6 +98,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1111983561948126351, guid: 92e5182b263d6e94da108e917c94d114, type: 3}
+--- !u!135 &-1658463461201202972
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169408999434323814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.116891906
+  m_Center: {x: 0.012588814, y: 0.019515276, z: 0.0000003054738}
 --- !u!54 &4436037672850637716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -111,3 +127,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &455044127863880483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169408999434323814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003e314293d2aae4796918d20c52b91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceType: 3
+  cup:
+    containerType: 2
+    isFull: 0
+    cupTaste: 0
+    cupStrength: 0
+    cupTemperature: 0
+    cooldownRate: 0.01
+  saucerObject: {fileID: 0}
+--- !u!114 &8851086915607728692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169408999434323814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a9e18530cafa49800c93eb33c879e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 0
+  meshRenderer: {fileID: 2441058098598359994}
+  interactionTrigger: {fileID: 307174034655289426}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9339623, g: 0.2951673, b: 0.2951673, a: 0}
+  interactHightlightColor: {r: 0.60515255, g: 0.9056604, b: 0.23495908, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  associatedInterface: {fileID: 0}

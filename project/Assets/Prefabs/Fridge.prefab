@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1249163747777629897}
   - component: {fileID: 2142300151808287953}
   - component: {fileID: 1942663727392851550}
+  - component: {fileID: 8337846297746087106}
   m_Layer: 0
   m_Name: Fridge
   m_TagString: Untagged
@@ -95,3 +96,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8202855, y: 0.6531448, z: 0.7740776}
   m_Center: {x: 0, y: 0.3265724, z: 0}
+--- !u!114 &8337846297746087106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914702026361651305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444da528f0228604fb2a3f8647d5d865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 2
+  meshRenderer: {fileID: 2142300151808287953}
+  interactionTrigger: {fileID: 0}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9339623, g: 0.24230155, b: 0.24230155, a: 0}
+  interactHightlightColor: {r: 0.65163416, g: 0.9716981, b: 0.2520915, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  additiveObjectToSpawn1: {fileID: 8001752072013330062, guid: 10151ec080a9e0348a9787b355aecf04,
+    type: 3}
+  additiveObjectToSpawn2: {fileID: 632965003833094470, guid: cfaf34ae741646a40bbc92354ede25ee,
+    type: 3}
+  containedAdditive1: {fileID: 11400000, guid: 00090879481be904fab22f6ef2e3fc86, type: 2}
+  containedAdditive2: {fileID: 11400000, guid: c41b546a1404efa4ea526464d2110671, type: 2}

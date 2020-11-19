@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7777282948369939314}
   - component: {fileID: 5439368463168027444}
   - component: {fileID: 2829564865295666644}
+  - component: {fileID: 7214749135358569755}
   m_Layer: 0
   m_Name: polySurface4
   m_TagString: Untagged
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7214749135358569755
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418385717224577173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2381890483179193753, guid: a610f7dfba8e27a4aac919fa94f2e694, type: 3}
 --- !u!1 &2730125988922610123
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,8 +104,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1420888739082511320}
   - component: {fileID: 7643671487874679764}
+  - component: {fileID: 4582790128723361137}
+  - component: {fileID: 3338574948199130796}
+  - component: {fileID: 2605304374960822258}
   m_Layer: 0
-  m_Name: Teapot1
+  m_Name: Teapot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,6 +147,67 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 3
+--- !u!135 &4582790128723361137
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2730125988922610123}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.19068065
+  m_Center: {x: 0, y: 0.078020126, z: 0}
+--- !u!114 &3338574948199130796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2730125988922610123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681e69cc5700a5f4ea2cc80a9dea77a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceType: 2
+  teapot:
+    containerType: 1
+    isFull: 0
+    teapotTaste: 0
+    teapotStrength: 0
+    teapotTemperature: 0
+    cooldownRate: 0.01
+  validObject: {fileID: 0}
+--- !u!114 &2605304374960822258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2730125988922610123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a9e18530cafa49800c93eb33c879e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 3
+  meshRenderer: {fileID: 91315199312511503}
+  interactionTrigger: {fileID: 4582790128723361137}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9056604, g: 0.22823048, b: 0.20932718, a: 0}
+  interactHightlightColor: {r: 0.55821615, g: 0.9150943, b: 0.19424175, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  associatedInterface: {fileID: 0}
 --- !u!1 &5641501407414555696
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +219,7 @@ GameObject:
   - component: {fileID: 2847324057995669019}
   - component: {fileID: 6297692678213042679}
   - component: {fileID: 91315199312511503}
+  - component: {fileID: 8210965890482630738}
   m_Layer: 0
   m_Name: polySurface2
   m_TagString: Untagged
@@ -208,6 +288,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8210965890482630738
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641501407414555696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5597002278806442958, guid: a610f7dfba8e27a4aac919fa94f2e694, type: 3}
 --- !u!1 &9200876932927257238
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +313,7 @@ GameObject:
   - component: {fileID: 5022615238444158600}
   - component: {fileID: 7024948379849764511}
   - component: {fileID: 2209286457142007134}
+  - component: {fileID: 872648756669967207}
   m_Layer: 0
   m_Name: polySurface1
   m_TagString: Untagged
@@ -287,3 +382,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &872648756669967207
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200876932927257238}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6329158148709259305, guid: a610f7dfba8e27a4aac919fa94f2e694, type: 3}

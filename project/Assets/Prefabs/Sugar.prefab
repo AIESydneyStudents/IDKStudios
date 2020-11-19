@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6423016239774049446}
   - component: {fileID: 3857150316682741564}
   - component: {fileID: 2961233380811581900}
+  - component: {fileID: 7999587867077112623}
   m_Layer: 0
   m_Name: Sugar
   m_TagString: Untagged
@@ -111,3 +112,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 3
+--- !u!114 &7999587867077112623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692738931771183226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d4b93d8ccea4449918f9b1ac14f892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 1
+  meshRenderer: {fileID: 6423016239774049446}
+  interactionTrigger: {fileID: 0}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0.9528302, g: 0.22921856, b: 0.22921856, a: 0}
+  interactHightlightColor: {r: 0.65293527, g: 0.9622642, b: 0.24964403, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  additiveObjectToSpawn: {fileID: 2121837270278377442, guid: 78af9fcf72d4e8343806c091e947a230,
+    type: 3}
+  containedAdditive: {fileID: 11400000, guid: 867b0644830be4a4ba6c1f4f71d793ee, type: 2}

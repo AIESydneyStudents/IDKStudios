@@ -197,8 +197,6 @@ public class InteractionController : MonoBehaviour
                                                 TapInterface tapInterface =
                                                     (TapInterface)otherContainerController.associatedInterface;
 
-                                                int newVolume = 0;
-
                                                 if (kettleInterface.kettle.CanFillFromTap(1))
                                                 {
                                                     validControllers.Add(tapInterface.gameObject, otherContainerController);

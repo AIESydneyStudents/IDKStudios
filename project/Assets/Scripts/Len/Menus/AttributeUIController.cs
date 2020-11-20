@@ -11,13 +11,7 @@ public class AttributeUIController : MonoBehaviour
 
     public Text strengthValue;
     public Text tasteValue;
-    public Text temperature;
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
+    public Text temperatureValue;
 
     // Update is called once per frame
     private void Update()
@@ -29,16 +23,22 @@ public class AttributeUIController : MonoBehaviour
 
     private void UpdateStrength()
     {
-        strengthSlider.value = GameEventManager.Instance.cupController1.cup.Strength;
+        float newValue = GameEventManager.Instance.cupController1.cup.Strength;
+        strengthValue.text = newValue.ToString();
+        strengthSlider.value = newValue;
     }
 
     private void UpdateTaste()
     {
-        tasteSlider.value = GameEventManager.Instance.cupController1.cup.Taste;
+        float newValue = GameEventManager.Instance.cupController1.cup.Taste; // needs to display text instead
+        tasteValue.text = newValue.ToString();
+        tasteSlider.value = newValue;
     }
 
     private void UpdateTemperature()
     {
+        float newValue = GameEventManager.Instance.cupController1.cup.Temperature; // need to times by 100
+        temperatureValue.text = newValue.ToString();
         temperatureSlider.value = GameEventManager.Instance.cupController1.cup.Temperature;
     }
 }

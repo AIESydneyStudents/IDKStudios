@@ -13,11 +13,12 @@ public class CustomerSpeechUIController : MonoBehaviour
     {
         if (coolDown)
         {
-            timer += Time.deltaTime;
+            timer -= Time.deltaTime;
 
-            if (timer > 2.0f)
+            if (timer < 0.0f)
             {
-                timer = 0.0f;
+                timer = 2.0f;
+                coolDown = false;
                 gameObject.SetActive(false);
             }
         }
@@ -29,7 +30,7 @@ public class CustomerSpeechUIController : MonoBehaviour
 
         // NEED WORK
     }
-
+    
     public void PushReactionDialogue(Customer customer, Evaluation evaluation)
     {
         gameObject.SetActive(true);

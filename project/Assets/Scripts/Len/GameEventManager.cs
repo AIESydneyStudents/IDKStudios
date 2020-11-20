@@ -5,14 +5,54 @@ using UnityEngine;
 
 public class GameEventManager : Singleton<GameEventManager>
 {
+    public enum GameEvent
+    {
+        // This will show current day on screen. This then triggers first customer arrival.
+        // DEATH BY TIMER
+        BEGIN_DAY,
+
+        // Customer display sets model, sends DISPLAY_GREETING command.
+        // DEATH BY TIMER
+        CUSTOMER_ARRIVE,
+
+        // Shows dialogue panel, displays greeting, and shows "Take order" button.
+        // Take order pushes "BEGIN_ORDER SWIPE"
+        // Orders are generated and displayed in UI.
+        // DEATH BY PLAYER INPUT
+        DISPLAY_GREETING,
+
+        // Fires a begin making order graphic when "Take Order"
+        // DEATH BY TIMER        
+        BEGIN_ORDER_SWIPE,
+
+        // This is the gameplay state. Dies when tea is submitted.
+        // DEATH BY PLAYER INPUT
+        MAKE_ORDER,
+
+        // This command is added that will either allow the session to continue, or will
+        // trigger post order evaluation. This is when customer displays feedback for 
+        // submitted tea.
+        // DEATH BY PLAYER INPUT
+        CONTINUE,
+
+        // This command is added when final order is submitted. Customer will give overall
+        // feedback for entire order.
+        // DEATH BY PLAYER INPUT
+        POST_ORDER_EVAL,
+
+        // This triggers end of day report.
+        // DEATH BY PLAYER INPUT
+        END_OF_DAY_EVAL
+    }
+
+    public Queue<GameEvent> eventQueue = new Queue<GameEvent>();
+
     public int currentDay;
 
     public Customer openCustomer;
-    private Timer openCustomerTimer = new Timer();
+    public Timer openCustomerTimer;
     public List<Order> openCustomerOrders = new List<Order>();
     public List<Order> closedCustomerOrders = new List<Order>();
-
-    private bool proceedWithCustomerOrder;
 
     public float totalDayScore;
     public float totalDayTime;
@@ -36,17 +76,200 @@ public class GameEventManager : Singleton<GameEventManager>
     public SaucerMenuController saucerMenu1;
     public SaucerMenuController saucerMenu2;
 
-    public CupInterface cupController1;
-    public CupInterface cupController2;
+    public GameEvent currentEvent = GameEvent.BEGIN_DAY;
+    public bool eventFired;
+    public bool eventComplete;
+    public bool eventTimer;
 
-    private void Start()
+    private void Update()
     {
-        BeginNewDay();
+        if (eventComplete)
+        {
+            PullFromQueue();
+            eventComplete = false;
+        }
+
+        if (eventFired)
+        {
+            return;
+        }
+
+        switch (currentEvent)
+        {
+            #region BEGIN_DAY
+            case GameEvent.BEGIN_DAY:
+                {
+                    PushToQueue(GameEvent.CUSTOMER_ARRIVE);
+
+                    currentDay++;
+                    //Run day begin graphic
+
+                    break;
+                }
+            #endregion
+            #region CUSTOMER_ARRIVE
+            case GameEvent.CUSTOMER_ARRIVE:
+                {
+                    PushToQueue(GameEvent.DISPLAY_GREETING);
+
+                    openCustomer = Customer.GetRandomCustomer();
+                    customerLoader.SetCustomer(openCustomer);
+
+                    break;
+                }
+            #endregion
+            #region DISPLAY_GREETING
+            case GameEvent.DISPLAY_GREETING:
+                {
+                    PushToQueue(GameEvent.BEGIN_ORDER_SWIPE);
+
+                    // Generate order/s
+                    System.Random randomGenerator = new System.Random();
+                    int orderCount = randomGenerator.Next(1, 9) % 2 + 1;
+
+                    for (int i = 0; i < orderCount; i++)
+                    {
+                        Order newOrder = openCustomer.GenerateOrder();
+                        openCustomerOrders.Add(newOrder);
+                    }
+
+                    // Show dockets.
+                    saucerMenu1.SetOrder(openCustomerOrders[0]);
+                    saucerObject1.SetActive(true);
+                    cupObject1.SetActive(true);
+                    docket1.SetDocket(openCustomerOrders[0]);
+
+                    if (orderCount == 2)
+                    {
+                        saucerMenu2.SetOrder(openCustomerOrders[1]);
+                        saucerObject2.SetActive(true);
+                        cupObject2.SetActive(true);
+                        docket2.SetDocket(openCustomerOrders[1]);
+                    }
+
+                    customerSpeechUI.PushGreeting(openCustomer);
+
+                    break;
+                }
+            #endregion
+            #region BEGIN_ORDER_SWIPE
+            case GameEvent.BEGIN_ORDER_SWIPE:
+                {
+                    PushToQueue(GameEvent.MAKE_ORDER);
+
+                    // Activate screen swipe begin order effect
+
+                    break;
+                }
+            #endregion
+            #region MAKE_ORDER
+            case GameEvent.MAKE_ORDER:
+                {
+                    PushToQueue(GameEvent.CONTINUE);
+
+                    openCustomerTimer.StartTimer();
+
+                    break;
+                }
+            #endregion
+            #region CONTINUE
+            case GameEvent.CONTINUE:
+                {
+                    if (openCustomerOrders.Count == 2)
+                    {
+                        PushToQueue(GameEvent.MAKE_ORDER);
+                    }
+                    else
+                    {
+                        PushToQueue(GameEvent.POST_ORDER_EVAL);
+                    }
+
+                    // Evaluate the current order.
+
+                    break;
+                }
+            #endregion
+            #region POST_ORDER_EVAL
+            case GameEvent.POST_ORDER_EVAL:
+                {
+                    if (completedCustomers == customersEachDay)
+                    {
+                        PushToQueue(GameEvent.END_OF_DAY_EVAL);
+                    }
+                    else
+                    {
+                        PushToQueue(GameEvent.CUSTOMER_ARRIVE);
+                    }
+
+                    // Show post order evaluation.
+
+                    break;
+                }
+            #endregion
+            #region END_OF_DAY_EVAL
+            case GameEvent.END_OF_DAY_EVAL:
+                {
+                    PushToQueue(GameEvent.BEGIN_DAY);
+
+                    // Show end of day evaluation.
+
+                    break;
+                }
+            #endregion
+            #region DEFAULT
+            default:
+                {
+                    break;
+                }
+            #endregion
+        }
+
+        eventFired = true;
     }
+
+    public void PushToQueue(GameEvent gameEvent)
+    {
+        eventQueue.Enqueue(gameEvent);
+    }
+
+    public void PullFromQueue()
+    {
+        currentEvent = eventQueue.Dequeue();
+    }
+
+    public void SetEventToComplete()
+    {
+        eventComplete = true;
+        eventFired = false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void BeginNewDay()
     {
-        InputController.Instance.DisableInteraction();
+        //InputController.Instance.DisableInteraction();
         currentDay++;
         openCustomer = null;
         openCustomerOrders.Clear();
@@ -79,6 +302,9 @@ public class GameEventManager : Singleton<GameEventManager>
 
         // Push customer greeting
         customerSpeechUI.PushGreeting(openCustomer);
+
+        openCustomerOrders.Clear();
+        closedCustomerOrders.Clear();
     }
 
     public void ProceedWithOrder()
@@ -207,19 +433,19 @@ public class GameEventManager : Singleton<GameEventManager>
 
         if (openCustomerOrders.Count == 0)
         {
+            completedCustomers++;
+
             // Show final reaction
             customerSpeechUI.PushFinalComment();
 
-            completedCustomers++;
-        }
-
-        if (completedCustomers == customersEachDay)
-        {
-            EndDay();
-        }
-        else
-        {
-            StartNewCustomer();
+            if (completedCustomers == customersEachDay)
+            {
+                EndDay();
+            }
+            else
+            {
+                StartNewCustomer();
+            }
         }
     }
 }

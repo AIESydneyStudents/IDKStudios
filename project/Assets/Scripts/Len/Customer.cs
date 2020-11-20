@@ -327,6 +327,7 @@ public class Customer : ScriptableObject
         teapot.Temperature = 0.01f * randomGenerator.Next(70, 100);
 
         //Choose and add tea
+        randomGenerator = new System.Random();
         float teaPercentile = 0.001f * randomGenerator.Next(0, 999);
 
         for (int i = 0; i < teaPreferences.Length; i++)
@@ -352,10 +353,12 @@ public class Customer : ScriptableObject
         teapot.DispenseToCup(cup);
 
         //Choose and add condiment/s
+        randomGenerator = new System.Random();
         int condiments = randomGenerator.Next(1, 3);
 
         for (int i = 0; i < condiments; i++)
         {
+            randomGenerator = new System.Random();
             float condimentPercentile = 0.001f * randomGenerator.Next(0, 999);
 
             for (int j = 0; j < condimentPreferences.Length; j++)

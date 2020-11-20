@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7369737755733859825}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3030723260499809851}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,10 +70,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4509202230463644501}
   - component: {fileID: 1103376307852322482}
+  - component: {fileID: 3291173175941296041}
   - component: {fileID: 8691843232732523845}
-  m_Layer: 9
+  - component: {fileID: 5993150116783331831}
+  - component: {fileID: 1705785585809647021}
+  m_Layer: 8
   m_Name: AlmondMilk
-  m_TagString: Item
+  m_TagString: interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,6 +114,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!135 &3291173175941296041
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632965003833094470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.11877186
+  m_Center: {x: 0.00052543974, y: 0.06559342, z: 0}
 --- !u!65 &8691843232732523845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -122,8 +138,49 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13478808, y: 0.22925466, z: 0.16928026}
-  m_Center: {x: -0.0064140186, y: 0.09934688, z: 0.0045340816}
+  m_Size: {x: 0.12325833, y: 0.21244496, z: 0.13584039}
+  m_Center: {x: -0.00064914423, y: 0.09094203, z: 0.0050175996}
+--- !u!114 &5993150116783331831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632965003833094470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56070238439a9ac41b155820cc6d32fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceType: 5
+  containedAdditive: {fileID: 11400000, guid: c41b546a1404efa4ea526464d2110671, type: 2}
+--- !u!114 &1705785585809647021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632965003833094470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17763a756fdd9042945488e42dd8066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerType: 0
+  meshRenderer: {fileID: 278780986595649072}
+  interactionTrigger: {fileID: 3291173175941296041}
+  isHighlighted: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverHighlightColor: {r: 0, g: 0, b: 0, a: 0}
+  interactHightlightColor: {r: 0, g: 0, b: 0, a: 0}
+  compatibleGameObject: {fileID: 0}
+  compatibleController: {fileID: 0}
+  menuController: {fileID: 0}
+  progressBarController: {fileID: 0}
+  progressBarOffset: {x: 0, y: 0, z: 0}
+  anchorController: {fileID: 0}
+  atAnchor: 0
+  additiveInterface: {fileID: 5993150116783331831}
 --- !u!1 &763646717457194047
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1647953681230827917}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5099641499544984575}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236090052189459364}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1640103852236939353}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7536787981414133253}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3579569759285839718}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 767968650105949846}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4079278666987945857}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5172634892971016061}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2100062546076686326}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8759159721973331073}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +535,7 @@ GameObject:
   - component: {fileID: 8844708032283991868}
   - component: {fileID: 278780986595649072}
   - component: {fileID: 2025670901408512032}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: polySurface6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +627,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6165470122015039951}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: transform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

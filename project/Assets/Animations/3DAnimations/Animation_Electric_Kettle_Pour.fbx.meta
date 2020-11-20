@@ -11,7 +11,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert25
+<<<<<<< Updated upstream
     second: {fileID: 2100000, guid: 9cfed2d71a321bc44a7239032e5c8980, type: 2}
+=======
+    second: {fileID: 2100000, guid: 3423b83227b38fd4093971aaacca1f40, type: 2}
+>>>>>>> Stashed changes
   materials:
     materialImportMode: 1
     materialName: 3

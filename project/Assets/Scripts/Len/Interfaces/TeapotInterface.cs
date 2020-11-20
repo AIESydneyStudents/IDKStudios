@@ -65,33 +65,4 @@ public class TeapotInterface : Interface
 
         return attributeInfo;
     }
-
-    //private void OnMouseUp()
-    //{
-    //    if (canUse)
-    //    {
-    //        DispenseToCup();
-    //
-    //        canUse = false;
-    //    }
-    //}
-    //
-    //private void OnTriggerEnter(Collider collider)
-    //{
-    //    if (SetValidObject(collider.gameObject))
-    //    {
-    //        if (CanDispenseToCup())
-    //        {
-    //            canUse = true;
-    //        }
-    //    }
-    //}
-    //
-    //private void OnTriggerExit(Collider collider)
-    //{
-    //    if (!canUse)
-    //    {
-    //        ClearValidObject();
-    //    }
-    //}
 }

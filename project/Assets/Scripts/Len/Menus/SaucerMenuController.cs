@@ -7,7 +7,7 @@ public class SaucerMenuController : MenuController
     public CupInterface cupInterface;
     public AnchorController anchorController;
 
-    private Order thisOrder;
+    public Order thisOrder;
 
     public SaucerMenuController()
     {

@@ -36,6 +36,9 @@ public class GameEventManager : Singleton<GameEventManager>
     public SaucerMenuController saucerMenu1;
     public SaucerMenuController saucerMenu2;
 
+    public CupInterface cupController1;
+    public CupInterface cupController2;
+
     private void Start()
     {
         BeginNewDay();

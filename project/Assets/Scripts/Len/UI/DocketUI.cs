@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DocketUI : MonoBehaviour
@@ -27,7 +25,7 @@ public class DocketUI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        ShowDockets();
+        UpdateDockets();
     }
 
     public void ShowDockets()
@@ -36,33 +34,33 @@ public class DocketUI : MonoBehaviour
 
         docket1.SetActive(true);
 
-        if (true)
-        {
-            // Strength Slider
-            strengthSlider1.value = GameEventManager.Instance.cupInterface1.cup.Strength;
-
-            // Taste Slider
-            tasteSlider1.value = GameEventManager.Instance.cupInterface1.cup.Taste;
-
-            // Temperature Slider
-            temperatureSlider1.value = GameEventManager.Instance.cupInterface1.cup.Temperature;
-        }
-
         if (GameEventManager.Instance.order2 != null)
         {
             docket2.SetActive(true);
+        }
+    }
 
-            if (true)
-            {
-                // Strength Slider
-                strengthSlider2.value = GameEventManager.Instance.cupInterface2.cup.Strength;
+    public void UpdateDockets()
+    {
+        // Strength Slider
+        strengthSlider1.value = GameEventManager.Instance.cupInterface1.cup.Strength;
 
-                // Taste Slider
-                tasteSlider2.value = GameEventManager.Instance.cupInterface2.cup.Taste;
+        // Taste Slider
+        tasteSlider1.value = GameEventManager.Instance.cupInterface1.cup.Taste;
 
-                // Temperature Slider
-                temperatureSlider2.value = GameEventManager.Instance.cupInterface2.cup.Temperature;
-            }
+        // Temperature Slider
+        temperatureSlider1.value = GameEventManager.Instance.cupInterface1.cup.Temperature;
+
+        if (GameEventManager.Instance.order2 != null)
+        {
+            // Strength Slider
+            strengthSlider2.value = GameEventManager.Instance.cupInterface2.cup.Strength;
+
+            // Taste Slider
+            tasteSlider2.value = GameEventManager.Instance.cupInterface2.cup.Taste;
+
+            // Temperature Slider
+            temperatureSlider2.value = GameEventManager.Instance.cupInterface2.cup.Temperature;
         }
     }
 }

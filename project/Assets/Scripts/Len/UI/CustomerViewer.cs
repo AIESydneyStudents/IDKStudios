@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerLoader : MonoBehaviour
+public class CustomerViewer : MonoBehaviour
 {
     private enum State
     {
@@ -18,10 +18,7 @@ public class CustomerLoader : MonoBehaviour
     private Customer currentCustomer = null;
     private State state = State.INACTIVE;
 
-    public Customer customer1;
-    public Customer customer2;
-
-    public void SetCustomer( Customer customer )
+    public void SetCustomer(Customer customer)
     {
         if (currentCustomer == customer)
         {
@@ -47,10 +44,6 @@ public class CustomerLoader : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SetCustomer(customer1);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SetCustomer(customer2);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SetCustomer(null);
-
         switch (state)
         {
             case State.FADING_IN:
@@ -58,6 +51,7 @@ public class CustomerLoader : MonoBehaviour
                     if (Alpha >= 1.0f)
                     {
                         state = State.INACTIVE;
+                        GameEventManager.Instance.SetEventToComplete();
                     }
 
                     Alpha += Time.deltaTime / fadeOutTime;

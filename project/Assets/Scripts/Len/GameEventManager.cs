@@ -60,21 +60,39 @@ public class GameEventManager : Singleton<GameEventManager>
     public int customersEachDay;
     public int completedCustomers;
 
-    public CustomerLoader customerLoader;
-    public CustomerSpeechUIController customerSpeechUI;
-    public DocketUIController docket1;
-    public DocketUIController docket2;
+    public CustomerViewer customerViewer;
 
+    #region UI Elements
+    public BeginDayUI beginDayUI;
+    public CustomerUI customerUI;
+    public BeginOrderUI beginOrderUI;
+    public DocketUI docketUI;
+    public OrderFeedbackUI orderFeedbackUI;
+    public PostOrderEvaluationUI postOrderEvaluationUI;
+    public EndDayEvaluationUI endDayEvaluationUI;
+    #endregion
+
+    #region Objects
+    [Header("")]
+    [Header("Game Objects")]
+    public GameObject kettleObject;
     public GameObject teapotObject1;
     public GameObject teapotObject2;
     public GameObject cupObject1;
     public GameObject cupObject2;
     public GameObject saucerObject1;
     public GameObject saucerObject2;
-    public GameObject kettleObject;
+    #endregion
 
-    public SaucerMenuController saucerMenu1;
-    public SaucerMenuController saucerMenu2;
+    #region Object Interfaces
+    [Header("")]
+    [Header("Object Interfaces")]
+    public KettleInterface kettleInterface;
+    public TeapotInterface teapotInterface1;
+    public TeapotInterface teapotInterface2;
+    public CupInterface cupController1;
+    public CupInterface cupController2;
+    #endregion    
 
     public GameEvent currentEvent = GameEvent.BEGIN_DAY;
     public bool eventFired;
@@ -102,7 +120,9 @@ public class GameEventManager : Singleton<GameEventManager>
                     PushToQueue(GameEvent.CUSTOMER_ARRIVE);
 
                     currentDay++;
+
                     //Run day begin graphic
+                    beginDayUI.TriggerBeginDaySplash(currentDay);
 
                     break;
                 }
@@ -113,7 +133,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     PushToQueue(GameEvent.DISPLAY_GREETING);
 
                     openCustomer = Customer.GetRandomCustomer();
-                    customerLoader.SetCustomer(openCustomer);
+                    customerViewer.SetCustomer(openCustomer);
 
                     break;
                 }
@@ -133,21 +153,7 @@ public class GameEventManager : Singleton<GameEventManager>
                         openCustomerOrders.Add(newOrder);
                     }
 
-                    // Show dockets.
-                    saucerMenu1.SetOrder(openCustomerOrders[0]);
-                    saucerObject1.SetActive(true);
-                    cupObject1.SetActive(true);
-                    docket1.SetDocket(openCustomerOrders[0]);
-
-                    if (orderCount == 2)
-                    {
-                        saucerMenu2.SetOrder(openCustomerOrders[1]);
-                        saucerObject2.SetActive(true);
-                        cupObject2.SetActive(true);
-                        docket2.SetDocket(openCustomerOrders[1]);
-                    }
-
-                    customerSpeechUI.PushGreeting(openCustomer);
+                    customerUI.ShowGreeting();
 
                     break;
                 }
@@ -158,6 +164,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     PushToQueue(GameEvent.MAKE_ORDER);
 
                     // Activate screen swipe begin order effect
+                    beginOrderUI.TriggerBeginOrderSwipe();
 
                     break;
                 }
@@ -185,6 +192,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     }
 
                     // Evaluate the current order.
+                    orderFeedbackUI.ShowOrderFeedback();
 
                     break;
                 }
@@ -202,6 +210,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     }
 
                     // Show post order evaluation.
+                    postOrderEvaluationUI.ShowPostOrderEvaluation();
 
                     break;
                 }
@@ -212,6 +221,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     PushToQueue(GameEvent.BEGIN_DAY);
 
                     // Show end of day evaluation.
+                    endDayEvaluationUI.ShowEndDayEvaluation();
 
                     break;
                 }
@@ -296,12 +306,12 @@ public class GameEventManager : Singleton<GameEventManager>
         cupObject2.GetComponent<CupInterface>().cup.ResetCup();
 
         openCustomer = Customer.GetRandomCustomer();
-        customerLoader.SetCustomer(openCustomer);
+        //customerLoader.SetCustomer(openCustomer);
 
-        customerSpeechUI.gameObject.SetActive(true);
+        //customerSpeechUI.gameObject.SetActive(true);
 
         // Push customer greeting
-        customerSpeechUI.PushGreeting(openCustomer);
+        //customerSpeechUI.PushGreeting(openCustomer);
 
         openCustomerOrders.Clear();
         closedCustomerOrders.Clear();
@@ -309,7 +319,7 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public void ProceedWithOrder()
     {
-        customerSpeechUI.gameObject.SetActive(false);
+        //customerSpeechUI.gameObject.SetActive(false);
         
         System.Random randomGenerator = new System.Random();
         int orderCount = 2;// randomGenerator.Next(1, 100) % 2 + 1;
@@ -321,17 +331,17 @@ public class GameEventManager : Singleton<GameEventManager>
         }
 
         // Show dockets somewhere.
-        saucerMenu1.SetOrder(openCustomerOrders[0]);
+        //saucerMenu1.SetOrder(openCustomerOrders[0]);
         saucerObject1.SetActive(true);
         cupObject1.SetActive(true);
-        docket1.SetDocket(openCustomerOrders[0]);
+        //docket1.SetDocket(openCustomerOrders[0]);
 
         if (orderCount == 2)
         {
-            saucerMenu2.SetOrder(openCustomerOrders[1]);
+            //saucerMenu2.SetOrder(openCustomerOrders[1]);
             saucerObject2.SetActive(true);
             cupObject2.SetActive(true);
-            docket2.SetDocket(openCustomerOrders[1]);
+            //docket2.SetDocket(openCustomerOrders[1]);
         }
 
         openCustomerTimer.StartTimer();
@@ -429,14 +439,14 @@ public class GameEventManager : Singleton<GameEventManager>
         closedCustomerOrders.Add(order);
 
         // Show customer reaction
-        customerSpeechUI.PushReactionDialogue(openCustomer, newEvaluation.GetRandomEvaluation());
+        //customerSpeechUI.PushReactionDialogue(openCustomer, newEvaluation.GetRandomEvaluation());
 
         if (openCustomerOrders.Count == 0)
         {
             completedCustomers++;
 
             // Show final reaction
-            customerSpeechUI.PushFinalComment();
+            //customerSpeechUI.PushFinalComment();
 
             if (completedCustomers == customersEachDay)
             {

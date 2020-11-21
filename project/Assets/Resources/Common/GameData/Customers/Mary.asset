@@ -30,6 +30,6 @@ MonoBehaviour:
   toleranceStrength: 0.2
   toleranceTemperature: 0.05
   weight: 0
-  customerMesh: {fileID: -8367162234134106156, guid: a9810df548a48b04b86ffd19534651e9,
+  customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
     type: 3}
   customerMaterial: {fileID: 2100000, guid: b9e2f2f1104acc640973b239a7452651, type: 2}

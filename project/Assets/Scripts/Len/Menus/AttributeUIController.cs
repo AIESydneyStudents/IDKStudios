@@ -3,50 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
+
 public class AttributeUIController : MonoBehaviour
 {
-    public CupInterface cupController;
+    private Slider _slider;
+    private float center = 0.5f;
 
-    public Slider strengthSlider;
-    public Slider tasteSlider;
-    public Slider temperatureSlider;
-
-    public Text strengthValue;
-    public Text tasteValue;
-    public Text temperatureValue;
-
-    // Update is called once per frame
-    private void Update()
+    void Awake()
     {
-        UpdateStrength();
-        UpdateTaste();
-        UpdateTemperature();
+        _slider = GetComponent<Slider>();
     }
 
-    private void UpdateStrength()
+    void Update()
     {
-        float newValue = cupController.cup.Strength;
-        strengthValue.text = newValue.ToString();
-        strengthSlider.value = newValue;
-
-        //if (newValue == 0 || )
-        //{
-        //
-        //}
-    }
-
-    private void UpdateTaste()
-    {
-        float newValue = cupController.cup.Taste; // needs to display text instead
-        tasteValue.text = newValue.ToString();
-        tasteSlider.value = newValue;
-    }
-
-    private void UpdateTemperature()
-    {
-        float newValue = cupController.cup.Temperature * 100; // need to times by 100
-        int temp = (int)newValue;
-        temperatureValue.text = temp.ToString();
-        temperatureSlider.value = newValue;
+        _slider.fillRect.anchorMin = new Vector2(Mathf.Clamp(_slider.fillRect.anchorMin.x, 0, center), 0);
+        _slider.fillRect.anchorMax = new Vector2(Mathf.Clamp(_slider.fillRect.anchorMin.x, center, 1), 1);
     }
 }

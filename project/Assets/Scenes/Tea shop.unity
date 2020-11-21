@@ -541,10 +541,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 710591298}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: -1
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -725,6 +725,13 @@ MonoBehaviour:
   menuType: 3
   cupInterface: {fileID: 2015801617383837877}
   anchorController: {fileID: 18696971}
+  thisOrder:
+    targetTaste: 0
+    targetStrength: 0
+    targetTemperature: 0
+    toleranceTaste: 0
+    toleranceStrength: 0
+    toleranceTemperature: 0
 --- !u!1 &62420143
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,7 +4195,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508826498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4504,9 +4511,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9471,7 +9478,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9707,6 +9714,13 @@ MonoBehaviour:
   menuType: 3
   cupInterface: {fileID: 1679272450}
   anchorController: {fileID: 108677592}
+  thisOrder:
+    targetTaste: 0
+    targetStrength: 0
+    targetTemperature: 0
+    toleranceTaste: 0
+    toleranceStrength: 0
+    toleranceTemperature: 0
 --- !u!1 &1301572890
 GameObject:
   m_ObjectHideFlags: 0
@@ -10685,10 +10699,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 119160460}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: -1
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10979,9 +10993,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -11848,10 +11862,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1794104412}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: -1
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -11937,6 +11951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616581746}
+  - component: {fileID: 1616581747}
   m_Layer: 5
   m_Name: PlayerDockets
   m_TagString: Untagged
@@ -11967,6 +11982,32 @@ RectTransform:
   m_AnchoredPosition: {x: -4.1187744, y: -152.95}
   m_SizeDelta: {x: 229.94, y: 363.09}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1616581747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616581745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0c8ac061f2b44ada41bd180b8619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  docket1: {fileID: 479144900}
+  docket2: {fileID: 1073210953}
+  strengthSlider1: {fileID: 1614851216}
+  tasteSlider1: {fileID: 1404580491}
+  temperatureSlider1: {fileID: 529357650}
+  strengthValue1: {fileID: 76258695}
+  tasteValue1: {fileID: 2028839247}
+  temperatureValue1: {fileID: 881932757}
+  strengthSlider2: {fileID: 1290395019}
+  tasteSlider2: {fileID: 27354654}
+  temperatureSlider2: {fileID: 1448254134}
+  strengthValue2: {fileID: 1255613573}
+  tasteValue2: {fileID: 508826500}
+  temperatureValue2: {fileID: 752182417}
 --- !u!1 &1622162679
 GameObject:
   m_ObjectHideFlags: 0
@@ -14144,11 +14185,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 384854449}
     m_Modifications:
+    - target: {fileID: 135245892137678356, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245892458049774, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 57.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245892458049775, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_Name
+      value: FullCreamMilk
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245892844065005, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Full Cream Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245892928819059, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Almond Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245892991820346, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.200012
+      objectReference: {fileID: 0}
     - target: {fileID: 135245893505234588, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
         type: 3}
       propertyPath: interactionController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4170630188309505232}
     - target: {fileID: 135245893505234589, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14258,6 +14329,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FridgeTooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245893505234590, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245893720655028, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 32.200012
+      objectReference: {fileID: 0}
+    - target: {fileID: 135245893720655029, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b,
+        type: 3}
+      propertyPath: m_Name
+      value: AlmondMilk
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c8e3d5cbd645eb4591b0e4c9bc2dd8b, type: 3}
@@ -16856,6 +16942,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1266096452469302438}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4170630188309505232 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8337846297746087106, guid: 7d4110e6c23acbd4697222ff450e1491,
+    type: 3}
+  m_PrefabInstance: {fileID: 1266096452469302438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170630188309505231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444da528f0228604fb2a3f8647d5d865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4170630188309505236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2173061398906745466, guid: 7d4110e6c23acbd4697222ff450e1491,

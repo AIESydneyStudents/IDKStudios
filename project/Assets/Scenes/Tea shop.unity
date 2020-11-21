@@ -1118,6 +1118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 98521428}
   - component: {fileID: 98521429}
+  - component: {fileID: 98521430}
   m_Layer: 5
   m_Name: TasteSlider
   m_TagString: Untagged
@@ -1196,6 +1197,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &98521430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98521427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cf147d84764c141af3347499d0f026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &99430563
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,6 +4339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 529357649}
   - component: {fileID: 529357650}
+  - component: {fileID: 529357651}
   m_Layer: 5
   m_Name: TemperatureSlider
   m_TagString: Untagged
@@ -4404,6 +4418,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &529357651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529357648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cf147d84764c141af3347499d0f026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &533390164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5607,6 +5633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 648690656}
   - component: {fileID: 648690657}
+  - component: {fileID: 648690658}
   m_Layer: 5
   m_Name: StrengthSlider
   m_TagString: Untagged
@@ -5685,6 +5712,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &648690658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648690655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cf147d84764c141af3347499d0f026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &666375720
 GameObject:
   m_ObjectHideFlags: 0
@@ -6011,6 +6050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 749856590}
   - component: {fileID: 749856591}
+  - component: {fileID: 749856592}
   m_Layer: 5
   m_Name: TemperatureSlider
   m_TagString: Untagged
@@ -6089,6 +6129,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &749856592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749856589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cf147d84764c141af3347499d0f026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &755103546
 GameObject:
   m_ObjectHideFlags: 0
@@ -12177,6 +12229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614851215}
   - component: {fileID: 1614851216}
+  - component: {fileID: 1614851217}
   m_Layer: 5
   m_Name: StrengthSlider
   m_TagString: Untagged
@@ -12255,6 +12308,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1614851217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614851214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cf147d84764c141af3347499d0f026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1616115494
 GameObject:
   m_ObjectHideFlags: 0

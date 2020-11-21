@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(Slider))]
 [RequireComponent(typeof(RectTransform))]
 
-public class AttributeUIController : MonoBehaviour
+public class SliderDirection : MonoBehaviour
 {
     private Slider slider;
     private float sliderSize;
@@ -35,6 +35,8 @@ public class AttributeUIController : MonoBehaviour
         if (slider.value > 0)
         {
             slider.fillRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, sliderSize * slider.value);
+            slider.fillRect.rotation = new Quaternion(0, 0, 0, 0);
+            slider.fillRect.pivot = new Vector2(slider.fillRect.transform.parent.localPosition.x, slider.fillRect.pivot.y);
         }
 
         else

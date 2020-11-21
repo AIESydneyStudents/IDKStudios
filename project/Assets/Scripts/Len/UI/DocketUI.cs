@@ -27,8 +27,7 @@ public class DocketUI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //UpdateSliderDirection();
-        //ShowDockets();
+        ShowDockets();
     }
 
     public void ShowDockets()
@@ -37,7 +36,7 @@ public class DocketUI : MonoBehaviour
 
         docket1.SetActive(true);
 
-        if (false)
+        if (true)
         {
             // Strength Slider
             strengthSlider1.value = GameEventManager.Instance.cupInterface1.cup.Strength;
@@ -53,7 +52,7 @@ public class DocketUI : MonoBehaviour
         {
             docket2.SetActive(true);
 
-            if (false)
+            if (true)
             {
                 // Strength Slider
                 strengthSlider2.value = GameEventManager.Instance.cupInterface2.cup.Strength;

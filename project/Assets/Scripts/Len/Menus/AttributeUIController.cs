@@ -29,10 +29,10 @@ public class AttributeUIController : MonoBehaviour
         strengthValue.text = newValue.ToString();
         strengthSlider.value = newValue;
 
-        if (newValue == 0 || )
-        {
-
-        }
+        //if (newValue == 0 || )
+        //{
+        //
+        //}
     }
 
     private void UpdateTaste()

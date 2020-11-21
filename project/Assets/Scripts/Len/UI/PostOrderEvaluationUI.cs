@@ -9,5 +9,6 @@ public class PostOrderEvaluationUI : MonoBehaviour
     public void ShowPostOrderEvaluation()
     {
         // Show feedback UI
+        gameObject.SetActive(true);
     }
 }

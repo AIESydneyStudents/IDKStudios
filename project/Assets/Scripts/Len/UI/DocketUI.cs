@@ -9,6 +9,7 @@ public class DocketUI : MonoBehaviour
     public GameObject docket2;
 
     //NEED BARS AND PICTURE FIELDS
+
     public void ShowDockets()
     {
         gameObject.SetActive(true);

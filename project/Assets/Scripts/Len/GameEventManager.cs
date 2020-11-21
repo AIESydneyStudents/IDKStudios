@@ -92,14 +92,32 @@ public class GameEventManager : Singleton<GameEventManager>
     public KettleInterface kettleInterface;
     public TeapotInterface teapotInterface1;
     public TeapotInterface teapotInterface2;
-    public CupInterface cupController1;
-    public CupInterface cupController2;
+    public CupInterface cupInterface1;
+    public CupInterface cupInterface2;
     #endregion    
 
     public GameEvent currentEvent = GameEvent.BEGIN_DAY;
     public bool eventFired;
     public bool eventComplete;
-    public bool eventTimer;
+
+    #region Properties
+
+    public float MinTasteAdjusted1 { get { return order1.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
+    public float MinTasteAdjusted2 { get { return order2.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
+    public float MaxTasteAdjusted1 { get { return order1.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
+    public float MaxTasteAdjusted2 { get { return order2.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
+    
+    public float MinStrengthAdjusted1 { get { return order1.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
+    public float MinStrengthAdjusted2 { get { return order2.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
+    public float MaxStrengthAdjusted1 { get { return order1.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
+    public float MaxStrengthAdjusted2 { get { return order2.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
+
+    public float MinTemperatureAdjusted1 { get { return order1.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
+    public float MinTemperatureAdjusted2 { get { return order2.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
+    public float MaxTemperatureAdjusted1 { get { return order1.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
+    public float MaxTemperatureAdjusted2 { get { return order2.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
+
+    #endregion
 
     private void Update()
     {
@@ -254,14 +272,14 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public void EvaluateOrder1()
     {
-        EvaluateOrder(order1, cupController1.cup);
+        EvaluateOrder(order1, cupInterface1.cup);
         docketUI.docket1.SetActive(false);
         SetEventToComplete();
     }
 
     public void EvaluateOrder2()
     {
-        EvaluateOrder(order2, cupController2.cup);
+        EvaluateOrder(order2, cupInterface2.cup);
         docketUI.docket2.SetActive(false);
         SetEventToComplete();
     }

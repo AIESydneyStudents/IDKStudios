@@ -1,23 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent(typeof(Slider))]
+[RequireComponent(typeof(RectTransform))]
 
 public class AttributeUIController : MonoBehaviour
 {
-    private Slider _slider;
-    private float center = 0.5f;
+    private Slider slider;
+    private float sliderSize;
 
     void Awake()
     {
-        _slider = GetComponent<Slider>();
+        slider = GetComponent<Slider>();
     }
 
     void Update()
     {
-        _slider.fillRect.anchorMin = new Vector2(Mathf.Clamp(_slider.fillRect.anchorMin.x, 0, center), 0);
-        _slider.fillRect.anchorMax = new Vector2(Mathf.Clamp(_slider.fillRect.anchorMin.x, center, 1), 1);
+        UpdateSliderDirection();
+    }
+
+    // Updates the direction of the fill bar in the sliders
+    public void UpdateSliderDirection()
+    {
+        if (sliderSize == 0)
+        {
+            sliderSize = GetComponent<RectTransform>().rect.width;
+            sliderSize /= slider.maxValue - slider.minValue;
+        }
+
+        slider.fillRect.rotation = new Quaternion(180, 0, 0, 0);
+        slider.fillRect.pivot = new Vector2(slider.fillRect.transform.parent.localPosition.x, slider.fillRect.pivot.y);
+
+        if (slider.value > 0)
+        {
+            slider.fillRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, sliderSize * slider.value);
+        }
+
+        else
+        {
+            slider.fillRect.Rotate(0, 0, 180);
+            slider.fillRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, -1 * sliderSize * slider.value);
+        }
+
+        slider.fillRect.localPosition = new Vector3(0, 0, 0);
     }
 }

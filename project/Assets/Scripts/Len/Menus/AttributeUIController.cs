@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class AttributeUIController : MonoBehaviour
 {
+    public CupInterface cupController;
+
     public Slider strengthSlider;
     public Slider tasteSlider;
     public Slider temperatureSlider;
@@ -23,22 +25,28 @@ public class AttributeUIController : MonoBehaviour
 
     private void UpdateStrength()
     {
-        float newValue = GameEventManager.Instance.cupController1.cup.Strength;
+        float newValue = cupController.cup.Strength;
         strengthValue.text = newValue.ToString();
         strengthSlider.value = newValue;
+
+        if (newValue == 0 || )
+        {
+
+        }
     }
 
     private void UpdateTaste()
     {
-        float newValue = GameEventManager.Instance.cupController1.cup.Taste; // needs to display text instead
+        float newValue = cupController.cup.Taste; // needs to display text instead
         tasteValue.text = newValue.ToString();
         tasteSlider.value = newValue;
     }
 
     private void UpdateTemperature()
     {
-        float newValue = GameEventManager.Instance.cupController1.cup.Temperature; // need to times by 100
-        temperatureValue.text = newValue.ToString();
-        temperatureSlider.value = GameEventManager.Instance.cupController1.cup.Temperature;
+        float newValue = cupController.cup.Temperature * 100; // need to times by 100
+        int temp = (int)newValue;
+        temperatureValue.text = temp.ToString();
+        temperatureSlider.value = newValue;
     }
 }

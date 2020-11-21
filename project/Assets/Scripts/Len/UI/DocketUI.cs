@@ -28,7 +28,7 @@ public class DocketUI : MonoBehaviour
     private void Update()
     {
         //UpdateSliderDirection();
-        ShowDockets();
+        //ShowDockets();
     }
 
     public void ShowDockets()
@@ -37,27 +37,33 @@ public class DocketUI : MonoBehaviour
 
         docket1.SetActive(true);
 
-        // Strength Slider
-        strengthSlider1.value = GameEventManager.Instance.cupInterface1.cup.Strength;
+        if (false)
+        {
+            // Strength Slider
+            strengthSlider1.value = GameEventManager.Instance.cupInterface1.cup.Strength;
 
-        // Taste Slider
-        tasteSlider1.value = GameEventManager.Instance.cupInterface1.cup.Taste;
+            // Taste Slider
+            tasteSlider1.value = GameEventManager.Instance.cupInterface1.cup.Taste;
 
-        // Temperature Slider
-        temperatureSlider1.value = GameEventManager.Instance.cupInterface1.cup.Temperature;
+            // Temperature Slider
+            temperatureSlider1.value = GameEventManager.Instance.cupInterface1.cup.Temperature;
+        }
 
         if (GameEventManager.Instance.order2 != null)
         {
             docket2.SetActive(true);
 
-            // Strength Slider
-            strengthSlider2.value = GameEventManager.Instance.cupInterface2.cup.Strength;
+            if (false)
+            {
+                // Strength Slider
+                strengthSlider2.value = GameEventManager.Instance.cupInterface2.cup.Strength;
 
-            // Taste Slider
-            tasteSlider2.value = GameEventManager.Instance.cupInterface2.cup.Taste;
+                // Taste Slider
+                tasteSlider2.value = GameEventManager.Instance.cupInterface2.cup.Taste;
 
-            // Temperature Slider
-            temperatureSlider2.value = GameEventManager.Instance.cupInterface2.cup.Temperature;
+                // Temperature Slider
+                temperatureSlider2.value = GameEventManager.Instance.cupInterface2.cup.Temperature;
+            }
         }
     }
 }

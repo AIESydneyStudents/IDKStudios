@@ -45,6 +45,7 @@ public class BeginDayUI : MonoBehaviour
         {
             splashTriggered = false;
             gameObject.SetActive(false);
+            splashTimer = 0.0f;
             GameEventManager.Instance.SetEventToComplete();
         }
     }
@@ -52,9 +53,10 @@ public class BeginDayUI : MonoBehaviour
     // Triggers a screen splash that fades in, shows the day beginning, and
     // fades back out. Once it has faded out, it needs to call the SetEventToComplete
     // function to trigger the next event.
-    public void TriggerBeginDaySplash(int day)
+    public void TriggerBeginDaySplash(int currentDay)
     {
         gameObject.SetActive(true);
         splashTriggered = true;
+        splashText.text = "DAY " + currentDay.ToString();
     }
 }

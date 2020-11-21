@@ -45,6 +45,8 @@ public class GameEventManager : Singleton<GameEventManager>
         END_OF_DAY_EVAL
     }
 
+    public System.Random randomGenerator = new System.Random();
+
     public Queue<GameEvent> eventQueue = new Queue<GameEvent>();
 
     public int currentDay;
@@ -140,6 +142,8 @@ public class GameEventManager : Singleton<GameEventManager>
                     PushToQueue(GameEvent.CUSTOMER_ARRIVE);
 
                     currentDay++;
+                    completedCustomers = 0;
+                    Customer.SetAllCustomersToUnvisited();
 
                     //Run day begin graphic
                     beginDayUI.TriggerBeginDaySplash(currentDay);
@@ -193,6 +197,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     PushToQueue(GameEvent.CUSTOMER_FEEDBACK);
 
                     missionTimer.StartTimer();
+                    InputController.Instance.EnableInteraction();
 
                     break;
                 }
@@ -208,6 +213,8 @@ public class GameEventManager : Singleton<GameEventManager>
                     {
                         PushToQueue(GameEvent.POST_ORDER_EVAL);
                     }
+
+                    InputController.Instance.DisableInteraction();
 
                     // Evaluate the current order.
                     orderFeedbackUI.ShowOrderFeedback();
@@ -246,6 +253,7 @@ public class GameEventManager : Singleton<GameEventManager>
 
                     // Show end of day evaluation.
                     endDayEvaluationUI.ShowEndDayEvaluation();
+                    customerViewer.SetCustomer(null);
 
                     break;
                 }

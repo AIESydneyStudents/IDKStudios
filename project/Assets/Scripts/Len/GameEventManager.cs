@@ -33,7 +33,7 @@ public class GameEventManager : Singleton<GameEventManager>
         // trigger post order evaluation. This is when customer displays feedback for 
         // submitted tea.
         // DEATH BY PLAYER INPUT
-        CONTINUE,
+        CUSTOMER_FEEDBACK,
 
         // This command is added when final order is submitted. Customer will give overall
         // feedback for entire order.
@@ -50,9 +50,11 @@ public class GameEventManager : Singleton<GameEventManager>
     public int currentDay;
 
     public Customer openCustomer;
-    public Timer openCustomerTimer;
-    public List<Order> openCustomerOrders = new List<Order>();
-    public List<Order> closedCustomerOrders = new List<Order>();
+    public Timer missionTimer;
+
+    public int orderCount;
+    public Order order1;
+    public Order order2;
 
     public float totalDayScore;
     public float totalDayTime;
@@ -145,13 +147,10 @@ public class GameEventManager : Singleton<GameEventManager>
 
                     // Generate order/s
                     System.Random randomGenerator = new System.Random();
-                    int orderCount = randomGenerator.Next(1, 9) % 2 + 1;
+                    orderCount = randomGenerator.Next(1, 9) % 2 + 1;
 
-                    for (int i = 0; i < orderCount; i++)
-                    {
-                        Order newOrder = openCustomer.GenerateOrder();
-                        openCustomerOrders.Add(newOrder);
-                    }
+                    order1 = openCustomer.GenerateOrder();
+                    order2 = orderCount == 2 ? openCustomer.GenerateOrder() : null;
 
                     customerUI.ShowGreeting();
 
@@ -172,17 +171,17 @@ public class GameEventManager : Singleton<GameEventManager>
             #region MAKE_ORDER
             case GameEvent.MAKE_ORDER:
                 {
-                    PushToQueue(GameEvent.CONTINUE);
+                    PushToQueue(GameEvent.CUSTOMER_FEEDBACK);
 
-                    openCustomerTimer.StartTimer();
+                    missionTimer.StartTimer();
 
                     break;
                 }
             #endregion
             #region CONTINUE
-            case GameEvent.CONTINUE:
+            case GameEvent.CUSTOMER_FEEDBACK:
                 {
-                    if (openCustomerOrders.Count == 2)
+                    if (orderCount == 2 && !order1.IsEvaluated)
                     {
                         PushToQueue(GameEvent.MAKE_ORDER);
                     }
@@ -253,126 +252,32 @@ public class GameEventManager : Singleton<GameEventManager>
         eventFired = false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void BeginNewDay()
+    public void EvaluateOrder1()
     {
-        //InputController.Instance.DisableInteraction();
-        currentDay++;
-        openCustomer = null;
-        openCustomerOrders.Clear();
-        closedCustomerOrders.Clear();
-        totalDayScore = 0.0f;
-        totalDayTime = 0.0f;
-
-        //Show day # fade in/out title
-        StartNewCustomer();
+        EvaluateOrder(order1, cupController1.cup);
+        docketUI.docket1.SetActive(false);
+        SetEventToComplete();
     }
 
-    public void EndDay()
+    public void EvaluateOrder2()
     {
-        //NEEDS CODE
+        EvaluateOrder(order2, cupController2.cup);
+        docketUI.docket2.SetActive(false);
+        SetEventToComplete();
     }
 
-    public void StartNewCustomer()
+    public void ResetContainers()
     {
-        // Reset containers.
         kettleObject.GetComponent<KettleInterface>().kettle.ResetKettle();
         teapotObject1.GetComponent<TeapotInterface>().teapot.ResetTeapot();
         teapotObject2.GetComponent<TeapotInterface>().teapot.ResetTeapot();
         cupObject1.GetComponent<CupInterface>().cup.ResetCup();
         cupObject2.GetComponent<CupInterface>().cup.ResetCup();
-
-        openCustomer = Customer.GetRandomCustomer();
-        //customerLoader.SetCustomer(openCustomer);
-
-        //customerSpeechUI.gameObject.SetActive(true);
-
-        // Push customer greeting
-        //customerSpeechUI.PushGreeting(openCustomer);
-
-        openCustomerOrders.Clear();
-        closedCustomerOrders.Clear();
-    }
-
-    public void ProceedWithOrder()
-    {
-        //customerSpeechUI.gameObject.SetActive(false);
-        
-        System.Random randomGenerator = new System.Random();
-        int orderCount = 2;// randomGenerator.Next(1, 100) % 2 + 1;
-
-        for (int i = 0; i < orderCount; i++)
-        {
-            Order newOrder = openCustomer.GenerateOrder();
-            openCustomerOrders.Add(newOrder);
-        }
-
-        // Show dockets somewhere.
-        //saucerMenu1.SetOrder(openCustomerOrders[0]);
-        saucerObject1.SetActive(true);
-        cupObject1.SetActive(true);
-        //docket1.SetDocket(openCustomerOrders[0]);
-
-        if (orderCount == 2)
-        {
-            //saucerMenu2.SetOrder(openCustomerOrders[1]);
-            saucerObject2.SetActive(true);
-            cupObject2.SetActive(true);
-            //docket2.SetDocket(openCustomerOrders[1]);
-        }
-
-        openCustomerTimer.StartTimer();
-
-        // Show timer at top of screen
-    }
-
-    public void EndCustomer()
-    {
-        openCustomerTimer.PauseTimer();
-        totalDayTime += openCustomerTimer.ElapsedTime();
-
-        foreach (Order order in closedCustomerOrders)
-        {
-            totalDayScore += order.evaluation.score;
-        }
     }
 
     public void EvaluateOrder(Order order, Cup cup)
     {
-        if (!openCustomerOrders.Contains(order))
-        {
-            return;
-        }
-
         OrderEvaluation newEvaluation = new OrderEvaluation();
-
-        if (openCustomer == null)
-        {
-            return;
-        }
 
         float accumulatedScore = 0.0f;
 
@@ -435,27 +340,5 @@ public class GameEventManager : Singleton<GameEventManager>
         }
 
         order.evaluation = newEvaluation;
-        openCustomerOrders.Remove(order);
-        closedCustomerOrders.Add(order);
-
-        // Show customer reaction
-        //customerSpeechUI.PushReactionDialogue(openCustomer, newEvaluation.GetRandomEvaluation());
-
-        if (openCustomerOrders.Count == 0)
-        {
-            completedCustomers++;
-
-            // Show final reaction
-            //customerSpeechUI.PushFinalComment();
-
-            if (completedCustomers == customersEachDay)
-            {
-                EndDay();
-            }
-            else
-            {
-                StartNewCustomer();
-            }
-        }
     }
 }

@@ -9,13 +9,13 @@ public class TimeDisplayController : MonoBehaviour
 
     private void Update()
     {
-        if (GameEventManager.Instance.openCustomerTimer == null)
+        if (GameEventManager.Instance.missionTimer == null)
         {
             timeDisplayField.text = "0";
         }
         else
         {
-            int elapsedTime = (int)GameEventManager.Instance.openCustomerTimer.ElapsedTime();
+            int elapsedTime = (int)GameEventManager.Instance.missionTimer.ElapsedTime();
             timeDisplayField.text = elapsedTime.ToString();
         }
     }

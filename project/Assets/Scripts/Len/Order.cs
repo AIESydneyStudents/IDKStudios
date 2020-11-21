@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class Order
 {
     #region Fields
@@ -35,11 +37,12 @@ public class Order
         new SortedSet<Additive>();
 
     public OrderEvaluation evaluation;
-    public Customer belongsTo;
 
     #endregion
 
     #region Properties
+
+    public bool IsEvaluated { get { return evaluation != null; } }
 
     #endregion
 

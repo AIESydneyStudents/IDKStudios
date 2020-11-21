@@ -33,3 +33,40 @@ MonoBehaviour:
   customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
     type: 3}
   customerMaterial: {fileID: 2100000, guid: ffa4d6f73f366ca4b91b81754f6587d7, type: 2}
+  greeting: 'Hey there! Can I get '
+  emptyCup:
+  - My cup....it's...empty.
+  - Is this some kind of joke?
+  justWater:
+  - Am I supposed to water the plants with this?
+  - This has to be the blandest tea I've ever tasted....
+  tooWeak:
+  - Is this just water? It's so weak...
+  - I think I can taste the tea.. I don't know.
+  tooStrong:
+  - I can run my car on this!
+  - I prefer more water with my tea.
+  tooBitter:
+  - This is terribly bitter...
+  - This is way too bitter.
+  tooSweet:
+  - How much sugar did you put in this?
+  - This is far too sweet for my liking.
+  tooCold:
+  - I didn't ask for iced tea.
+  - I think I just got a brain freeze.
+  tooHot:
+  - Ow my thung! Ith too hoth.
+  - YEEEAAAOOOOOOOWWW!
+  noAdditive:
+  - 'Didn''t I ask for '
+  - 'Sorry, I asked for '
+  resultGreat:
+  - Fantastic tea!
+  - This is great tea!
+  resultMediocre:
+  - Not bad, but I expected better.
+  - Not perfect, but drinkable.
+  resultPoor:
+  - I didn't get what I asked for.
+  - Did you purposefully try to ruin my order?

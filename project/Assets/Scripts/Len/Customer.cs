@@ -43,6 +43,21 @@ public class Customer : ScriptableObject
     public Mesh customerMesh;
     public Material customerMaterial;
 
+    [Header("Responses")]
+    public string greeting;
+    public string[] emptyCup;
+    public string[] justWater;
+    public string[] tooWeak;
+    public string[] tooStrong;
+    public string[] tooBitter;
+    public string[] tooSweet;
+    public string[] tooCold;
+    public string[] tooHot;
+    public string[] noAdditive;
+    public string[] resultGreat;
+    public string[] resultMediocre;
+    public string[] resultPoor;
+
     #endregion
 
     #region Properties
@@ -444,11 +459,104 @@ public class Customer : ScriptableObject
         {
             if (customerPercentile < customer.percentile)
             {
+                customer.hasVisitedToday = true;
                 return customer;
             }
         }
 
         return null;
+    }
+
+    public string GetGreeting()
+    {
+        if (greeting == null)
+        {
+            return "";
+        }
+
+        return greeting;
+    }
+
+    public string GetEvaluationResponse(Evaluation evaluation)
+    {
+        int random = GameEventManager.Instance.randomGenerator.Next();
+
+        switch (evaluation.error)
+        {
+            case Evaluation.Error.TOO_BITTER:
+                {
+                    return tooBitter[random % tooBitter.Length];
+                }
+            case Evaluation.Error.TOO_SWEET:
+                {
+                    return tooSweet[random % tooSweet.Length];
+                }
+            case Evaluation.Error.TOO_WEAK:
+                {
+                    return tooWeak[random % tooWeak.Length];
+                }
+            case Evaluation.Error.TOO_STRONG:
+                {
+                    return tooStrong[random % tooStrong.Length];
+                }
+            case Evaluation.Error.TOO_COLD:
+                {
+                    return tooCold[random % tooCold.Length];
+                }
+            case Evaluation.Error.TOO_HOT:
+                {
+                    return tooHot[random % tooHot.Length];
+                }
+            case Evaluation.Error.EMPTY_CUP:
+                {
+                    return emptyCup[random % emptyCup.Length];
+                }
+            case Evaluation.Error.JUST_WATER:
+                {
+                    return justWater[random % justWater.Length];
+                }
+            case Evaluation.Error.NO_ADDITIVE:
+                {
+                    return noAdditive[random % noAdditive.Length] + evaluation.additiveName;
+                }
+            default:
+                {
+                    return "";
+                }
+        }
+    }
+
+    public string GetGreatResponse()
+    {
+        if (resultGreat.Length == 0)
+        {
+            return "";
+        }
+
+        int random = GameEventManager.Instance.randomGenerator.Next();
+        return resultGreat[random % resultGreat.Length];
+    }
+
+    public string GetMediocreResponse()
+    {
+        if (resultMediocre.Length == 0)
+        {
+            return "";
+        }
+
+        int random = GameEventManager.Instance.randomGenerator.Next();
+        return resultMediocre[random % resultMediocre.Length];
+    }
+
+    public string GetPoorResponse()
+    {
+        if (resultPoor.Length == 0)
+        {
+            return "";
+        }
+
+        int random = GameEventManager.Instance.randomGenerator.Next();
+        return resultPoor[random % resultPoor.Length];
     }
 
     #endregion

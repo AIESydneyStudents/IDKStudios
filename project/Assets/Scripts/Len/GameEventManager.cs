@@ -152,6 +152,7 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     PushToQueue(GameEvent.DISPLAY_GREETING);
 
+                    completedCustomers++;
                     openCustomer = Customer.GetRandomCustomer();
                     customerViewer.SetCustomer(openCustomer);
 
@@ -199,7 +200,7 @@ public class GameEventManager : Singleton<GameEventManager>
             #region CONTINUE
             case GameEvent.CUSTOMER_FEEDBACK:
                 {
-                    if (orderCount == 2 && !order1.IsEvaluated)
+                    if (orderCount == 2 && !order2.IsEvaluated)
                     {
                         PushToQueue(GameEvent.MAKE_ORDER);
                     }
@@ -228,6 +229,12 @@ public class GameEventManager : Singleton<GameEventManager>
 
                     // Show post order evaluation.
                     postOrderEvaluationUI.ShowPostOrderEvaluation();
+
+                    // Clean up parameters
+                    openCustomer = null;
+                    order1 = null;
+                    order2 = null;
+                    orderCount = 0;
 
                     break;
                 }

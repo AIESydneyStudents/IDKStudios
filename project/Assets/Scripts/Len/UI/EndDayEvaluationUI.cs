@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class EndDayEvaluationUI : MonoBehaviour
 {
-    public GameObject endDayEvaluationUI;
-
     public void ShowEndDayEvaluation()
     {
-
+        gameObject.SetActive(true);
     }
 }

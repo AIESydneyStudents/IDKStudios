@@ -485,38 +485,83 @@ public class Customer : ScriptableObject
         {
             case Evaluation.Error.TOO_BITTER:
                 {
+                    if (tooBitter.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return tooBitter[random % tooBitter.Length];
                 }
             case Evaluation.Error.TOO_SWEET:
                 {
+                    if (tooSweet.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return tooSweet[random % tooSweet.Length];
                 }
             case Evaluation.Error.TOO_WEAK:
                 {
+                    if (tooWeak.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return tooWeak[random % tooWeak.Length];
                 }
             case Evaluation.Error.TOO_STRONG:
                 {
+                    if (tooStrong.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return tooStrong[random % tooStrong.Length];
                 }
             case Evaluation.Error.TOO_COLD:
                 {
+                    if (tooCold.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return tooCold[random % tooCold.Length];
                 }
             case Evaluation.Error.TOO_HOT:
                 {
+                    if (tooHot.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return tooHot[random % tooHot.Length];
                 }
             case Evaluation.Error.EMPTY_CUP:
                 {
+                    if (emptyCup.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return emptyCup[random % emptyCup.Length];
                 }
             case Evaluation.Error.JUST_WATER:
                 {
+                    if (justWater.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return justWater[random % justWater.Length];
                 }
             case Evaluation.Error.NO_ADDITIVE:
                 {
+                    if (noAdditive.Length == 0)
+                    {
+                        return "";
+                    }
+
                     return noAdditive[random % noAdditive.Length] + evaluation.additiveName;
                 }
             default:

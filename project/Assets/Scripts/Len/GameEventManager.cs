@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameEventManager : Singleton<GameEventManager>
 {
+    #region Fields
+
     public enum GameEvent
     {
         // This will show current day on screen. This then triggers first customer arrival.
@@ -53,18 +53,29 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public Customer openCustomer;
     public Timer missionTimer;
+    public TimeDisplayUI timeDisplay;
 
     public int orderCount;
+    public int lastToBeEvaluated;
     public Order order1;
     public Order order2;
-
-    public float totalDayScore;
-    public float totalDayTime;
 
     public int customersEachDay;
     public int completedCustomers;
 
+    public float totalDayAccuracy;
+    public float totalDaySpeed;
+    public int currentStoreReputation; // between 1 and 7.
+
     public CustomerViewer customerViewer;
+    public Animation cameraAnimator;
+
+    public GameObject pauseScreen;
+
+    public GameEvent currentEvent = GameEvent.BEGIN_DAY;
+    public bool eventFired;
+    public bool eventComplete;
+    public bool gamePaused;
 
     #region UI Elements
     public BeginDayUI beginDayUI;
@@ -96,11 +107,9 @@ public class GameEventManager : Singleton<GameEventManager>
     public TeapotInterface teapotInterface2;
     public CupInterface cupInterface1;
     public CupInterface cupInterface2;
-    #endregion    
+    #endregion
 
-    public GameEvent currentEvent = GameEvent.BEGIN_DAY;
-    public bool eventFired;
-    public bool eventComplete;
+    #endregion
 
     #region Properties
 
@@ -108,7 +117,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public float MinTasteAdjusted2 { get { return order2.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
     public float MaxTasteAdjusted1 { get { return order1.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
     public float MaxTasteAdjusted2 { get { return order2.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
-    
+
     public float MinStrengthAdjusted1 { get { return order1.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
     public float MinStrengthAdjusted2 { get { return order2.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
     public float MaxStrengthAdjusted1 { get { return order1.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
@@ -121,8 +130,15 @@ public class GameEventManager : Singleton<GameEventManager>
 
     #endregion
 
+    #region Functions
+
     private void Update()
     {
+        if (gamePaused)
+        {
+            return;
+        }
+
         if (eventComplete)
         {
             PullFromQueue();
@@ -196,8 +212,10 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     PushToQueue(GameEvent.CUSTOMER_FEEDBACK);
 
-                    missionTimer.StartTimer();
                     InputController.Instance.EnableInteraction();
+                    timeDisplay.ShowPause(false);
+                    missionTimer.ResumeTimer();
+                    docketUI.ShowDocketSubmit();
 
                     break;
                 }
@@ -205,7 +223,9 @@ public class GameEventManager : Singleton<GameEventManager>
             #region CONTINUE
             case GameEvent.CUSTOMER_FEEDBACK:
                 {
-                    if (orderCount == 2 && !order2.IsEvaluated)
+                    if (orderCount == 2 &&
+                        ((!order2.IsEvaluated && order1.IsEvaluated) ||
+                        (order2.IsEvaluated && !order1.IsEvaluated)))
                     {
                         PushToQueue(GameEvent.MAKE_ORDER);
                     }
@@ -215,6 +235,9 @@ public class GameEventManager : Singleton<GameEventManager>
                     }
 
                     InputController.Instance.DisableInteraction();
+                    timeDisplay.ShowPause(true);
+                    missionTimer.PauseTimer();
+                    docketUI.HideDocketSubmit();
 
                     // Evaluate the current order.
                     orderFeedbackUI.ShowOrderFeedback();
@@ -236,12 +259,23 @@ public class GameEventManager : Singleton<GameEventManager>
 
                     // Show post order evaluation.
                     postOrderEvaluationUI.ShowPostOrderEvaluation();
+                    TriggerCameraZoomOut();
+                    timeDisplay.gameObject.SetActive(false);
+                    missionTimer.PauseTimer();
+
+                    float elapsedTime = missionTimer.ElapsedTime();
+                    totalDaySpeed += elapsedTime * (order2 == null ? 1 : 0.66f);
+
+                    cupObject1.SetActive(false);
+                    cupObject2.SetActive(false);
 
                     // Clean up parameters
                     openCustomer = null;
                     order1 = null;
                     order2 = null;
                     orderCount = 0;
+                    lastToBeEvaluated = 0;
+                    ResetContainers();
 
                     break;
                 }
@@ -263,7 +297,7 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     break;
                 }
-            #endregion
+                #endregion
         }
 
         eventFired = true;
@@ -287,14 +321,16 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public void EvaluateOrder1()
     {
-        EvaluateOrder(order1, cupInterface1.cup);
+        EvaluateOrder(1, cupInterface1.cup);
+        lastToBeEvaluated = 1;
         docketUI.docket1.SetActive(false);
         SetEventToComplete();
     }
 
     public void EvaluateOrder2()
     {
-        EvaluateOrder(order2, cupInterface2.cup);
+        EvaluateOrder(2, cupInterface2.cup);
+        lastToBeEvaluated = 2;
         docketUI.docket2.SetActive(false);
         SetEventToComplete();
     }
@@ -308,70 +344,133 @@ public class GameEventManager : Singleton<GameEventManager>
         cupObject2.GetComponent<CupInterface>().cup.ResetCup();
     }
 
-    public void EvaluateOrder(Order order, Cup cup)
+    public void EvaluateOrder(int order, Cup cup)
     {
+        order = order < 1 ? 1 : (order > 2 ? 2 : order);
+
+        Order thisOrder = order == 1 ? order1 : order2;
+
         OrderEvaluation newEvaluation = new OrderEvaluation();
 
-        float accumulatedScore = 0.0f;
-
-        float tasteMin = order.targetTaste - order.toleranceTaste;
-        float tasteMax = order.targetTaste + order.toleranceTaste;
-        float strengthMin = order.targetStrength - order.toleranceStrength;
-        float strengthMax = order.targetStrength + order.toleranceStrength;
-        float temperatureMin = order.targetTemperature - order.toleranceTemperature;
-        float temperatureMax = order.targetTemperature + order.toleranceTemperature;
-
-        if (cup.Taste < tasteMin)
+        if (!cup.IsFull)
         {
-            newEvaluation.InsertEvaluation(Evaluation.Error.TOO_BITTER);
+            newEvaluation.InsertEvaluation(Evaluation.Error.EMPTY_CUP);
         }
-        else if (cup.Taste > tasteMax)
+        else if (cup.IsFull && cup.additiveRepository.Count == 0)
         {
-            newEvaluation.InsertEvaluation(Evaluation.Error.TOO_SWEET);
+            newEvaluation.InsertEvaluation(Evaluation.Error.JUST_WATER);
         }
         else
         {
-            accumulatedScore += Mathf.Abs(cup.Taste - order.targetTaste) / order.toleranceTaste;
-        }
+            float tasteMin;
+            float tasteMax;
+            float tasteRange;
+            float strengthMin;
+            float strengthMax;
+            float strengthRange;
+            float temperatureMin;
+            float temperatureMax;
+            float temperatureRange;
 
-        if (cup.Strength < strengthMin)
-        {
-            newEvaluation.InsertEvaluation(Evaluation.Error.TOO_WEAK);
-        }
-        else if (cup.Strength > strengthMax)
-        {
-            newEvaluation.InsertEvaluation(Evaluation.Error.TOO_STRONG);
-        }
-        else
-        {
-            accumulatedScore += Mathf.Abs(cup.Strength - order.targetStrength) / order.toleranceStrength;
-        }
-
-        if (cup.Temperature < temperatureMin)
-        {
-            newEvaluation.InsertEvaluation(Evaluation.Error.TOO_COLD);
-        }
-        else if (cup.Temperature > temperatureMax)
-        {
-            newEvaluation.InsertEvaluation(Evaluation.Error.TOO_HOT);
-        }
-        else
-        {
-            accumulatedScore += Mathf.Abs(cup.Temperature - order.targetTemperature) / order.toleranceTemperature;
-        }
-
-        foreach (Additive additive in order.additiveRepository)
-        {
-            if (!cup.ContainsAdditive(additive))
+            if (order == 1)
             {
-                newEvaluation.InsertEvaluation(Evaluation.Error.NO_ADDITIVE, additive.Name);
+                tasteMin = MinTasteAdjusted1;
+                tasteMax = MaxTasteAdjusted1;
+                strengthMin = MinStrengthAdjusted1;
+                strengthMax = MaxStrengthAdjusted1;
+                temperatureMin = MinTemperatureAdjusted1;
+                temperatureMax = MaxTemperatureAdjusted1;
             }
             else
             {
-                accumulatedScore += 1.0f;
+                tasteMin = MinTasteAdjusted2;
+                tasteMax = MaxTasteAdjusted2;
+                strengthMin = MinStrengthAdjusted2;
+                strengthMax = MaxStrengthAdjusted2;
+                temperatureMin = MinTemperatureAdjusted2;
+                temperatureMax = MaxTemperatureAdjusted2;
+            }
+
+            tasteRange = (tasteMax - tasteMin) * 0.5f;
+            strengthRange = (strengthMax - strengthMin) * 0.5f;
+            temperatureRange = (temperatureMax - temperatureMin) * 0.5f;
+
+            if (cup.Taste < tasteMin)
+            {
+                newEvaluation.InsertEvaluation(Evaluation.Error.TOO_BITTER);
+            }
+            else if (cup.Taste > tasteMax)
+            {
+                newEvaluation.InsertEvaluation(Evaluation.Error.TOO_SWEET);
+            }
+            else
+            {
+                newEvaluation.scoreTaste = Mathf.Abs(cup.Taste - thisOrder.targetTaste) / tasteRange;
+            }
+
+            if (cup.Strength < strengthMin)
+            {
+                newEvaluation.InsertEvaluation(Evaluation.Error.TOO_WEAK);
+            }
+            else if (cup.Strength > strengthMax)
+            {
+                newEvaluation.InsertEvaluation(Evaluation.Error.TOO_STRONG);
+            }
+            else
+            {
+                newEvaluation.scoreStrength = Mathf.Abs(cup.Strength - thisOrder.targetStrength) / strengthRange;
+            }
+
+            if (cup.Temperature < temperatureMin)
+            {
+                newEvaluation.InsertEvaluation(Evaluation.Error.TOO_COLD);
+            }
+            else if (cup.Temperature > temperatureMax)
+            {
+                newEvaluation.InsertEvaluation(Evaluation.Error.TOO_HOT);
+            }
+            else
+            {
+                newEvaluation.scoreTemperature = Mathf.Abs(cup.Temperature - thisOrder.targetTemperature) / temperatureRange;
+            }
+
+            if (thisOrder.additiveRepository.Count != 0)
+            {
+                foreach (Additive additive in thisOrder.additiveRepository)
+                {
+                    if (!cup.ContainsAdditive(additive))
+                    {
+                        newEvaluation.InsertEvaluation(Evaluation.Error.NO_ADDITIVE, additive.Name);
+                    }
+                    else
+                    {
+                        newEvaluation.scoreAdditive += 1.0f / thisOrder.additiveRepository.Count;
+                    }
+                }
             }
         }
 
-        order.evaluation = newEvaluation;
+        thisOrder.evaluation = newEvaluation;
     }
+
+    public void TriggerCameraZoomIn()
+    {
+        cameraAnimator.Play("CameraZoomIn");
+    }
+
+    public void TriggerCameraZoomOut()
+    {
+        cameraAnimator.Play("CameraZoomOut");
+    }
+
+    public void TogglePauseGame()
+    {
+        gamePaused = !gamePaused;
+
+        pauseScreen.SetActive(gamePaused);
+
+        Time.timeScale = gamePaused ? 0.0f : 1.0f;
+    }
+
+    #endregion
 }

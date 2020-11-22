@@ -21,7 +21,7 @@ public class SaucerMenuController : MenuController
     
     public void ServeTea()
     {
-        GameEventManager.Instance.EvaluateOrder(thisOrder, cupInterface.cup);
+        //GameEventManager.Instance.EvaluateOrder(thisOrder, cupInterface.cup);
         HideMenu();
     }
 

@@ -3,8 +3,6 @@ using UnityEngine.UI;
 
 public class BeginOrderUI : MonoBehaviour
 {
-    public GameObject clockUI;
-    public Text clockText;
     public DocketUI docketUI;
 
     public bool triggered;
@@ -23,10 +21,18 @@ public class BeginOrderUI : MonoBehaviour
         {
             triggerTimer = 0.0f;
             gameObject.SetActive(false);
-            clockUI.SetActive(true);
-            clockText.text = "#";
-            gameObject.SetActive(false);
+
+            // Setup for gameplay
             docketUI.ShowDockets();
+            GameEventManager.Instance.missionTimer.StartTimer();
+            GameEventManager.Instance.timeDisplay.gameObject.SetActive(true);
+            GameEventManager.Instance.cupObject1.SetActive(true);
+            
+            if (GameEventManager.Instance.orderCount == 2)
+            {
+                GameEventManager.Instance.cupObject2.SetActive(true);
+            }
+
             GameEventManager.Instance.SetEventToComplete();
         }
     }
@@ -40,5 +46,6 @@ public class BeginOrderUI : MonoBehaviour
 
         gameObject.SetActive(true);
         triggered = true;
+        GameEventManager.Instance.TriggerCameraZoomIn();
     }
 }

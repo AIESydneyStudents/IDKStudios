@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 public class OrderEvaluation
 {
-    public float score;
+    public float scoreTaste;
+    public float scoreStrength;
+    public float scoreTemperature;
+    public float scoreAdditive;
+
     List<Evaluation> evaluations = new List<Evaluation>();
 
     public void InsertEvaluation(Evaluation.Error error, string additiveName = null)

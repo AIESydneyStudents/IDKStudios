@@ -5,6 +5,8 @@ public class DocketUI : MonoBehaviour
 {
     public GameObject docket1;
     public GameObject docket2;
+    public Button docket1Button;
+    public Button docket2Button;
 
     #region Docket 1 Data
     [Header("Docket 1")]
@@ -25,7 +27,7 @@ public class DocketUI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        UpdateDockets();
+        //UpdateDockets();
     }
 
     public void ShowDockets()
@@ -62,5 +64,17 @@ public class DocketUI : MonoBehaviour
             // Temperature Slider
             temperatureSlider2.value = GameEventManager.Instance.cupInterface2.cup.Temperature;
         }
+    }
+
+    public void HideDocketSubmit()
+    {
+        docket1Button.gameObject.SetActive(false);
+        docket2Button.gameObject.SetActive(false);
+    }
+
+    public void ShowDocketSubmit()
+    {
+        docket1Button.gameObject.SetActive(true);
+        docket2Button.gameObject.SetActive(true);
     }
 }

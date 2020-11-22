@@ -32,6 +32,11 @@ public class InputController : Singleton<InputController>
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameEventManager.Instance.TogglePauseGame();
+        }
+
         if (!enabled)
         {
             return;

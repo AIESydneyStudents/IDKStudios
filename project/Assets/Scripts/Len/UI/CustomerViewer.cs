@@ -14,6 +14,8 @@ public class CustomerViewer : MonoBehaviour
     public MeshFilter customerMeshFilter;
     public MeshRenderer customerMeshRenderer;
 
+    public AudioClip bellRing;
+
     public float fadeOutTime = 1.0f;
     private Customer currentCustomer = null;
     private State state = State.INACTIVE;
@@ -24,6 +26,8 @@ public class CustomerViewer : MonoBehaviour
         {
             return;
         }
+
+        AudioSource.PlayClipAtPoint(bellRing, Vector3.zero);
 
         if (currentCustomer == null)
         {

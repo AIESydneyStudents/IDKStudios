@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
@@ -131,7 +129,7 @@ public class InteractionController : MonoBehaviour
                         {
                             case Interface.InterfaceType.TEAPOT_INTERFACE:
                                 {
-                                    TeapotInterface teapotInterface = 
+                                    TeapotInterface teapotInterface =
                                         (TeapotInterface)containerController.associatedInterface;
 
                                     if (teapotInterface.teapot.CanInsertAdditive(additive))
@@ -246,23 +244,50 @@ public class InteractionController : MonoBehaviour
                                     ContainerController otherContainerController =
                                         (ContainerController)controller;
 
-                                    if (otherContainerController.associatedInterface.interfaceType != 
-                                        Interface.InterfaceType.CUP_INTERFACE)
+                                    switch (otherContainerController.associatedInterface.interfaceType)
                                     {
-                                        continue;
-                                    }
 
-                                    CupInterface cupInterface =
-                                        (CupInterface)otherContainerController.associatedInterface;
+                                        case Interface.InterfaceType.TAP_INTERFACE:
+                                            {
+                                                TapInterface tapInterface =
+                                                    (TapInterface)otherContainerController.associatedInterface;
 
-                                    if (teapotInterface.teapot.CanDispenseToCup(cupInterface.cup))
-                                    {
-                                        validControllers.Add(cupInterface.gameObject, otherContainerController);
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        continue;
+                                                if (teapotInterface.teapot.IsFull)
+                                                {
+                                                    validControllers.Add(tapInterface.gameObject, otherContainerController);
+                                                    continue;
+                                                }
+                                                else
+                                                {
+                                                    continue;
+                                                }
+
+                                            }
+                                        case Interface.InterfaceType.CUP_INTERFACE:
+                                            {
+                                                if (otherContainerController.associatedInterface.interfaceType !=
+                                                    Interface.InterfaceType.CUP_INTERFACE)
+                                                {
+                                                    continue;
+                                                }
+
+                                                CupInterface cupInterface =
+                                                    (CupInterface)otherContainerController.associatedInterface;
+
+                                                if (teapotInterface.teapot.CanDispenseToCup(cupInterface.cup))
+                                                {
+                                                    validControllers.Add(cupInterface.gameObject, otherContainerController);
+                                                    continue;
+                                                }
+                                                else
+                                                {
+                                                    continue;
+                                                }
+                                            }
+                                        default:
+                                            {
+                                                break;
+                                            }
                                     }
                                 }
 
@@ -282,18 +307,30 @@ public class InteractionController : MonoBehaviour
 
                                     ContainerController otherContainerController =
                                         (ContainerController)controller;
-
-                                    if (otherContainerController.associatedInterface.interfaceType !=
-                                        Interface.InterfaceType.SAUCER_INTERFACE)
+                                    switch (otherContainerController.associatedInterface.interfaceType)
                                     {
-                                        continue;
+
+                                        case Interface.InterfaceType.TAP_INTERFACE:
+                                            {
+                                                TapInterface tapInterface =
+                                                    (TapInterface)otherContainerController.associatedInterface;
+
+                                                if (cupInterface.cup.IsFull)
+                                                {
+                                                    validControllers.Add(tapInterface.gameObject, otherContainerController);
+                                                    continue;
+                                                }
+                                                else
+                                                {
+                                                    continue;
+                                                }
+
+                                            }
+                                        default:
+                                            {
+                                                break;
+                                            }
                                     }
-
-                                    SaucerInterface saucerInterface =
-                                        (SaucerInterface)otherContainerController.associatedInterface;
-
-                                    validControllers.Add(saucerInterface.gameObject, otherContainerController);
-                                    continue;
                                 }
 
                                 return;
@@ -364,7 +401,7 @@ public class InteractionController : MonoBehaviour
 
         thisTransform.position = anchorTransform.position;
         thisTransform.rotation = anchorTransform.rotation;
-        
+
         anchorController.visitingController = this;
         atAnchor = true;
 
@@ -398,13 +435,13 @@ public class InteractionController : MonoBehaviour
 
     }
 
-//#if UNITY_EDITOR
-//    private void OnGUI()
-//    {
-//        Vector2 cam = Camera.main.WorldToScreenPoint(transform.position);
-//        cam.y = Screen.height - cam.y;
-//        Rect rect = new Rect(cam, new Vector2(200, 200));
-//        GUI.Label(rect, gameObject.name);
-//    }
-//#endif
+    //#if UNITY_EDITOR
+    //    private void OnGUI()
+    //    {
+    //        Vector2 cam = Camera.main.WorldToScreenPoint(transform.position);
+    //        cam.y = Screen.height - cam.y;
+    //        Rect rect = new Rect(cam, new Vector2(200, 200));
+    //        GUI.Label(rect, gameObject.name);
+    //    }
+    //#endif
 }

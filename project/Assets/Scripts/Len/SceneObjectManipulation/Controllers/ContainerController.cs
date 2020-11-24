@@ -5,14 +5,7 @@ using UnityEngine;
 public class ContainerController : InteractionController
 {
     public Interface associatedInterface;
-
-    //private void Start()
-    //{
-    //    if (anchorController != null)
-    //    {
-    //        ReturnToAnchor();
-    //    }
-    //}
+    public AudioClip audioClip;
 
     private void Update()
     {
@@ -67,9 +60,47 @@ public class ContainerController : InteractionController
             {
                 case Interface.InterfaceType.TAP_INTERFACE:
                     {
-                        Vector3 screenCoordinates = Input.mousePosition;
-                        InputController.Instance.HideInformationReadout();
-                        menuController.ShowMenu(screenCoordinates);
+                        switch (associatedInterface.interfaceType)
+                        {
+                            case Interface.InterfaceType.KETTLE_INTERFACE:
+                                {
+                                    Vector3 screenCoordinates = Input.mousePosition;
+                                    InputController.Instance.HideInformationReadout();
+                                    menuController.ShowMenu(screenCoordinates);
+
+                                    break;
+                                }
+                            case Interface.InterfaceType.TEAPOT_INTERFACE:
+                                {
+                                    AudioSource.PlayClipAtPoint(audioClip, Vector3.zero);
+
+                                    TeapotInterface teapotInterface =
+                                        (TeapotInterface)associatedInterface;
+
+                                    teapotInterface.teapot.ResetTeapot();
+                                    GameEventManager.Instance.docketUI.TriggerIconUpdate();
+                                    ReturnToAnchor();
+
+                                    break;
+                                }
+                            case Interface.InterfaceType.CUP_INTERFACE:
+                                {
+                                    AudioSource.PlayClipAtPoint(audioClip, Vector3.zero);
+
+                                    CupInterface cupInterface =
+                                        (CupInterface)associatedInterface;
+
+                                    cupInterface.cup.ResetCup();
+                                    GameEventManager.Instance.docketUI.TriggerIconUpdate();
+                                    ReturnToAnchor();
+
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+                        }
 
                         break;
                     }
@@ -94,20 +125,10 @@ public class ContainerController : InteractionController
                         TeapotInterface teapotInterface =
                             (TeapotInterface)associatedInterface;
 
+                        
                         teapotInterface.teapot.DispenseToCup(cupInterface.cup);
+                        GameEventManager.Instance.docketUI.TriggerIconUpdate();
                         ReturnToAnchor();
-
-                        break;
-                    }
-                case Interface.InterfaceType.SAUCER_INTERFACE:
-                    {
-                        SaucerInterface saucerInterface =
-                            (SaucerInterface)compatibleContainerController.associatedInterface;
-
-                        CupInterface cupInterface =
-                            (CupInterface)associatedInterface;
-
-                        //cupInterface.cup.ServeToOrder blah blah
 
                         break;
                     }

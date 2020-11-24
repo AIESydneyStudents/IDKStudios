@@ -103,10 +103,10 @@ public class PostOrderEvaluationUI : MonoBehaviour
         starsTemperature = Mathf.CeilToInt(3.0f * averageScoreTemperature);
         starsIngredients = Mathf.CeilToInt(3.0f * averageScoreIngredients);
 
-        starsTaste = Mathf.Max(starsTaste, 1);
-        starsStrength = Mathf.Max(starsStrength, 1);
-        starsTemperature = Mathf.Max(starsTemperature, 1);
-        starsIngredients = Mathf.Max(starsIngredients, 1);
+        starsTaste       = Mathf.Min(Mathf.Max(starsTaste, 1), 3);
+        starsStrength    = Mathf.Min(Mathf.Max(starsStrength, 1), 3);
+        starsTemperature = Mathf.Min(Mathf.Max(starsTemperature, 1), 3);
+        starsIngredients = Mathf.Min(Mathf.Max(starsIngredients, 1), 3);
 
         float averageScore = 0.25f * (averageScoreTaste + averageScoreStrength + averageScoreTemperature + averageScoreIngredients);
         GameEventManager.Instance.totalDayAccuracy += averageScore;

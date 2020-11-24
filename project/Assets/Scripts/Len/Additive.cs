@@ -9,14 +9,15 @@ using UnityEngine;
     menuName = "Additive",
     order = 0
     )]
-public class Additive : ScriptableObject, IComparable<Additive>
+public class Additive : ScriptableObject
 {
     #region Fields
 
     public enum Type
     {
         TEA,
-        CONDIMENT
+        CONDIMENT,
+        MILK
     }
 
     // Additive dictionary: AdditiveName|Additive
@@ -49,6 +50,8 @@ public class Additive : ScriptableObject, IComparable<Additive>
 
     [Tooltip("Does this additive require tea to be added first?")]
     public bool teaRequirement;
+
+    public Sprite additiveSprite;
 
     #endregion
 
@@ -119,11 +122,6 @@ public class Additive : ScriptableObject, IComparable<Additive>
         }
 
         return additiveList.ToArray();
-    }
-
-    int IComparable<Additive>.CompareTo(Additive other)
-    {
-        return additiveIndex.CompareTo(other.additiveIndex);
     }
 
     #endregion

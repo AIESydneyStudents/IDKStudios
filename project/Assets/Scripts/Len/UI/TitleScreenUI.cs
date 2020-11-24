@@ -9,7 +9,7 @@ public class TitleScreenUI : MonoBehaviour
 
     static void OnStartUp()
     {
-        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        //SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 
     public void ContinueGame()

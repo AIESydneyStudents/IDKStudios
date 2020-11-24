@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Full Cream Milk
   m_EditorClassIdentifier: 
   additiveName: Full Cream Milk
-  additiveType: 1
+  additiveType: 2
   container: 2
   initialEffect:
     effectTaste: 0.176
@@ -23,4 +23,5 @@ MonoBehaviour:
     effectTaste: 0
     effectStrength: 0
     effectTemperature: 0
-  teaRequirement: 0
+  teaRequirement: 1
+  additiveSprite: {fileID: 21300000, guid: 628ddcfd0a1eb2b468032bee8936636e, type: 3}

@@ -15,21 +15,37 @@ MonoBehaviour:
   customerName: Mary
   customerIndex: 0
   teaPreferences:
-  - teaName: Black Tea
+  - teaName: Pink Tea
     additiveIndex: 0
     weighting: 0.3
     percentile: 0
-    customerSelected: 0
   condimentPreferences:
   - condimentName: Sugar
     additiveIndex: 0
     weighting: 0.8
     percentile: 0
-    customerSelected: 0
-  toleranceTaste: 0.1
-  toleranceStrength: 0.2
-  toleranceTemperature: 0.05
+  milkPreferences:
+  - milkName: Full Cream Milk
+    additiveIndex: 0
+    weighting: 0.2
+    percentile: 0
+  toleranceTaste: 0.9
+  toleranceStrength: 0.75
+  toleranceTemperature: 0.95
   weight: 0
   customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
     type: 3}
   customerMaterial: {fileID: 2100000, guid: b9e2f2f1104acc640973b239a7452651, type: 2}
+  greeting: 
+  emptyCup: []
+  justWater: []
+  tooWeak: []
+  tooStrong: []
+  tooBitter: []
+  tooSweet: []
+  tooCold: []
+  tooHot: []
+  noAdditive: []
+  resultGreat: []
+  resultMediocre: []
+  resultPoor: []

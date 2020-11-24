@@ -95,29 +95,8 @@ public class Cup : Container
 
         // If tea is required for additive, check if it contains tea.
         // Ignores check completely if it's tea in the first place.
-        if (additive.additiveType == Additive.Type.CONDIMENT &&
-            additive.teaRequirement &&
+        if (additive.teaRequirement &&
             !ContainsType(Additive.Type.TEA))
-        {
-            return false;
-        }
-
-        // Check if attribute ceiling will be hit by adding this additive.
-        float resultTaste = cupTaste + additive.initialEffect.Taste;
-        float resultStrength = cupStrength + additive.initialEffect.Strength;
-        float resultTemperature = cupTemperature + additive.initialEffect.Temperature;
-
-        if (resultTaste > 1.0f || resultTaste < -1.0f)
-        {
-            return false;
-        }
-
-        if (resultStrength > 1.0f || resultStrength < 0.0f)
-        {
-            return false;
-        }
-
-        if (resultTemperature > 1.0f || resultTemperature < 0.0f)
         {
             return false;
         }
@@ -130,7 +109,7 @@ public class Cup : Container
         // Check if additive can be inserted
         if (!CanInsertAdditive(additive))
         {
-            return;
+            //return;
         }
 
         InsertAdditiveToRepo(additive);

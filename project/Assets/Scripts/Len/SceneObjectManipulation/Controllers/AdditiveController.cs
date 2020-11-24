@@ -46,6 +46,7 @@ public class AdditiveController : InteractionController
                             (CupInterface)compatibleContainerController.associatedInterface;
 
                         cupInterface.cup.InsertAdditive(additiveInterface.containedAdditive);
+                        GameEventManager.Instance.docketUI.TriggerIconUpdate();
 
                         break;
                     }

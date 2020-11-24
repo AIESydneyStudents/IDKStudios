@@ -15,21 +15,37 @@ MonoBehaviour:
   customerName: Joe
   customerIndex: 0
   teaPreferences:
-  - teaName: Black Tea
+  - teaName: Yellow Tea
     additiveIndex: 0
     weighting: 0.3
     percentile: 0
-    customerSelected: 0
   condimentPreferences:
   - condimentName: Sugar
     additiveIndex: 0
     weighting: 0.8
     percentile: 0
-    customerSelected: 0
-  toleranceTaste: 0.1
-  toleranceStrength: 0.2
-  toleranceTemperature: 0.05
+  milkPreferences:
+  - milkName: Almond Milk
+    additiveIndex: 0
+    weighting: 0.9
+    percentile: 0
+  toleranceTaste: 0.8
+  toleranceStrength: 0.85
+  toleranceTemperature: 0.6
   weight: 0
   customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
     type: 3}
   customerMaterial: {fileID: 2100000, guid: 22166a28b437a6f49996e8fd16ef7450, type: 2}
+  greeting: 
+  emptyCup: []
+  justWater: []
+  tooWeak: []
+  tooStrong: []
+  tooBitter: []
+  tooSweet: []
+  tooCold: []
+  tooHot: []
+  noAdditive: []
+  resultGreat: []
+  resultMediocre: []
+  resultPoor: []

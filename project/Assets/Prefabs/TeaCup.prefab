@@ -106,11 +106,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4169408999434323814}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.116891906
-  m_Center: {x: 0.012588814, y: 0.019515276, z: 0.0000003054738}
+  m_Radius: 0.1
+  m_Center: {x: 0, y: -0.07, z: 0}
 --- !u!54 &4436037672850637716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,11 +142,13 @@ MonoBehaviour:
   interfaceType: 3
   cup:
     containerType: 2
+    additiveRepository: []
     isFull: 0
     cupTaste: 0
     cupStrength: 0
     cupTemperature: 0
     cooldownRate: 0.01
+  cupIndex: 0
   saucerObject: {fileID: 0}
 --- !u!114 &8851086915607728692
 MonoBehaviour:
@@ -175,3 +177,4 @@ MonoBehaviour:
   anchorController: {fileID: 0}
   atAnchor: 0
   associatedInterface: {fileID: 0}
+  audioClip: {fileID: 0}

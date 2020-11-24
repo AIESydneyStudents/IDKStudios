@@ -21,8 +21,8 @@ public class Container
     [SerializeField]
     public Type containerType;
 
-    public SortedSet<Additive> additiveRepository =
-        new SortedSet<Additive>();
+    public List<Additive> additiveRepository =
+        new List<Additive>();
 
     #endregion
 

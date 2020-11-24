@@ -19,9 +19,6 @@ public class CondimentPreference
 
     public float percentile;
 
-    [HideInInspector]
-    public bool customerSelected;
-
     #endregion
 
     #region Properties

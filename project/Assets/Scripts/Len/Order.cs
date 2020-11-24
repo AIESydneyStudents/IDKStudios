@@ -32,8 +32,8 @@ public class Order
     [SerializeField]
     public float toleranceTemperature;
 
-    public SortedSet<Additive> additiveRepository =
-        new SortedSet<Additive>();
+    public List<Additive> additiveRepository =
+        new List<Additive>();
 
     public OrderEvaluation evaluation;
 

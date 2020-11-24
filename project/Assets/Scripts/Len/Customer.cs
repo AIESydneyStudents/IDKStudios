@@ -24,6 +24,8 @@ public class Customer : ScriptableObject
 
     public CondimentPreference[] condimentPreferences;
 
+    public MilkPreference[] milkPreferences;
+
     [SerializeField]
     private float toleranceTaste;
 
@@ -145,13 +147,12 @@ public class Customer : ScriptableObject
         foreach (TeaPreference preference in teaPreferences)
         {
             preference.Initialize();
-            preference.customerSelected = true;
             teaWeighting += preference.weighting;
         }
 
         // If total weighting of all tea preferences is more than 1,
         // normalise them all.
-        if (teaWeighting > 1.0f)
+        if (teaWeighting >= 1.0f)
         {
             float teaWeightingInverse = 1.0f / teaWeighting;
 
@@ -194,7 +195,6 @@ public class Customer : ScriptableObject
                     newPreference.teaName = currentTeaAdditive.Name;
                     newPreference.additiveIndex = currentTeaAdditive.Index;
                     newPreference.weighting = remainingTeaWeighting;
-                    newPreference.customerSelected = false;
 
                     bloatedList.Add(newPreference);
                     currentIndex++;
@@ -213,7 +213,6 @@ public class Customer : ScriptableObject
                 newPreference.teaName = currentTeaAdditive.Name;
                 newPreference.additiveIndex = currentTeaAdditive.Index;
                 newPreference.weighting = remainingTeaWeighting;
-                newPreference.customerSelected = false;
 
                 bloatedList.Add(newPreference);
             }
@@ -241,13 +240,12 @@ public class Customer : ScriptableObject
         foreach (CondimentPreference preference in condimentPreferences)
         {
             preference.Initialize();
-            preference.customerSelected = true;
             condimentWeighting += preference.weighting;
         }
 
         // If total weighting of all condiment preferences is more than 1,
         // normalise them all.
-        if (condimentWeighting > 1.0f)
+        if (condimentWeighting >= 1.0f)
         {
             float condimentWeightingInverse = 1.0f / condimentWeighting;
 
@@ -290,7 +288,6 @@ public class Customer : ScriptableObject
                     newPreference.condimentName = currentCondimentAdditive.Name;
                     newPreference.additiveIndex = currentCondimentAdditive.Index;
                     newPreference.weighting = remainingCondimentWeighting;
-                    newPreference.customerSelected = false;
 
                     bloatedList.Add(newPreference);
                     currentIndex++;
@@ -300,7 +297,7 @@ public class Customer : ScriptableObject
                 currentIndex++;
             }
 
-            // Create default preferences for remaining tea additives.
+            // Create default preferences for remaining condiment additives.
             for (int i = currentIndex; i < allCondimentAdditives.Length; i++)
             {
                 CondimentPreference newPreference = new CondimentPreference();
@@ -309,7 +306,6 @@ public class Customer : ScriptableObject
                 newPreference.condimentName = currentCondimentAdditive.Name;
                 newPreference.additiveIndex = currentCondimentAdditive.Index;
                 newPreference.weighting = remainingCondimentWeighting;
-                newPreference.customerSelected = false;
 
                 bloatedList.Add(newPreference);
             }
@@ -329,21 +325,111 @@ public class Customer : ScriptableObject
             condimentWeightRunningTotal += preference.weighting;
             preference.percentile = condimentWeightRunningTotal;
         }
+
+        // SET UP MILK PREFERENCE LIST
+
+        float milkWeighting = 0.0f;
+
+        foreach (MilkPreference preference in milkPreferences)
+        {
+            preference.Initialize();
+            milkWeighting += preference.weighting;
+        }
+
+        // If total weighting of all milk preferences is more than 1,
+        // normalise them all.
+        if (milkWeighting >= 1.0f)
+        {
+            float milkWeightingInverse = 1.0f / milkWeighting;
+
+            foreach (MilkPreference preference in milkPreferences)
+            {
+                preference.weighting *= milkWeightingInverse;
+            }
+
+            Array.Sort(milkPreferences, MilkPreference.CompareByWeight);
+        }
+
+        // If total weighting is less than 1, fill out rest of
+        // preference list with the other condiments and share the
+        // remaining weight between them.
+        else
+        {
+            // Sort preferences by index.
+            Array.Sort(milkPreferences, MilkPreference.CompareByIndex);
+
+            // Get all inclusive list of milk additives.
+            Additive[] allMilkAdditives = Additive.GetAllAdditives(Additive.Type.MILK);
+
+            // Calculate average weight of remaining 
+            int remainingMilkCount = allMilkAdditives.Length - milkPreferences.Length;
+            float remainingWeight = 1.0f - milkWeighting;
+            float remainingMilkWeighting = remainingWeight / remainingMilkCount;
+
+            int currentIndex = 0;
+            Additive currentMilkAdditive = null;
+
+            List<MilkPreference> bloatedList = new List<MilkPreference>();
+
+            foreach (MilkPreference preference in milkPreferences)
+            {
+                while (allMilkAdditives[currentIndex].Index < preference.additiveIndex)
+                {
+                    MilkPreference newPreference = new MilkPreference();
+                    currentMilkAdditive = allMilkAdditives[currentIndex];
+
+                    newPreference.milkName = currentMilkAdditive.Name;
+                    newPreference.additiveIndex = currentMilkAdditive.Index;
+                    newPreference.weighting = remainingMilkWeighting;
+
+                    bloatedList.Add(newPreference);
+                    currentIndex++;
+                }
+
+                bloatedList.Add(preference);
+                currentIndex++;
+            }
+
+            // Create default preferences for remaining milk additives.
+            for (int i = currentIndex; i < allMilkAdditives.Length; i++)
+            {
+                MilkPreference newPreference = new MilkPreference();
+                currentMilkAdditive = allMilkAdditives[i];
+
+                newPreference.milkName = currentMilkAdditive.Name;
+                newPreference.additiveIndex = currentMilkAdditive.Index;
+                newPreference.weighting = remainingMilkWeighting;
+
+                bloatedList.Add(newPreference);
+            }
+
+            // After bloated list construction, sort by weight, and replace
+            // milk preferences with an array copy.
+
+            milkPreferences = bloatedList.ToArray();
+            Array.Sort(milkPreferences, MilkPreference.CompareByWeight);
+        }
+
+        // Set up all preference percentiles.
+        float milkWeightRunningTotal = 0;
+
+        foreach (MilkPreference preference in milkPreferences)
+        {
+            milkWeightRunningTotal += preference.weighting;
+            preference.percentile = milkWeightRunningTotal;
+        }
     }
 
     public Order GenerateOrder()
     {
         Order newOrder = new Order(toleranceTaste, toleranceStrength, toleranceTemperature);
-        SortedSet<Additive> showOnDocket = new SortedSet<Additive>();
-        System.Random randomGenerator = new System.Random();
 
         Teapot teapot = new Teapot();
         teapot.IsFull = true;
-        teapot.Temperature = 0.01f * randomGenerator.Next(70, 100);
+        teapot.Temperature = 0.01f * GameEventManager.Instance.randomGenerator.Next(70, 100);
 
         //Choose and add tea
-        randomGenerator = new System.Random();
-        float teaPercentile = 0.001f * randomGenerator.Next(0, 999);
+        float teaPercentile = 0.001f * GameEventManager.Instance.randomGenerator.Next(0, 999);
 
         for (int i = 0; i < teaPreferences.Length; i++)
         {
@@ -352,51 +438,49 @@ public class Customer : ScriptableObject
                 Additive additive = Additive.GetAdditive(teaPreferences[i].additiveIndex);
                 teapot.InsertAdditive(additive);
 
-                if (teaPreferences[i].customerSelected)
-                {
-                    showOnDocket.Add(additive);
-                }
-
                 break;
             }
         }
 
-        teapot.Simulate(randomGenerator.Next(0, 10));
+        teapot.Simulate(GameEventManager.Instance.randomGenerator.Next(0, 10));
 
         Cup cup = new Cup();
 
         teapot.DispenseToCup(cup);
 
-        //Choose and add condiment/s
-        randomGenerator = new System.Random();
-        int condiments = randomGenerator.Next(1, 3);
+        //Choose and add condiment
+        float condimentPercentile = 0.001f * GameEventManager.Instance.randomGenerator.Next(0, 999);
 
-        for (int i = 0; i < condiments; i++)
+        for (int j = 0; j < condimentPreferences.Length; j++)
         {
-            randomGenerator = new System.Random();
-            float condimentPercentile = 0.001f * randomGenerator.Next(0, 999);
-
-            for (int j = 0; j < condimentPreferences.Length; j++)
+            if (condimentPercentile < condimentPreferences[j].percentile)
             {
-                if (condimentPercentile < condimentPreferences[j].percentile)
-                {
-                    Additive additive = Additive.GetAdditive(condimentPreferences[j].additiveIndex);
-                    cup.InsertAdditive(additive);
+                Additive additive = Additive.GetAdditive(condimentPreferences[j].additiveIndex);
+                cup.InsertAdditive(additive);
 
-                    if (condimentPreferences[j].customerSelected)
-                    {
-                        showOnDocket.Add(additive);
-                    }
-
-                    break;
-                }
+                break;
             }
         }
 
-        cup.Simulate(randomGenerator.Next(0, 10));
+        //Choose and add milk
+        float milkPercentile = 0.001f * GameEventManager.Instance.randomGenerator.Next(0, 999);
+
+        for (int k = 0; k < milkPreferences.Length; k++)
+        {
+            if (milkPercentile < milkPreferences[k].percentile)
+            {
+                Additive additive = Additive.GetAdditive(milkPreferences[k].additiveIndex);
+                cup.InsertAdditive(additive);
+
+                break;
+            }
+        }
+
+
+        cup.Simulate(GameEventManager.Instance.randomGenerator.Next(0, 10));
         newOrder.SetTarget(cup.Taste, cup.Strength, cup.Temperature);
 
-        foreach (Additive additive in showOnDocket)
+        foreach (Additive additive in cup.additiveRepository)
         {
             newOrder.additiveRepository.Add(additive);
         }

@@ -72,8 +72,8 @@ public class EndDayEvaluationUI : MonoBehaviour
         float totalDaySpeed = 1.0f - (GameEventManager.Instance.totalDaySpeed /
                                        GameEventManager.Instance.customersEachDay) / timeTarget;
 
-        starsAccuracy = (int)Mathf.Max(3.0f * totalDayAccuracy, 1.0f);
-        starsSpeed = (int)Mathf.Max(3.0f * totalDaySpeed, 1.0f);
+        starsAccuracy = (int)Mathf.Min(Mathf.Max(3.0f * totalDayAccuracy, 1), 3);
+        starsSpeed = (int)Mathf.Min(Mathf.Max(3.0f * totalDaySpeed, 1), 3);
 
         oldStarsReputation = GameEventManager.Instance.currentStoreReputation;
         GameEventManager.Instance.currentStoreReputation += starsAccuracy + starsSpeed - 4;

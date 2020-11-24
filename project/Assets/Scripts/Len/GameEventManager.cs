@@ -113,20 +113,20 @@ public class GameEventManager : Singleton<GameEventManager>
 
     #region Properties
 
-    public float MinTasteAdjusted1 { get { return order1.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
-    public float MinTasteAdjusted2 { get { return order2.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
-    public float MaxTasteAdjusted1 { get { return order1.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
-    public float MaxTasteAdjusted2 { get { return order2.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste; } }
+    public float MinTasteAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
+    public float MinTasteAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
+    public float MaxTasteAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
+    public float MaxTasteAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
 
-    public float MinStrengthAdjusted1 { get { return order1.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
-    public float MinStrengthAdjusted2 { get { return order2.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
-    public float MaxStrengthAdjusted1 { get { return order1.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
-    public float MaxStrengthAdjusted2 { get { return order2.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength; } }
+    public float MinStrengthAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
+    public float MinStrengthAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
+    public float MaxStrengthAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
+    public float MaxStrengthAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
 
-    public float MinTemperatureAdjusted1 { get { return order1.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
-    public float MinTemperatureAdjusted2 { get { return order2.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
-    public float MaxTemperatureAdjusted1 { get { return order1.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
-    public float MaxTemperatureAdjusted2 { get { return order2.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature; } }
+    public float MinTemperatureAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
+    public float MinTemperatureAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
+    public float MaxTemperatureAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
+    public float MaxTemperatureAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
 
     #endregion
 
@@ -215,6 +215,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     InputController.Instance.EnableInteraction();
                     timeDisplay.ShowPause(false);
                     missionTimer.ResumeTimer();
+                    docketUI.TriggerIconUpdate();
                     docketUI.ShowDocketSubmit();
 
                     break;
@@ -275,6 +276,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     order2 = null;
                     orderCount = 0;
                     lastToBeEvaluated = 0;
+                    docketUI.ResetDockets();
                     ResetContainers();
 
                     break;

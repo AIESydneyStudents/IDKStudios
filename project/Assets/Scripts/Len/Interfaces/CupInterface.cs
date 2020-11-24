@@ -6,6 +6,8 @@ public class CupInterface : Interface
 {
     public Cup cup;
 
+    public int cupIndex;
+
     public GameObject saucerObject;
 
     private SaucerInterface saucerInterface;

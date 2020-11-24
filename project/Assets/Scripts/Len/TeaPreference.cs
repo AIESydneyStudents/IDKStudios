@@ -18,9 +18,6 @@ public class TeaPreference
 
     public float percentile;
 
-    [HideInInspector]
-    public bool customerSelected;
-
     #endregion
 
     #region Properties

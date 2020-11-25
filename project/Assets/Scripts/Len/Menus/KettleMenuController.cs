@@ -37,7 +37,6 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        kettleController.ShowProgressBar();
     }
 
     public void TempOption2()
@@ -46,7 +45,6 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        kettleController.ShowProgressBar();
     }
 
     public void TempOption3()
@@ -55,7 +53,6 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        kettleController.ShowProgressBar();
     }
 
     public void TempOption4()
@@ -64,7 +61,6 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        kettleController.ShowProgressBar();
     }
 
     public void ExitMenu()

@@ -9,7 +9,6 @@ public class ContainerController : InteractionController
 
     private void Update()
     {
-        UpdateProgressBar();
     }
 
     public override void Interact()
@@ -29,7 +28,6 @@ public class ContainerController : InteractionController
 
                     InputController.Instance.HoldObject(gameObject);
                     LeaveAnchor();
-                    HideProgressBar();
                     ((KettleInterface)associatedInterface).kettle.IsActive = false;
 
                     break;
@@ -146,51 +144,5 @@ public class ContainerController : InteractionController
         InputController.Instance.UnholdObject();
         UnhighlightValidControllers();
         ClearValidControllers();
-    }
-
-    public override void ShowProgressBar()
-    {
-        switch (associatedInterface.interfaceType)
-        {
-            case Interface.InterfaceType.KETTLE_INTERFACE:
-                {
-                    KettleInterface kettleInterface =
-                        (KettleInterface)associatedInterface;
-
-                    progressBarController.SetStartEnd(
-                        kettleInterface.kettle.Temperature,
-                        kettleInterface.kettle.TemperatureSetting);
-
-                    Vector3 screenCoordinates = Input.mousePosition;
-                    progressBarController.SetPosition(screenCoordinates + progressBarOffset);
-                    progressBarController.ShowProgressBar();
-
-                    return;
-                }
-            default:
-                {
-                    return;
-                }
-        }
-    }
-
-    public override void UpdateProgressBar()
-    {
-        switch (associatedInterface.interfaceType)
-        {
-            case Interface.InterfaceType.KETTLE_INTERFACE:
-                {
-                    KettleInterface kettleInterface =
-                        (KettleInterface)associatedInterface;
-
-                    progressBarController.SetProgress(kettleInterface.kettle.Temperature);
-
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
     }
 }

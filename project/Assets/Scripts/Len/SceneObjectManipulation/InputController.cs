@@ -22,6 +22,8 @@ public class InputController : Singleton<InputController>
     public bool enabled;
     public bool isHoldingItem;
 
+    public KettleUI kettleUI;
+
     void Start()
     {
 
@@ -131,7 +133,38 @@ public class InputController : Singleton<InputController>
 
     public void ShowInformationReadout()
     {
-        
+        switch (pointingAtController.controllerType)
+        {
+            case InteractionController.ControllerType.CONTAINER:
+                {
+                    ContainerController containerController =
+                        (ContainerController)pointingAtController;
+
+                    switch (containerController.associatedInterface.interfaceType)
+                    {
+                        case Interface.InterfaceType.KETTLE_INTERFACE:
+                            {
+
+
+                                break;
+                            }
+                        case Interface.InterfaceType.TEAPOT_INTERFACE:
+                            {
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
     }
 
     public void HideInformationReadout()

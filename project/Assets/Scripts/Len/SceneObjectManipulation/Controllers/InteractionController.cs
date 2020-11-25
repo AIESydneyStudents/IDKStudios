@@ -32,8 +32,6 @@ public class InteractionController : MonoBehaviour
     public InteractionController compatibleController;
 
     public MenuController menuController;
-    public ProgressBarController progressBarController;
-    public Vector3 progressBarOffset;
 
     public AnchorController anchorController;
     public bool atAnchor;
@@ -412,29 +410,4 @@ public class InteractionController : MonoBehaviour
         anchorController.visitingController = null;
         atAnchor = false;
     }
-
-    public virtual void ShowProgressBar()
-    {
-
-    }
-
-    public virtual void HideProgressBar()
-    {
-        progressBarController.HideProgressBar();
-    }
-
-    public virtual void UpdateProgressBar()
-    {
-
-    }
-
-    //#if UNITY_EDITOR
-    //    private void OnGUI()
-    //    {
-    //        Vector2 cam = Camera.main.WorldToScreenPoint(transform.position);
-    //        cam.y = Screen.height - cam.y;
-    //        Rect rect = new Rect(cam, new Vector2(200, 200));
-    //        GUI.Label(rect, gameObject.name);
-    //    }
-    //#endif
 }

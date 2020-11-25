@@ -8476,14 +8476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03fc4ff013b68947be061cd03c406d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisButtonRect: {fileID: 951606628}
-  buttonImage: {fileID: 951606630}
-  thisMenuController: {fileID: 0}
-  x: 0
-  y: 0
-  width: 0
-  height: 0
-  mousePos: {x: 0, y: 0}
+  ingredientUI: {fileID: 0}
+  additive: {fileID: 0}
 --- !u!114 &953481950 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6907717562238331944, guid: 706d56163228efc46a89890e1331d766,
@@ -11278,7 +11272,7 @@ PrefabInstance:
     - target: {fileID: 4002576234436410435, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.6002197
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4002576234436410435, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
@@ -12903,14 +12897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03fc4ff013b68947be061cd03c406d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisButtonRect: {fileID: 1343757845}
-  buttonImage: {fileID: 1343757847}
-  thisMenuController: {fileID: 0}
-  x: 0
-  y: 0
-  width: 0
-  height: 0
-  mousePos: {x: 0, y: 0}
+  ingredientUI: {fileID: 0}
+  additive: {fileID: 0}
 --- !u!114 &1344241459 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5971260243851890392, guid: 706d56163228efc46a89890e1331d766,
@@ -14734,7 +14722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.1187744, y: -152.95}
+  m_AnchoredPosition: {x: -4, y: -153}
   m_SizeDelta: {x: 229.94, y: 363.09}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1616581747
@@ -15197,7 +15185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1681985626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15235,6 +15223,8 @@ MonoBehaviour:
   kettleController: {fileID: 1475812392}
   cupOne: {fileID: 916470596}
   cupTwo: {fileID: 1899359796}
+  fillSound: {fileID: 0}
+  emptySound: {fileID: 0}
 --- !u!1 &1683998852
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,7 +79,7 @@ public class Kettle : Container
             return;
         }
 
-        if (kettleTemperature <= 0)
+        if (kettleTemperature <= -1)
         {
             return;
         }
@@ -90,7 +90,7 @@ public class Kettle : Container
         }
 
         kettleTemperature -= cooldownRate * deltaTime;
-        kettleTemperature = Math.Max(kettleTemperature, 0.0f);
+        kettleTemperature = Math.Max(kettleTemperature, -1.0f);
     }
 
     public void Heatup(float deltaTime)
@@ -157,7 +157,7 @@ public class Kettle : Container
 
         if (waterVolume == 0)
         {
-            kettleTemperature = 0;
+            kettleTemperature = -1.0f;
             isActive = false;
         }
     }
@@ -187,13 +187,13 @@ public class Kettle : Container
         switch (waterVolume)
         {
             case 0:
-                kettleTemperature = 0;
+                kettleTemperature = -1.0f;
                 waterVolume = volume;
                 break;
 
             default:
                 int totalVolume = waterVolume + volume;
-                kettleTemperature = kettleTemperature * waterVolume / totalVolume;
+                kettleTemperature = (kettleTemperature * waterVolume / totalVolume) * 2 - 1;
                 waterVolume = totalVolume;
                 break;
         }
@@ -202,8 +202,9 @@ public class Kettle : Container
     public void ResetKettle()
     {
         waterVolume = 0;
+        kettleTemperature = -1.0f;
         isActive = false;
-        temperatureSetting = 0;
+        temperatureSetting = -1.0f;
     }
 
     #endregion

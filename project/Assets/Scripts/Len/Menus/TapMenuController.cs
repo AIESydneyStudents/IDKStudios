@@ -7,6 +7,7 @@ public class TapMenuController : MenuController
 {
     public KettleInterface kettleInterface;
     public InteractionController kettleController;
+    public Button cupZero;
     public Button cupOne;
     public Button cupTwo;
     public AudioClip fillSound;
@@ -24,8 +25,9 @@ public class TapMenuController : MenuController
 
     public void ShowFillOptions()
     {
-        cupOne.interactable = true;
-        cupTwo.interactable = kettleInterface.kettle.WaterVolume == 0;
+        cupZero.interactable = kettleInterface.kettle.WaterVolume != 0;
+        cupOne.interactable = kettleInterface.kettle.WaterVolume != 1;
+        cupTwo.interactable = kettleInterface.kettle.WaterVolume != 2;
     }
 
     public void Empty()

@@ -70,8 +70,8 @@ public class Teapot : Container
             teapotTemperature += additive.steepEffect.Temperature * deltaTime;
 
             teapotTaste       = Math.Max(-1.0f, Math.Min(1.0f, teapotTaste));
-            teapotStrength    = Math.Max( 0.0f, Math.Min(1.0f, teapotStrength));
-            teapotTemperature = Math.Max( 0.0f, Math.Min(1.0f, teapotTemperature));
+            teapotStrength    = Math.Max(-1.0f, Math.Min(1.0f, teapotStrength));
+            teapotTemperature = Math.Max(-1.0f, Math.Min(1.0f, teapotTemperature));
         }
     }
 
@@ -82,13 +82,13 @@ public class Teapot : Container
             return;
         }
 
-        if (teapotTemperature <= 0)
+        if (teapotTemperature <= -1.0f)
         {
             return;
         }
 
         teapotTemperature -= cooldownRate * deltaTime;
-        teapotTemperature = Math.Max(teapotTemperature, 0.0f);
+        teapotTemperature = Math.Max(teapotTemperature, -1.0f);
     }
 
     public bool CanDispenseToCup(Cup cup)
@@ -122,8 +122,8 @@ public class Teapot : Container
         isFull = false;
 
         teapotTaste = 0;
-        teapotStrength = 0;
-        teapotTemperature = 0;
+        teapotStrength = -1.0f;
+        teapotTemperature = -1.0f;
 
         foreach (Additive additive in additiveRepository)
         {
@@ -166,6 +166,10 @@ public class Teapot : Container
         teapotTaste += additive.initialEffect.Taste;
         teapotStrength += additive.initialEffect.Strength;
         teapotTemperature += additive.initialEffect.Temperature;
+
+        teapotTaste = Mathf.Clamp(teapotTaste, -1.0f, 1.0f);
+        teapotStrength = Mathf.Clamp(teapotStrength, -1.0f, 1.0f);
+        teapotTemperature = Mathf.Clamp(teapotTemperature, -1.0f, 1.0f);
     }
 
     public void ResetTeapot()

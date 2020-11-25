@@ -61,13 +61,13 @@ public class Cup : Container
             return;
         }
 
-        if (cupTemperature <= 0)
+        if (cupTemperature <= -1)
         {
             return;
         }
 
         cupTemperature -= cooldownRate * deltaTime;
-        cupTemperature = Math.Max(cupTemperature, 0.0f);
+        cupTemperature = Math.Max(cupTemperature, -1.0f);
     }
 
     public float PreviewTaste(float taste)
@@ -77,12 +77,12 @@ public class Cup : Container
 
     public float PreviewStrength(float strength)
     {
-        return Math.Min(Math.Max(cupStrength + strength, 0.0f), 1.0f);
+        return Math.Min(Math.Max(cupStrength + strength, -1.0f), 1.0f);
     }
 
     public float PreviewTemperature(float temperature)
     {
-        return Math.Min(Math.Max(cupTemperature + temperature, 0.0f), 1.0f);
+        return Math.Min(Math.Max(cupTemperature + temperature, -1.0f), 1.0f);
     }
 
     public bool CanInsertAdditive(Additive additive)
@@ -109,7 +109,7 @@ public class Cup : Container
         // Check if additive can be inserted
         if (!CanInsertAdditive(additive))
         {
-            //return;
+            return;
         }
 
         InsertAdditiveToRepo(additive);
@@ -118,14 +118,18 @@ public class Cup : Container
         cupTaste += additive.initialEffect.Taste;
         cupStrength += additive.initialEffect.Strength;
         cupTemperature += additive.initialEffect.Temperature;
+
+        cupTaste = Mathf.Clamp(cupTaste, -1.0f, 1.0f);
+        cupStrength = Mathf.Clamp(cupStrength, -1.0f, 1.0f);
+        cupTemperature = Mathf.Clamp(cupTemperature, -1.0f, 1.0f);
     }
 
     public void ResetCup()
     {
         isFull = false;
         cupTaste = 0.0f;
-        cupStrength = 0.0f;
-        cupTemperature = 0.0f;
+        cupStrength = -1.0f;
+        cupTemperature = -1.0f;
         ResetContainer();
     }
 

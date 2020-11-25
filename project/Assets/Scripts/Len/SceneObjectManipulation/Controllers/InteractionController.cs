@@ -195,15 +195,8 @@ public class InteractionController : MonoBehaviour
                                                 TapInterface tapInterface =
                                                     (TapInterface)otherContainerController.associatedInterface;
 
-                                                if (kettleInterface.kettle.CanFillFromTap(1))
-                                                {
-                                                    validControllers.Add(tapInterface.gameObject, otherContainerController);
-                                                    continue;
-                                                }
-                                                else
-                                                {
-                                                    continue;
-                                                }
+                                                validControllers.Add(tapInterface.gameObject, otherContainerController);
+                                                continue;
                                             }
                                         case Interface.InterfaceType.TEAPOT_INTERFACE:
                                             {

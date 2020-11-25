@@ -1,35 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonMouseOverUI : MonoBehaviour
+public class ButtonMouseOverUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public RectTransform thisButtonRect;
-    public Image buttonImage;
-    public MenuController thisMenuController;
+    public IngredientUI ingredientUI;
+    public Additive additive;
 
-    public float x;
-    public float y;
-    public float width;
-    public float height;
-    public Vector2 mousePos;
-
-    public void Update()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        x = thisButtonRect.position.x;
-        y = thisButtonRect.position.y;
-        width = thisButtonRect.rect.width;
-        height = thisButtonRect.rect.height;
-        mousePos = Input.mousePosition;
+        ingredientUI.SetAdditive(additive);
+        ingredientUI.ShowUI();
 
-        if (mousePos.x > x && mousePos.x < x + width && mousePos.y > y && mousePos.y < y + height)
-        {
-            buttonImage.color = Color.red;
-        }
-        else
-        {
-            buttonImage.color = Color.green;
-        }
+        ingredientUI.UpdatePosition(Input.mousePosition);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ingredientUI.HideUI();
     }
 }

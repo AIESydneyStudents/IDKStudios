@@ -25,15 +25,17 @@ public class TapMenuController : MenuController
 
     public void ShowFillOptions()
     {
-        cupZero.interactable = kettleInterface.kettle.WaterVolume != 0;
-        cupOne.interactable = kettleInterface.kettle.WaterVolume == 0;
-        cupTwo.interactable = kettleInterface.kettle.WaterVolume != 2;
+        cupZero.interactable = kettleInterface.kettle.WaterVolume > 0;
+        cupOne.interactable = kettleInterface.kettle.WaterVolume < 2;
+        cupTwo.interactable = kettleInterface.kettle.WaterVolume == 0;
     }
 
     public void Empty()
     {
         kettleInterface.kettle.ResetKettle();
         AudioSource.PlayClipAtPoint(emptySound, Vector3.zero);
+
+        InputController.Instance.kettleUI.UpdateCupIcons();
 
         HideMenu();
 
@@ -45,6 +47,8 @@ public class TapMenuController : MenuController
         kettleInterface.kettle.FillFromTap(1);
         AudioSource.PlayClipAtPoint(fillSound, Vector3.zero);
 
+        InputController.Instance.kettleUI.UpdateCupIcons();
+
         HideMenu();
 
         kettleController.ReturnToAnchor();
@@ -54,6 +58,8 @@ public class TapMenuController : MenuController
     {
         kettleInterface.kettle.FillFromTap(2);
         AudioSource.PlayClipAtPoint(fillSound, Vector3.zero);
+
+        InputController.Instance.kettleUI.UpdateCupIcons();
 
         HideMenu();
 

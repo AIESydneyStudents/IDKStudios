@@ -13,6 +13,8 @@ public class ContainerController : InteractionController
 
     public override void Interact()
     {
+        InputController.Instance.HideInformationReadout();
+
         switch (associatedInterface.interfaceType)
         {
             case Interface.InterfaceType.TAP_INTERFACE:
@@ -112,6 +114,7 @@ public class ContainerController : InteractionController
 
                         kettleInterface.kettle.DispenseToTeapot(teapotInterface.teapot);
                         ReturnToAnchor();
+                        InputController.Instance.kettleUI.UpdateCupIcons();
 
                         break;
                     }

@@ -23,6 +23,7 @@ public class InputController : Singleton<InputController>
     public bool isHoldingItem;
 
     public KettleUI kettleUI;
+    public TeapotUI teapotUI;
 
     void Start()
     {
@@ -144,12 +145,18 @@ public class InputController : Singleton<InputController>
                     {
                         case Interface.InterfaceType.KETTLE_INTERFACE:
                             {
-
+                                kettleUI.ShowUI(Input.mousePosition);
 
                                 break;
                             }
                         case Interface.InterfaceType.TEAPOT_INTERFACE:
                             {
+                                TeapotInterface teapotInterface =
+                                    (TeapotInterface)containerController.associatedInterface;
+
+                                teapotUI.SetInterface(teapotInterface);
+                                teapotUI.ShowUI(Input.mousePosition);
+
                                 break;
                             }
                         default:
@@ -169,6 +176,8 @@ public class InputController : Singleton<InputController>
 
     public void HideInformationReadout()
     {
+        kettleUI.HideUI();
+        teapotUI.HideUI();
     }
 
     public void UpdateInformationReadout()

@@ -372,7 +372,7 @@ public class InteractionController : MonoBehaviour
 
     public virtual void Interact()
     {
-
+        
     }
 
     public virtual void Uninteract()

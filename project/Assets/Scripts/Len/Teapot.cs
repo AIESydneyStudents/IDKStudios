@@ -176,8 +176,8 @@ public class Teapot : Container
     {
         isFull = false;
         teapotTaste = 0.0f;
-        teapotStrength = 0.0f;
-        teapotTemperature = 0.0f;
+        teapotStrength = -1.0f;
+        teapotTemperature = -1.0f;
         ResetContainer();
     }
 

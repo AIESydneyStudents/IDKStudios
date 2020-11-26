@@ -37,6 +37,9 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
+        Camera camera = InputController.Instance.camera;
+        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
+        InputController.Instance.kettleUI.ShowUI(screenPos);
     }
 
     public void TempOption2()
@@ -45,6 +48,10 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
+        Camera camera = InputController.Instance.camera;
+        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
+        InputController.Instance.kettleUI.ShowUI(screenPos);
+
     }
 
     public void TempOption3()
@@ -53,6 +60,9 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
+        Camera camera = InputController.Instance.camera;
+        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
+        InputController.Instance.kettleUI.ShowUI(screenPos);
     }
 
     public void TempOption4()
@@ -61,6 +71,9 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
+        Camera camera = InputController.Instance.camera;
+        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
+        InputController.Instance.kettleUI.ShowUI(screenPos);
     }
 
     public void ExitMenu()

@@ -91,6 +91,7 @@ public class GameEventManager : Singleton<GameEventManager>
     [Header("")]
     [Header("Game Objects")]
     public GameObject kettleObject;
+    public GameObject kettleBaseObject;
     public GameObject teapotObject1;
     public GameObject teapotObject2;
     public GameObject cupObject1;

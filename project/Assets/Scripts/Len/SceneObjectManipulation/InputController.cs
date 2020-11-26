@@ -54,6 +54,7 @@ public class InputController : Singleton<InputController>
                     if (pointingAtGameObject != null)
                     {
                         pointingAtController.Unhighlight();
+                        HideInformationReadout();
                     }
 
                     pointingAtGameObject = rayHit.collider.gameObject;
@@ -67,6 +68,7 @@ public class InputController : Singleton<InputController>
                 if (pointingAtGameObject != null)
                 {
                     pointingAtController.Unhighlight();
+                    HideInformationReadout();
                 }
 
                 pointingAtGameObject = null;
@@ -87,6 +89,7 @@ public class InputController : Singleton<InputController>
         {
             Physics.Raycast(cameraRay, out rayHit, 100, dragLayer);
             pointingAtGameObject.transform.position = rayHit.point;
+            HideInformationReadout();
 
             if (Input.GetMouseButtonDown(0))
             {

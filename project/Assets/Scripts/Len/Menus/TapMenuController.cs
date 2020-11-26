@@ -52,6 +52,14 @@ public class TapMenuController : MenuController
         HideMenu();
 
         kettleController.ReturnToAnchor();
+
+        kettleController.ReturnToAnchor();
+        MenuController menuController = GameEventManager.Instance.kettleBaseObject.GetComponent<AnchorController>().menuController;
+        ((KettleMenuController)menuController).ShowTempOptions();
+        Camera camera = InputController.Instance.camera;
+        menuController.gameObject.GetComponent<RectTransform>().anchoredPosition = camera.WorldToScreenPoint(kettleController.transform.position);
+        menuController.gameObject.SetActive(true);
+        InputController.Instance.DisableInteraction();
     }
 
     public void FillTwo()
@@ -64,6 +72,14 @@ public class TapMenuController : MenuController
         HideMenu();
 
         kettleController.ReturnToAnchor();
+
+        kettleController.ReturnToAnchor();
+        MenuController menuController = GameEventManager.Instance.kettleBaseObject.GetComponent<AnchorController>().menuController;
+        ((KettleMenuController)menuController).ShowTempOptions();
+        Camera camera = InputController.Instance.camera;
+        menuController.gameObject.GetComponent<RectTransform>().anchoredPosition = camera.WorldToScreenPoint(kettleController.transform.position);
+        menuController.gameObject.SetActive(true);
+        InputController.Instance.DisableInteraction();
     }
 
     public void ExitMenu()
@@ -71,5 +87,13 @@ public class TapMenuController : MenuController
         HideMenu();
 
         kettleController.ReturnToAnchor();
+
+        kettleController.ReturnToAnchor();
+        MenuController menuController = GameEventManager.Instance.kettleBaseObject.GetComponent<AnchorController>().menuController;
+        ((KettleMenuController)menuController).ShowTempOptions();
+        Camera camera = InputController.Instance.camera;
+        menuController.gameObject.GetComponent<RectTransform>().anchoredPosition = camera.WorldToScreenPoint(kettleController.transform.position);
+        menuController.gameObject.SetActive(true);
+        InputController.Instance.DisableInteraction();
     }
 }

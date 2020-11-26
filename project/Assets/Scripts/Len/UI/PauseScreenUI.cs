@@ -7,20 +7,17 @@ public class PauseScreenUI : MonoBehaviour
 {
     public GameObject pauseMenu;
 
-    private void Start()
-    {
-        pauseMenu.SetActive(false);
-    }
-
     public void Pause()
     {
         GameEventManager.Instance.TogglePauseGame();
+        InputController.Instance.DisableInteraction();
     }
 
     // Called to continue playing game
     public void Resume()
     {
         Pause();
+        InputController.Instance.EnableInteraction();
     }
 
     // Goes back to the main menu

@@ -75,6 +75,12 @@ public class GameEventManager : Singleton<GameEventManager>
     public bool eventFired;
     public bool eventComplete;
     public bool gamePaused;
+    public bool rememberDocketUI;
+    public bool rememberTeapotUI;
+    public bool rememberCupUI;
+    public bool rememberKettleUI;
+    public bool rememberTimeUI;
+    public bool rememberIngredientUI;
 
     #region UI Elements
     public BeginDayUI beginDayUI;
@@ -88,6 +94,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public CupUI cupUI;
     public KettleMenuController kettleTemperatureUI;
     public IngredientUI ingredientUI;
+    public TimeDisplayUI timeUI;
     #endregion
 
     #region Objects
@@ -395,6 +402,46 @@ public class GameEventManager : Singleton<GameEventManager>
         pauseScreen.SetActive(gamePaused);
 
         Time.timeScale = gamePaused ? 0.0f : 1.0f;
+
+        if (gamePaused)
+        {
+            InputController.Instance.DisableInteraction();
+        }
+        else
+        {
+            InputController.Instance.EnableInteraction();
+        }
+
+        ToggleUI();
+    }
+
+    public void ToggleUI()
+    {
+        if (gamePaused)
+        {
+            rememberDocketUI = docketUI.gameObject.activeSelf;
+            rememberCupUI = cupUI.gameObject.activeSelf;
+            rememberTeapotUI = teapotUI.gameObject.activeSelf;
+            rememberKettleUI = kettleUI.gameObject.activeSelf;
+            rememberTimeUI = timeUI.gameObject.activeSelf;
+            rememberIngredientUI = ingredientUI.gameObject.activeSelf;
+
+            docketUI.gameObject.SetActive(false);
+            cupUI.gameObject.SetActive(false);
+            teapotUI.gameObject.SetActive(false);
+            kettleUI.gameObject.SetActive(false);
+            timeUI.gameObject.SetActive(false);
+            ingredientUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            docketUI.gameObject.SetActive(rememberDocketUI);
+            cupUI.gameObject.SetActive(rememberCupUI);
+            teapotUI.gameObject.SetActive(rememberTeapotUI);
+            kettleUI.gameObject.SetActive(rememberKettleUI);
+            timeUI.gameObject.SetActive(rememberTimeUI);
+            ingredientUI.gameObject.SetActive(rememberIngredientUI);
+        }
     }
 
     #endregion

@@ -34,9 +34,4 @@ public class DocketUI : MonoBehaviour
 
         gameObject.SetActive(true);
     }
-
-    public void HideDocketSubmit()
-    {
-        gameObject.SetActive(false);
-    }
 }

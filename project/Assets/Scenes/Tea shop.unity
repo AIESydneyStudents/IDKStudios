@@ -2742,7 +2742,9 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5738248321147860132, guid: 3ce500f1ea8bd3a4f90e92d79e44bded, type: 3}
+    - {fileID: 4913672029376184389, guid: 3ce500f1ea8bd3a4f90e92d79e44bded, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3ce500f1ea8bd3a4f90e92d79e44bded, type: 3}
 --- !u!1001 &466754326
 PrefabInstance:
@@ -7915,6 +7917,11 @@ PrefabInstance:
       propertyPath: temperatureSlider
       value: 
       objectReference: {fileID: 1547324877}
+    - target: {fileID: 7794326496359419494, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: submitButton
+      value: 
+      objectReference: {fileID: 1944672713}
     - target: {fileID: 7794326496359419495, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8315,6 +8322,11 @@ MonoBehaviour:
   eventFired: 0
   eventComplete: 0
   gamePaused: 0
+  rememberDocketUI: 0
+  rememberTeapotUI: 0
+  rememberCupUI: 0
+  rememberKettleUI: 0
+  rememberTimeUI: 0
   beginDayUI: {fileID: 869348644}
   customerUI: {fileID: 2100389420}
   beginOrderUI: {fileID: 2143417254}
@@ -8326,6 +8338,7 @@ MonoBehaviour:
   cupUI: {fileID: 508646787}
   kettleTemperatureUI: {fileID: 919375241}
   ingredientUI: {fileID: 86617611}
+  timeUI: {fileID: 2085432502}
   kettleObject: {fileID: 2028313702}
   teapotObject: {fileID: 746580418}
   cupObject: {fileID: 2134641914}
@@ -13197,6 +13210,18 @@ Transform:
   m_Father: {fileID: 951478523}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944672713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+    type: 3}
+  m_PrefabInstance: {fileID: 1240517926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1964618379
 GameObject:
   m_ObjectHideFlags: 0

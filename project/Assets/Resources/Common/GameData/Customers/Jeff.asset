@@ -41,9 +41,9 @@ MonoBehaviour:
   toleranceStrength: 0.8
   toleranceTemperature: 1
   weight: 0
-  customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
+  customerMesh: {fileID: 2532197596911439093, guid: 399b1d5be2bddfa40aa63f837c458cf0,
     type: 3}
-  customerMaterial: {fileID: 2100000, guid: ffa4d6f73f366ca4b91b81754f6587d7, type: 2}
+  customerMaterial: {fileID: 2100000, guid: c65b1d3c73373e54b8276dc0d939dba5, type: 2}
   greeting: 'Hey there! Can I get '
   emptyCup:
   - My cup....it's...empty.

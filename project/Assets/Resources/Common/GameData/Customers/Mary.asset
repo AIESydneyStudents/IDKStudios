@@ -33,9 +33,9 @@ MonoBehaviour:
   toleranceStrength: 0.75
   toleranceTemperature: 0.95
   weight: 0
-  customerMesh: {fileID: -2383018815641804243, guid: d4554cdcfe3b7ef4cb5b95b5d4a83252,
+  customerMesh: {fileID: -6602441374692447843, guid: 81d544127e9259d4eb9ebf032dcaf059,
     type: 3}
-  customerMaterial: {fileID: 2100000, guid: b9e2f2f1104acc640973b239a7452651, type: 2}
+  customerMaterial: {fileID: 2100000, guid: 571e7094bfd1e7047b5f01489ae750c6, type: 2}
   greeting: 
   emptyCup: []
   justWater: []

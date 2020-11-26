@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class AttributeSliderController : MonoBehaviour
@@ -14,29 +12,13 @@ public class AttributeSliderController : MonoBehaviour
         Vector2 offset;
         float width = background.rectTransform.rect.width * 0.5f;
 
-        if (value < 0)
-        {
-            offset = bar.rectTransform.offsetMin;
-            offset.x = width * (1.0f + value);
-            bar.rectTransform.offsetMin = offset;
-            offset = bar.rectTransform.offsetMax;
-            offset.x = -width;
-            bar.rectTransform.offsetMax = offset;
-        }
-        else if (value > 0)
-        {
-            offset = bar.rectTransform.offsetMax;
-            offset.x = width * (-1.0f + value);
-            bar.rectTransform.offsetMax = offset;
-            offset = bar.rectTransform.offsetMin;
-            offset.x = width;
-            bar.rectTransform.offsetMin = offset;
-        }
+        offset = bar.rectTransform.anchoredPosition;
+        offset.x = value * width;
+        bar.rectTransform.anchoredPosition = offset;
 
         offset = tolerance.rectTransform.offsetMin;
         offset.x = width * (1.0f + toleranceMin);
         tolerance.rectTransform.offsetMin = offset;
-
 
         offset = tolerance.rectTransform.offsetMax;
         offset.x = width * (-1.0f + toleranceMax);

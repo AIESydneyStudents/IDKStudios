@@ -24,4 +24,4 @@ MonoBehaviour:
     effectStrength: 0
     effectTemperature: 0
   teaRequirement: 1
-  additiveSprite: {fileID: 21300000, guid: b99fa99a3e3cd8d468d82d4783cc92c5, type: 3}
+  additiveSprite: {fileID: 21300000, guid: 75e1b83fe17e09f4c8c38fd01f0438e5, type: 3}

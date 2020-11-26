@@ -42,6 +42,20 @@ public class EndDayEvaluationUI : MonoBehaviour
             moveToNextGroup = false;
             currentGroupFinished = false;
 
+            if (GameEventManager.Instance.currentStoreReputation == 0)
+            {
+                GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.GAME_OVER);
+            }
+            else if (GameEventManager.Instance.currentStoreReputation == 7)
+            {
+                GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.GAME_WON);
+            }
+            else
+            {
+                GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.BEGIN_DAY);
+            }
+            
+
             return;
         }
 
@@ -77,6 +91,7 @@ public class EndDayEvaluationUI : MonoBehaviour
 
         oldStarsReputation = GameEventManager.Instance.currentStoreReputation;
         GameEventManager.Instance.currentStoreReputation += starsAccuracy + starsSpeed - 4;
+        GameEventManager.Instance.currentStoreReputation = Mathf.Clamp(GameEventManager.Instance.currentStoreReputation, 0, 7);
         newstarsReputation = GameEventManager.Instance.currentStoreReputation;
 
         growthDirection = (int)Mathf.Min(Mathf.Max(newstarsReputation - oldStarsReputation, -1.0f), 1.0f);

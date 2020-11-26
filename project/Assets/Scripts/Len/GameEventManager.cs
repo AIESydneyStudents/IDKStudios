@@ -36,7 +36,13 @@ public class GameEventManager : Singleton<GameEventManager>
 
         // This triggers end of day report.
         // DEATH BY PLAYER INPUT
-        END_OF_DAY_EVAL
+        END_OF_DAY_EVAL,
+
+        // This is to push the game over screen
+        GAME_OVER,
+
+        // This is to push the game win screen
+        GAME_WON
     }
 
     public System.Random randomGenerator = new System.Random();
@@ -62,6 +68,8 @@ public class GameEventManager : Singleton<GameEventManager>
     public Animation cameraAnimator;
 
     public GameObject pauseScreen;
+    public GameObject gameOverScreen;
+    public GameObject gameWinScreen;
 
     public GameEvent currentEvent = GameEvent.BEGIN_DAY;
     public bool eventFired;
@@ -221,7 +229,6 @@ public class GameEventManager : Singleton<GameEventManager>
                     cupUI.gameObject.SetActive(false);
                     missionTimer.PauseTimer();
                     totalDaySpeed += missionTimer.ElapsedTime();
-                    cupObject.SetActive(false);
                     openCustomer = null;
                     openOrder = null;
                     ResetContainers();
@@ -232,10 +239,24 @@ public class GameEventManager : Singleton<GameEventManager>
             #region END_OF_DAY_EVAL
             case GameEvent.END_OF_DAY_EVAL:
                 {
-                    PushToQueue(GameEvent.BEGIN_DAY);
-
                     endDayEvaluationUI.ShowEndDayEvaluation();
                     customerViewer.SetCustomer(null);
+
+                    break;
+                }
+            #endregion
+            #region GAME_OVER
+            case GameEvent.GAME_OVER:
+                {
+                    gameOverScreen.SetActive(true);
+
+                    break;
+                }
+            #endregion
+            #region GAME_WON
+            case GameEvent.GAME_WON:
+                {
+                    gameWinScreen.SetActive(true);
 
                     break;
                 }

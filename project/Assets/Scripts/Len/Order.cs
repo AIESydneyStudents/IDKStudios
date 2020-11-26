@@ -8,29 +8,9 @@ public class Order
     #region Fields
 
     [Header("Target Order Attributes")]
-
-    [Range(0.0f, 1.0f)]
-    [SerializeField]
     public float targetTaste;
-
-    [Range(0.0f, 1.0f)]
-    [SerializeField]
     public float targetStrength;
-
-    [Range(0.0f, 1.0f)]
-    [SerializeField]
     public float targetTemperature;
-
-    [Header("Attribute Tolerances")]
-
-    [SerializeField]
-    public float toleranceTaste;
-
-    [SerializeField]
-    public float toleranceStrength;
-
-    [SerializeField]
-    public float toleranceTemperature;
 
     public List<Additive> additiveRepository =
         new List<Additive>();
@@ -47,14 +27,7 @@ public class Order
 
     #region Functions
 
-    public Order(float toleranceTaste, float toleranceStrength, float toleranceTemperature)
-    {
-        this.toleranceTaste = toleranceTaste;
-        this.toleranceStrength = toleranceStrength;
-        this.toleranceTemperature = toleranceTemperature;
-    }
-
-    public void SetTarget(float taste, float strength, float temperature)
+    public Order(float taste, float strength, float temperature)
     {
         targetTaste = taste;
         targetStrength = strength;

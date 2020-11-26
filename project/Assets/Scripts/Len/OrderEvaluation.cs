@@ -26,8 +26,7 @@ public class OrderEvaluation
             return null;
         }
 
-        Random randomGenerator = new Random();
-        int randomNumber = randomGenerator.Next(0, evaluations.Count - 1);
+        int randomNumber = GameEventManager.Instance.randomGenerator.Next(0, evaluations.Count - 1);
         return evaluations[randomNumber];
     }
 }

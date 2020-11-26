@@ -422,7 +422,7 @@ public class Customer : ScriptableObject
 
     public Order GenerateOrder()
     {
-        Order newOrder = new Order(toleranceTaste, toleranceStrength, toleranceTemperature);
+        Order newOrder;
 
         Teapot teapot = new Teapot();
         teapot.IsFull = true;
@@ -478,7 +478,7 @@ public class Customer : ScriptableObject
 
 
         cup.Simulate(GameEventManager.Instance.randomGenerator.Next(0, 10));
-        newOrder.SetTarget(cup.Taste, cup.Strength, cup.Temperature);
+        newOrder = new Order(cup.Taste, cup.Strength, cup.Temperature);
 
         foreach (Additive additive in cup.additiveRepository)
         {

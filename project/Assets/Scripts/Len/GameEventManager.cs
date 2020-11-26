@@ -55,10 +55,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public Timer missionTimer;
     public TimeDisplayUI timeDisplay;
 
-    public int orderCount;
-    public int lastToBeEvaluated;
     public Order order1;
-    public Order order2;
 
     public int customersEachDay;
     public int completedCustomers;
@@ -93,11 +90,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public GameObject kettleObject;
     public GameObject kettleBaseObject;
     public GameObject teapotObject1;
-    public GameObject teapotObject2;
     public GameObject cupObject1;
-    public GameObject cupObject2;
-    public GameObject saucerObject1;
-    public GameObject saucerObject2;
     #endregion
 
     #region Object Interfaces
@@ -105,9 +98,7 @@ public class GameEventManager : Singleton<GameEventManager>
     [Header("Object Interfaces")]
     public KettleInterface kettleInterface;
     public TeapotInterface teapotInterface1;
-    public TeapotInterface teapotInterface2;
     public CupInterface cupInterface1;
-    public CupInterface cupInterface2;
     #endregion
 
     #endregion
@@ -115,20 +106,14 @@ public class GameEventManager : Singleton<GameEventManager>
     #region Properties
 
     public float MinTasteAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
-    public float MinTasteAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
     public float MaxTasteAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
-    public float MaxTasteAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
-
+    
     public float MinStrengthAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
-    public float MinStrengthAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
     public float MaxStrengthAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
-    public float MaxStrengthAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
-
+    
     public float MinTemperatureAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
-    public float MinTemperatureAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
     public float MaxTemperatureAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
-    public float MaxTemperatureAdjusted2 { get { return Mathf.Min(Mathf.Max(order2.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
-
+    
     #endregion
 
     #region Functions
@@ -185,12 +170,7 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     PushToQueue(GameEvent.BEGIN_ORDER_SWIPE);
 
-                    // Generate order/s
-                    System.Random randomGenerator = new System.Random();
-                    orderCount = randomGenerator.Next(1, 9) % 2 + 1;
-
                     order1 = openCustomer.GenerateOrder();
-                    order2 = orderCount == 2 ? openCustomer.GenerateOrder() : null;
 
                     customerUI.ShowGreeting();
 
@@ -216,7 +196,6 @@ public class GameEventManager : Singleton<GameEventManager>
                     InputController.Instance.EnableInteraction();
                     timeDisplay.ShowPause(false);
                     missionTimer.ResumeTimer();
-                    docketUI.TriggerIconUpdate();
                     docketUI.ShowDocketSubmit();
 
                     break;
@@ -225,16 +204,7 @@ public class GameEventManager : Singleton<GameEventManager>
             #region CONTINUE
             case GameEvent.CUSTOMER_FEEDBACK:
                 {
-                    if (orderCount == 2 &&
-                        ((!order2.IsEvaluated && order1.IsEvaluated) ||
-                        (order2.IsEvaluated && !order1.IsEvaluated)))
-                    {
-                        PushToQueue(GameEvent.MAKE_ORDER);
-                    }
-                    else
-                    {
                         PushToQueue(GameEvent.POST_ORDER_EVAL);
-                    }
 
                     InputController.Instance.DisableInteraction();
                     timeDisplay.ShowPause(true);
@@ -265,19 +235,12 @@ public class GameEventManager : Singleton<GameEventManager>
                     timeDisplay.gameObject.SetActive(false);
                     missionTimer.PauseTimer();
 
-                    float elapsedTime = missionTimer.ElapsedTime();
-                    totalDaySpeed += elapsedTime * (order2 == null ? 1 : 0.66f);
+                    totalDaySpeed += missionTimer.ElapsedTime();
 
                     cupObject1.SetActive(false);
-                    cupObject2.SetActive(false);
-
                     // Clean up parameters
                     openCustomer = null;
                     order1 = null;
-                    order2 = null;
-                    orderCount = 0;
-                    lastToBeEvaluated = 0;
-                    docketUI.ResetDockets();
                     ResetContainers();
 
                     break;
@@ -324,17 +287,8 @@ public class GameEventManager : Singleton<GameEventManager>
 
     public void EvaluateOrder1()
     {
-        EvaluateOrder(1, cupInterface1.cup);
-        lastToBeEvaluated = 1;
+        EvaluateOrder();
         docketUI.docket1.SetActive(false);
-        SetEventToComplete();
-    }
-
-    public void EvaluateOrder2()
-    {
-        EvaluateOrder(2, cupInterface2.cup);
-        lastToBeEvaluated = 2;
-        docketUI.docket2.SetActive(false);
         SetEventToComplete();
     }
 
@@ -342,24 +296,18 @@ public class GameEventManager : Singleton<GameEventManager>
     {
         kettleObject.GetComponent<KettleInterface>().kettle.ResetKettle();
         teapotObject1.GetComponent<TeapotInterface>().teapot.ResetTeapot();
-        teapotObject2.GetComponent<TeapotInterface>().teapot.ResetTeapot();
         cupObject1.GetComponent<CupInterface>().cup.ResetCup();
-        cupObject2.GetComponent<CupInterface>().cup.ResetCup();
     }
 
-    public void EvaluateOrder(int order, Cup cup)
+    public void EvaluateOrder()
     {
-        order = order < 1 ? 1 : (order > 2 ? 2 : order);
-
-        Order thisOrder = order == 1 ? order1 : order2;
-
         OrderEvaluation newEvaluation = new OrderEvaluation();
 
-        if (!cup.IsFull)
+        if (!cupInterface1.cup.IsFull)
         {
             newEvaluation.InsertEvaluation(Evaluation.Error.EMPTY_CUP);
         }
-        else if (cup.IsFull && cup.additiveRepository.Count == 0)
+        else if (cupInterface1.cup.IsFull && cupInterface1.cup.additiveRepository.Count == 0)
         {
             newEvaluation.InsertEvaluation(Evaluation.Error.JUST_WATER);
         }
@@ -375,85 +323,74 @@ public class GameEventManager : Singleton<GameEventManager>
             float temperatureMax;
             float temperatureRange;
 
-            if (order == 1)
-            {
                 tasteMin = MinTasteAdjusted1;
                 tasteMax = MaxTasteAdjusted1;
                 strengthMin = MinStrengthAdjusted1;
                 strengthMax = MaxStrengthAdjusted1;
                 temperatureMin = MinTemperatureAdjusted1;
                 temperatureMax = MaxTemperatureAdjusted1;
-            }
-            else
-            {
-                tasteMin = MinTasteAdjusted2;
-                tasteMax = MaxTasteAdjusted2;
-                strengthMin = MinStrengthAdjusted2;
-                strengthMax = MaxStrengthAdjusted2;
-                temperatureMin = MinTemperatureAdjusted2;
-                temperatureMax = MaxTemperatureAdjusted2;
-            }
+           
 
             tasteRange = (tasteMax - tasteMin) * 0.5f;
             strengthRange = (strengthMax - strengthMin) * 0.5f;
             temperatureRange = (temperatureMax - temperatureMin) * 0.5f;
 
-            if (cup.Taste < tasteMin)
+            if (cupInterface1.cup.Taste < tasteMin)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_BITTER);
             }
-            else if (cup.Taste > tasteMax)
+            else if (cupInterface1.cup.Taste > tasteMax)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_SWEET);
             }
             else
             {
-                newEvaluation.scoreTaste = Mathf.Abs(cup.Taste - thisOrder.targetTaste) / tasteRange;
+                newEvaluation.scoreTaste = Mathf.Abs(cupInterface1.cup.Taste - order1.targetTaste) / tasteRange;
             }
 
-            if (cup.Strength < strengthMin)
+            if (cupInterface1.cup.Strength < strengthMin)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_WEAK);
             }
-            else if (cup.Strength > strengthMax)
+            else if (cupInterface1.cup.Strength > strengthMax)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_STRONG);
             }
             else
             {
-                newEvaluation.scoreStrength = Mathf.Abs(cup.Strength - thisOrder.targetStrength) / strengthRange;
+                newEvaluation.scoreStrength = Mathf.Abs(cupInterface1.cup.Strength - order1.targetStrength) / strengthRange;
             }
 
-            if (cup.Temperature < temperatureMin)
+            if (cupInterface1.cup.Temperature < temperatureMin)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_COLD);
             }
-            else if (cup.Temperature > temperatureMax)
+            else if (cupInterface1.cup.Temperature > temperatureMax)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_HOT);
             }
             else
             {
-                newEvaluation.scoreTemperature = Mathf.Abs(cup.Temperature - thisOrder.targetTemperature) / temperatureRange;
+                newEvaluation.scoreTemperature = Mathf.Abs(cupInterface1.cup.Temperature - order1.targetTemperature) / temperatureRange;
             }
 
-            if (thisOrder.additiveRepository.Count != 0)
+            if (order1.additiveRepository.Count != 0)
             {
-                foreach (Additive additive in thisOrder.additiveRepository)
+                foreach (Additive additive in order1.additiveRepository)
                 {
-                    if (!cup.ContainsAdditive(additive))
+                    if (!cupInterface1.cup.ContainsAdditive(additive))
                     {
                         newEvaluation.InsertEvaluation(Evaluation.Error.NO_ADDITIVE, additive.Name);
                     }
                     else
                     {
-                        newEvaluation.scoreAdditive += 1.0f / thisOrder.additiveRepository.Count;
+                        newEvaluation.scoreAdditive += 1.0f / order1.additiveRepository.Count;
                     }
                 }
             }
         }
 
-        thisOrder.evaluation = newEvaluation;
+        order1.evaluation = newEvaluation;
     }
 
     public void TriggerCameraZoomIn()

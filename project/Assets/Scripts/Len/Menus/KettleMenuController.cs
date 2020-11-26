@@ -25,10 +25,10 @@ public class KettleMenuController : MenuController
 
     public void ShowTempOptions()
     {
-        tempOption1.interactable = kettleInterface.kettle.Temperature < 0.25f && kettleInterface.kettle.WaterVolume > 0;
-        tempOption2.interactable = kettleInterface.kettle.Temperature < 0.50f && kettleInterface.kettle.WaterVolume > 0;
-        tempOption3.interactable = kettleInterface.kettle.Temperature < 0.75f && kettleInterface.kettle.WaterVolume > 0;
-        tempOption4.interactable = kettleInterface.kettle.Temperature < 1.00f && kettleInterface.kettle.WaterVolume > 0;
+        tempOption1.interactable = kettleInterface.kettle.Temperature < 0.25f && kettleInterface.kettle.IsFull;
+        tempOption2.interactable = kettleInterface.kettle.Temperature < 0.50f && kettleInterface.kettle.IsFull;
+        tempOption3.interactable = kettleInterface.kettle.Temperature < 0.75f && kettleInterface.kettle.IsFull;
+        tempOption4.interactable = kettleInterface.kettle.Temperature < 1.00f && kettleInterface.kettle.IsFull;
     }
 
     public void TempOption1()

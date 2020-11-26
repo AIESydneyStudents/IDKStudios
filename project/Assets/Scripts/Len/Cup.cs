@@ -70,21 +70,6 @@ public class Cup : Container
         cupTemperature = Math.Max(cupTemperature, -1.0f);
     }
 
-    public float PreviewTaste(float taste)
-    {
-        return Math.Min(Math.Max(cupTaste + taste, -1.0f), 1.0f);
-    }
-
-    public float PreviewStrength(float strength)
-    {
-        return Math.Min(Math.Max(cupStrength + strength, -1.0f), 1.0f);
-    }
-
-    public float PreviewTemperature(float temperature)
-    {
-        return Math.Min(Math.Max(cupTemperature + temperature, -1.0f), 1.0f);
-    }
-
     public bool CanInsertAdditive(Additive additive)
     {
         // Checks if additive can be added to this container.

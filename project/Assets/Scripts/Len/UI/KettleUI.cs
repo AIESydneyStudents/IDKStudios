@@ -7,7 +7,6 @@ public class KettleUI : MonoBehaviour
     public KettleInterface kettleInterface;
     public RectTransform thisRect;
     public Image cup1;
-    public Image cup2;
 
     public Sprite emptyCup;
     public Sprite fullCup;
@@ -34,8 +33,7 @@ public class KettleUI : MonoBehaviour
 
     public void UpdateCupIcons()
     {
-        cup1.sprite = kettleInterface.kettle.WaterVolume > 0 ? fullCup : emptyCup;
-        cup2.sprite = kettleInterface.kettle.WaterVolume == 2 ? fullCup : emptyCup;
+        cup1.sprite = kettleInterface.kettle.IsFull ? fullCup : emptyCup;
     }
 
     public void HideUI()

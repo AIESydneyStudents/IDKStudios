@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 [Serializable]
 public class Kettle : Container
 {
     #region Fields
 
-    [Range(0, 2)]
     [SerializeField]
-    [Tooltip("This is how much water is currently in the kettle.")]
-    private int waterVolume = 0;
-    private int maxWaterVolume = 2;
+    private bool isFull;
 
     [Range(0.0f, 1.0f)]
     [SerializeField]
@@ -49,11 +41,7 @@ public class Kettle : Container
 
     public float TemperatureSetting { get { return temperatureSetting; } set { temperatureSetting = value; } }
 
-    public int WaterVolume { get { return waterVolume; } }
-
-    public int WaterVolumeMax { get { return maxWaterVolume; } }
-
-    public bool IsFull { get { return waterVolume == maxWaterVolume; } }
+    public bool IsFull { get { return isFull; } }
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
 
@@ -74,7 +62,7 @@ public class Kettle : Container
 
     public void Cooldown(float deltaTime)
     {
-        if (waterVolume == 0)
+        if (isFull)
         {
             return;
         }
@@ -95,7 +83,7 @@ public class Kettle : Container
 
     public void Heatup(float deltaTime)
     {
-        if (!isActive || waterVolume == 0)
+        if (!isActive || !isFull)
         {
             return;
         }
@@ -112,7 +100,7 @@ public class Kettle : Container
 
     public bool SetToActive()
     {
-        if (waterVolume == 0)
+        if (!isFull)
         {
             return false;
         }
@@ -129,7 +117,7 @@ public class Kettle : Container
 
     public bool CanDispenseToTeapot(Teapot teapot)
     {
-        if (waterVolume == 0)
+        if (!isFull)
         {
             return false;
         }
@@ -153,23 +141,14 @@ public class Kettle : Container
 
         teapot.Temperature = kettleTemperature;
 
-        waterVolume--;
-
-        if (waterVolume == 0)
-        {
-            kettleTemperature = -1.0f;
-            isActive = false;
-        }
+        isFull = false;
+        kettleTemperature = -1.0f;
+        isActive = false;
     }
 
-    public bool CanFillFromTap(int volume)
+    public bool CanFillFromTap()
     {
-        if (IsFull)
-        {
-            return false;
-        }
-
-        if (waterVolume + volume > maxWaterVolume)
+        if (isFull)
         {
             return false;
         }
@@ -177,33 +156,22 @@ public class Kettle : Container
         return true;
     }
 
-    public void FillFromTap(int volume)
+    public void FillFromTap()
     {
-        if (!CanFillFromTap(volume))
+        if (!CanFillFromTap())
         {
             return;
         }
-
-        switch (waterVolume)
-        {
-            case 0:
-                kettleTemperature = -1.0f;
-                waterVolume = volume;
-                break;
-
-            default:
-                int totalVolume = waterVolume + volume;
-                kettleTemperature = (kettleTemperature * waterVolume / totalVolume) * 2 - 1;
-                waterVolume = totalVolume;
-                break;
-        }
+        
+        kettleTemperature = -1.0f;
+        isFull = true;
     }
 
     public void ResetKettle()
     {
-        waterVolume = 0;
-        kettleTemperature = -1.0f;
+        isFull = false;
         isActive = false;
+        kettleTemperature = -1.0f;
         temperatureSetting = -1.0f;
     }
 

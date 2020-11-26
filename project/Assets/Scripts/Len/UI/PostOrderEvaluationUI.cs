@@ -83,20 +83,11 @@ public class PostOrderEvaluationUI : MonoBehaviour
         }
 
         Order order1 = GameEventManager.Instance.order1;
-        Order order2 = GameEventManager.Instance.order2;
 
-        averageScoreTaste = order1.evaluation.scoreTaste + (order2 != null ? order2.evaluation.scoreTaste : 0);
-        averageScoreStrength = order1.evaluation.scoreStrength + (order2 != null ? order2.evaluation.scoreStrength : 0);
-        averageScoreTemperature = order1.evaluation.scoreTemperature + (order2 != null ? order2.evaluation.scoreTemperature : 0);
-        averageScoreIngredients = order1.evaluation.scoreAdditive + (order2 != null ? order2.evaluation.scoreAdditive : 0);
-        
-        if (order2 != null)
-        {
-            averageScoreTaste *= 0.5f;
-            averageScoreStrength *= 0.5f;
-            averageScoreTemperature *= 0.5f;
-            averageScoreIngredients *= 0.5f;
-        }
+        averageScoreTaste = order1.evaluation.scoreTaste;
+        averageScoreStrength = order1.evaluation.scoreStrength;
+        averageScoreTemperature = order1.evaluation.scoreTemperature;
+        averageScoreIngredients = order1.evaluation.scoreAdditive;
 
         starsTaste = Mathf.CeilToInt(3.0f * averageScoreTaste);
         starsStrength = Mathf.CeilToInt(3.0f * averageScoreStrength);

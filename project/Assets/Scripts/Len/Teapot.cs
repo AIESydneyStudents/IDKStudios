@@ -69,9 +69,9 @@ public class Teapot : Container
             teapotStrength    += additive.steepEffect.Strength    * deltaTime;
             teapotTemperature += additive.steepEffect.Temperature * deltaTime;
 
-            teapotTaste       = Math.Max(-1.0f, Math.Min(1.0f, teapotTaste));
-            teapotStrength    = Math.Max(-1.0f, Math.Min(1.0f, teapotStrength));
-            teapotTemperature = Math.Max(-1.0f, Math.Min(1.0f, teapotTemperature));
+            teapotTaste       = Mathf.Clamp(teapotTaste      , -1.0f, 1.0f);
+            teapotStrength    = Mathf.Clamp(teapotStrength   , -1.0f, 1.0f);
+            teapotTemperature = Mathf.Clamp(teapotTemperature, -1.0f, 1.0f);
         }
     }
 
@@ -121,7 +121,7 @@ public class Teapot : Container
 
         isFull = false;
 
-        teapotTaste = 0;
+        teapotTaste = 0.0f;
         teapotStrength = -1.0f;
         teapotTemperature = -1.0f;
 
@@ -157,7 +157,7 @@ public class Teapot : Container
         // Check if additive can be inserted
         if (!CanInsertAdditive(additive))
         {
-            //return;
+            return;
         }
 
         InsertAdditiveToRepo(additive);

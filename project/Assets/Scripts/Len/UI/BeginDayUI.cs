@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BeginDayUI : MonoBehaviour
 {
-    // GameObject references
     public Text splashText;
 
     public float fadeInTime;

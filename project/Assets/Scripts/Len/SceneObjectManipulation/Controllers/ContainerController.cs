@@ -78,7 +78,6 @@ public class ContainerController : InteractionController
                                         (TeapotInterface)associatedInterface;
 
                                     teapotInterface.teapot.ResetTeapot();
-                                    GameEventManager.Instance.docketUI.TriggerIconUpdate();
                                     ReturnToAnchor();
 
                                     break;
@@ -91,7 +90,6 @@ public class ContainerController : InteractionController
                                         (CupInterface)associatedInterface;
 
                                     cupInterface.cup.ResetCup();
-                                    GameEventManager.Instance.docketUI.TriggerIconUpdate();
                                     ReturnToAnchor();
 
                                     break;
@@ -128,7 +126,6 @@ public class ContainerController : InteractionController
 
                         
                         teapotInterface.teapot.DispenseToCup(cupInterface.cup);
-                        GameEventManager.Instance.docketUI.TriggerIconUpdate();
                         ReturnToAnchor();
 
                         break;

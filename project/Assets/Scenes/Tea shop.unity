@@ -2694,7 +2694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &508646786
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2710,9 +2710,9 @@ RectTransform:
   m_Father: {fileID: 384854449}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 615.1, y: 383}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -180.90002, y: -65}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508646787
@@ -3778,7 +3778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb296b7fd33ea4542b7beb5fee4ecf31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionOffset: {x: -15, y: -135, z: 0}
+  positionOffset: {x: 0, y: -20, z: 0}
   temperatureSlider: {fileID: 36823234}
   kettleInterface: {fileID: 1475812393}
   thisRect: {fileID: 777286057}
@@ -5974,9 +5974,9 @@ RectTransform:
   m_Father: {fileID: 384854449}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 741.8, y: 383}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -54.200012, y: -65}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1063090865
@@ -7209,6 +7209,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 384854449}
     m_Modifications:
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1256145502}
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EvaluateOrder
+      objectReference: {fileID: 0}
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 326191964023277811, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_Sprite
@@ -7346,6 +7376,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7794326496309274945, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_Name
+      value: Background
+      objectReference: {fileID: 0}
     - target: {fileID: 7794326496309274950, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7364,7 +7399,7 @@ PrefabInstance:
     - target: {fileID: 7794326496359419488, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7794326496359419494, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
@@ -8183,6 +8218,7 @@ MonoBehaviour:
   endDayEvaluationUI: {fileID: 1010312803}
   kettleUI: {fileID: 777286060}
   teapotUI: {fileID: 1063090865}
+  cupUI: {fileID: 508646787}
   kettleTemperatureUI: {fileID: 919375241}
   kettleObject: {fileID: 2028313702}
   teapotObject: {fileID: 746580418}
@@ -14849,6 +14885,16 @@ PrefabInstance:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0356a1435c15efa4c847abefba015521, type: 3}
+    - target: {fileID: 8851086915607728692, guid: 21692c4c03d411e459e1873535ad435c,
+        type: 3}
+      propertyPath: audioClip1
+      value: 
+      objectReference: {fileID: 8300000, guid: 0356a1435c15efa4c847abefba015521, type: 3}
+    - target: {fileID: 8851086915607728692, guid: 21692c4c03d411e459e1873535ad435c,
+        type: 3}
+      propertyPath: audioClip2
+      value: 
+      objectReference: {fileID: 8300000, guid: b8e6fc109bf598f40a281fe90390f939, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21692c4c03d411e459e1873535ad435c, type: 3}
 --- !u!4 &2015801617383837876 stripped
@@ -16426,6 +16472,16 @@ PrefabInstance:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0356a1435c15efa4c847abefba015521, type: 3}
+    - target: {fileID: 2605304374960822258, guid: caa13e509c7e1594baeef528a73dd45e,
+        type: 3}
+      propertyPath: audioClip1
+      value: 
+      objectReference: {fileID: 8300000, guid: 0356a1435c15efa4c847abefba015521, type: 3}
+    - target: {fileID: 2605304374960822258, guid: caa13e509c7e1594baeef528a73dd45e,
+        type: 3}
+      propertyPath: audioClip2
+      value: 
+      objectReference: {fileID: 8300000, guid: b8e6fc109bf598f40a281fe90390f939, type: 3}
     - target: {fileID: 2730125988922610123, guid: caa13e509c7e1594baeef528a73dd45e,
         type: 3}
       propertyPath: m_Name

@@ -25,44 +25,40 @@ public class KettleMenuController : MenuController
 
     public void ShowTempOptions()
     {
-        tempOption1.interactable = kettleInterface.kettle.Temperature < 0.25f && kettleInterface.kettle.IsFull;
-        tempOption2.interactable = kettleInterface.kettle.Temperature < 0.50f && kettleInterface.kettle.IsFull;
-        tempOption3.interactable = kettleInterface.kettle.Temperature < 0.75f && kettleInterface.kettle.IsFull;
-        tempOption4.interactable = kettleInterface.kettle.Temperature < 1.00f && kettleInterface.kettle.IsFull;
+        tempOption1.interactable = kettleInterface.kettle.Temperature < -0.5f;
+        tempOption2.interactable = kettleInterface.kettle.Temperature <  0.0f;
+        tempOption3.interactable = kettleInterface.kettle.Temperature <  0.5f;
+        tempOption4.interactable = kettleInterface.kettle.Temperature <  1.0f;
     }
 
     public void TempOption1()
     {
-        kettleInterface.kettle.TemperatureSetting = 0.25f;
+        kettleInterface.kettle.TemperatureSetting = -0.5f;
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        Camera camera = InputController.Instance.camera;
-        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
-        InputController.Instance.kettleUI.ShowUI(screenPos);
+        InputController.Instance.EnableInteraction();
+        GameEventManager.Instance.kettleUI.gameObject.SetActive(true);
     }
 
     public void TempOption2()
     {
-        kettleInterface.kettle.TemperatureSetting = 0.50f;
+        kettleInterface.kettle.TemperatureSetting = 0.0f;
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        Camera camera = InputController.Instance.camera;
-        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
-        InputController.Instance.kettleUI.ShowUI(screenPos);
-
+        InputController.Instance.EnableInteraction();
+        GameEventManager.Instance.kettleUI.gameObject.SetActive(true);
     }
 
     public void TempOption3()
     {
-        kettleInterface.kettle.TemperatureSetting = 0.75f;
+        kettleInterface.kettle.TemperatureSetting = 0.5f;
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        Camera camera = InputController.Instance.camera;
-        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
-        InputController.Instance.kettleUI.ShowUI(screenPos);
+        InputController.Instance.EnableInteraction();
+        GameEventManager.Instance.kettleUI.gameObject.SetActive(true);
     }
 
     public void TempOption4()
@@ -71,13 +67,14 @@ public class KettleMenuController : MenuController
         kettleInterface.kettle.SetToActive();
 
         HideMenu();
-        Camera camera = InputController.Instance.camera;
-        Vector3 screenPos = camera.WorldToScreenPoint(kettleController.gameObject.transform.position);
-        InputController.Instance.kettleUI.ShowUI(screenPos);
+        InputController.Instance.EnableInteraction();
+        GameEventManager.Instance.kettleUI.gameObject.SetActive(true);
     }
 
     public void ExitMenu()
     {
         HideMenu();
+        InputController.Instance.EnableInteraction();
+        GameEventManager.Instance.kettleUI.gameObject.SetActive(true);
     }
 }

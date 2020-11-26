@@ -9,10 +9,10 @@ public class Kettle : Container
     [SerializeField]
     private bool isFull;
 
-    [Range(0.0f, 1.0f)]
+    [Range(-1.0f, 1.0f)]
     [SerializeField]
     [Tooltip("The temperature that the water currently in the kettle is at.")]
-    private float kettleTemperature = 0;
+    private float kettleTemperature = -1.0f;
 
     [Range(0.0f, 1.0f)]
     [SerializeField]
@@ -28,10 +28,15 @@ public class Kettle : Container
     [Tooltip("Is the kettle active.")]
     private bool isActive = false;
 
-    [Range(0.0f, 1.0f)]
+    [Range(-1.0f, 1.0f)]
     [SerializeField]
     [Tooltip("Temperature setting. Will not heat if lower than kettle's current temperature.")]
-    private float temperatureSetting = 0;
+    private float temperatureSetting = -1.0f;
+
+    public AudioSource audioSource;
+
+    public AudioClip heatupBegin;
+    public AudioClip heatupDone;
 
     #endregion
 
@@ -62,12 +67,12 @@ public class Kettle : Container
 
     public void Cooldown(float deltaTime)
     {
-        if (isFull)
+        if (!isFull)
         {
             return;
         }
 
-        if (kettleTemperature <= -1)
+        if (kettleTemperature <= -1.0f)
         {
             return;
         }
@@ -90,6 +95,10 @@ public class Kettle : Container
 
         if (kettleTemperature >= temperatureSetting)
         {
+            audioSource.Stop();
+            audioSource.clip = heatupDone;
+            audioSource.Play();
+            //AudioSource.PlayClipAtPoint(heatupDone, Vector3.zero);
             isActive = false;
             return;
         }
@@ -104,6 +113,9 @@ public class Kettle : Container
         {
             return false;
         }
+
+        audioSource.clip = heatupBegin;
+        audioSource.Play();
 
         isActive = true;
 

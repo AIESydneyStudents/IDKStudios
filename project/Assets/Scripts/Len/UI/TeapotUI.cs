@@ -9,49 +9,37 @@ public class TeapotUI : MonoBehaviour
     public AttributeSliderController strengthSlider;
     public AttributeSliderController temperatureSlider;
 
-    public Image ingredientIcon;
+    public Image teaIcon;
     public Image cupIcon;
 
+    public Sprite noTea;
     public Sprite emptyCup;
     public Sprite fullCup;
 
     public TeapotInterface teapotInterface;
-    public RectTransform thisRect;
+
+    private void OnEnable()
+    {
+        UpdateSliders();
+        UpdateIcons();
+    }
 
     private void Update()
     {
-        if (teapotInterface == null)
-        {
-            return;
-        }
+        UpdateSliders();
+    }
 
+    public void UpdateSliders()
+    {
         tasteSlider.UpdateSlider(0, 0, teapotInterface.teapot.Taste);
         strengthSlider.UpdateSlider(0, 0, teapotInterface.teapot.Strength);
         temperatureSlider.UpdateSlider(0, 0, teapotInterface.teapot.Temperature);
     }
 
-    public void ShowUI(Vector3 screenPos)
-    {
-        thisRect.anchoredPosition = screenPos;
-
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
-    }
-
-    public void SetInterface(TeapotInterface teapotInterface)
-    {
-        this.teapotInterface = teapotInterface;
-    }
-
-    public void UpdateCupIcons()
+    public void UpdateIcons()
     {
         cupIcon.sprite = teapotInterface.teapot.IsFull ? fullCup : emptyCup;
-    }
-
-    public void HideUI()
-    {
-        gameObject.SetActive(false);
+        teaIcon.sprite = teapotInterface.teapot.additiveRepository.Count == 0 ? noTea :
+            teapotInterface.teapot.additiveRepository[0].additiveSprite;
     }
 }

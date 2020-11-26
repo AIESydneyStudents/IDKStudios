@@ -29,12 +29,6 @@ public class GameEventManager : Singleton<GameEventManager>
         // DEATH BY PLAYER INPUT
         MAKE_ORDER,
 
-        // This command is added that will either allow the session to continue, or will
-        // trigger post order evaluation. This is when customer displays feedback for 
-        // submitted tea.
-        // DEATH BY PLAYER INPUT
-        CUSTOMER_FEEDBACK,
-
         // This command is added when final order is submitted. Customer will give overall
         // feedback for entire order.
         // DEATH BY PLAYER INPUT
@@ -55,14 +49,14 @@ public class GameEventManager : Singleton<GameEventManager>
     public Timer missionTimer;
     public TimeDisplayUI timeDisplay;
 
-    public Order order1;
+    public Order openOrder;
 
     public int customersEachDay;
     public int completedCustomers;
 
     public float totalDayAccuracy;
     public float totalDaySpeed;
-    public int currentStoreReputation; // between 1 and 7.
+    public int currentStoreReputation;
 
     public CustomerViewer customerViewer;
     public Animation cameraAnimator;
@@ -79,41 +73,43 @@ public class GameEventManager : Singleton<GameEventManager>
     public CustomerUI customerUI;
     public BeginOrderUI beginOrderUI;
     public DocketUI docketUI;
-    public OrderFeedbackUI orderFeedbackUI;
     public PostOrderEvaluationUI postOrderEvaluationUI;
     public EndDayEvaluationUI endDayEvaluationUI;
+    public KettleUI kettleUI;
+    public TeapotUI teapotUI;
+    public CupUI cupUI;
+    public KettleMenuController kettleTemperatureUI;
     #endregion
 
     #region Objects
     [Header("")]
     [Header("Game Objects")]
     public GameObject kettleObject;
-    public GameObject kettleBaseObject;
-    public GameObject teapotObject1;
-    public GameObject cupObject1;
+    public GameObject teapotObject;
+    public GameObject cupObject;
     #endregion
 
     #region Object Interfaces
     [Header("")]
     [Header("Object Interfaces")]
     public KettleInterface kettleInterface;
-    public TeapotInterface teapotInterface1;
-    public CupInterface cupInterface1;
+    public TeapotInterface teapotInterface;
+    public CupInterface cupInterface;
     #endregion
 
     #endregion
 
     #region Properties
 
-    public float MinTasteAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
-    public float MaxTasteAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
-    
-    public float MinStrengthAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
-    public float MaxStrengthAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
-    
-    public float MinTemperatureAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
-    public float MaxTemperatureAdjusted1 { get { return Mathf.Min(Mathf.Max(order1.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
-    
+    public float MinTasteAdjusted { get { return Mathf.Min(Mathf.Max(openOrder.targetTaste - (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
+    public float MaxTasteAdjusted { get { return Mathf.Min(Mathf.Max(openOrder.targetTaste + (1.0f / currentDay) * openCustomer.ToleranceTaste, -1.0f), 1.0f); } }
+
+    public float MinStrengthAdjusted { get { return Mathf.Min(Mathf.Max(openOrder.targetStrength - (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
+    public float MaxStrengthAdjusted { get { return Mathf.Min(Mathf.Max(openOrder.targetStrength + (1.0f / currentDay) * openCustomer.ToleranceStrength, -1.0f), 1.0f); } }
+
+    public float MinTemperatureAdjusted { get { return Mathf.Min(Mathf.Max(openOrder.targetTemperature - (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
+    public float MaxTemperatureAdjusted { get { return Mathf.Min(Mathf.Max(openOrder.targetTemperature + (1.0f / currentDay) * openCustomer.ToleranceTemperature, -1.0f), 1.0f); } }
+
     #endregion
 
     #region Functions
@@ -170,7 +166,7 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     PushToQueue(GameEvent.BEGIN_ORDER_SWIPE);
 
-                    order1 = openCustomer.GenerateOrder();
+                    openOrder = openCustomer.GenerateOrder();
 
                     customerUI.ShowGreeting();
 
@@ -182,7 +178,6 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     PushToQueue(GameEvent.MAKE_ORDER);
 
-                    // Activate screen swipe begin order effect
                     beginOrderUI.TriggerBeginOrderSwipe();
 
                     break;
@@ -191,28 +186,15 @@ public class GameEventManager : Singleton<GameEventManager>
             #region MAKE_ORDER
             case GameEvent.MAKE_ORDER:
                 {
-                    PushToQueue(GameEvent.CUSTOMER_FEEDBACK);
+                    PushToQueue(GameEvent.POST_ORDER_EVAL);
 
+                    docketUI.ShowDocket();
+                    kettleUI.gameObject.SetActive(true);
+                    teapotUI.gameObject.SetActive(true);
+                    cupUI.gameObject.SetActive(true);
                     InputController.Instance.EnableInteraction();
                     timeDisplay.ShowPause(false);
                     missionTimer.ResumeTimer();
-                    docketUI.ShowDocketSubmit();
-
-                    break;
-                }
-            #endregion
-            #region CONTINUE
-            case GameEvent.CUSTOMER_FEEDBACK:
-                {
-                        PushToQueue(GameEvent.POST_ORDER_EVAL);
-
-                    InputController.Instance.DisableInteraction();
-                    timeDisplay.ShowPause(true);
-                    missionTimer.PauseTimer();
-                    docketUI.HideDocketSubmit();
-
-                    // Evaluate the current order.
-                    orderFeedbackUI.ShowOrderFeedback();
 
                     break;
                 }
@@ -229,18 +211,19 @@ public class GameEventManager : Singleton<GameEventManager>
                         PushToQueue(GameEvent.CUSTOMER_ARRIVE);
                     }
 
-                    // Show post order evaluation.
+                    InputController.Instance.DisableInteraction();
                     postOrderEvaluationUI.ShowPostOrderEvaluation();
                     TriggerCameraZoomOut();
                     timeDisplay.gameObject.SetActive(false);
+                    docketUI.gameObject.SetActive(false);
+                    teapotUI.gameObject.SetActive(false);
+                    kettleUI.gameObject.SetActive(false);
+                    cupUI.gameObject.SetActive(false);
                     missionTimer.PauseTimer();
-
                     totalDaySpeed += missionTimer.ElapsedTime();
-
-                    cupObject1.SetActive(false);
-                    // Clean up parameters
+                    cupObject.SetActive(false);
                     openCustomer = null;
-                    order1 = null;
+                    openOrder = null;
                     ResetContainers();
 
                     break;
@@ -251,7 +234,6 @@ public class GameEventManager : Singleton<GameEventManager>
                 {
                     PushToQueue(GameEvent.BEGIN_DAY);
 
-                    // Show end of day evaluation.
                     endDayEvaluationUI.ShowEndDayEvaluation();
                     customerViewer.SetCustomer(null);
 
@@ -285,112 +267,94 @@ public class GameEventManager : Singleton<GameEventManager>
         eventFired = false;
     }
 
-    public void EvaluateOrder1()
-    {
-        EvaluateOrder();
-        docketUI.docket1.SetActive(false);
-        SetEventToComplete();
-    }
-
     public void ResetContainers()
     {
         kettleObject.GetComponent<KettleInterface>().kettle.ResetKettle();
-        teapotObject1.GetComponent<TeapotInterface>().teapot.ResetTeapot();
-        cupObject1.GetComponent<CupInterface>().cup.ResetCup();
+        teapotObject.GetComponent<TeapotInterface>().teapot.ResetTeapot();
+        cupObject.GetComponent<CupInterface>().cup.ResetCup();
     }
 
     public void EvaluateOrder()
     {
         OrderEvaluation newEvaluation = new OrderEvaluation();
 
-        if (!cupInterface1.cup.IsFull)
+        if (!cupInterface.cup.IsFull)
         {
             newEvaluation.InsertEvaluation(Evaluation.Error.EMPTY_CUP);
         }
-        else if (cupInterface1.cup.IsFull && cupInterface1.cup.additiveRepository.Count == 0)
+        else if (cupInterface.cup.IsFull && cupInterface.cup.additiveRepository.Count == 0)
         {
             newEvaluation.InsertEvaluation(Evaluation.Error.JUST_WATER);
         }
         else
         {
-            float tasteMin;
-            float tasteMax;
-            float tasteRange;
-            float strengthMin;
-            float strengthMax;
-            float strengthRange;
-            float temperatureMin;
-            float temperatureMax;
-            float temperatureRange;
+            float tasteMin = MinTasteAdjusted;
+            float tasteMax = MaxTasteAdjusted;
+            float strengthMin = MinStrengthAdjusted;
+            float strengthMax = MaxStrengthAdjusted;
+            float temperatureMin = MinTemperatureAdjusted;
+            float temperatureMax = MaxTemperatureAdjusted;
 
-                tasteMin = MinTasteAdjusted1;
-                tasteMax = MaxTasteAdjusted1;
-                strengthMin = MinStrengthAdjusted1;
-                strengthMax = MaxStrengthAdjusted1;
-                temperatureMin = MinTemperatureAdjusted1;
-                temperatureMax = MaxTemperatureAdjusted1;
-           
+            int maxScore = 3 + openOrder.additiveRepository.Count;
 
-            tasteRange = (tasteMax - tasteMin) * 0.5f;
-            strengthRange = (strengthMax - strengthMin) * 0.5f;
-            temperatureRange = (temperatureMax - temperatureMin) * 0.5f;
-
-            if (cupInterface1.cup.Taste < tasteMin)
+            if (cupInterface.cup.Taste < tasteMin)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_BITTER);
             }
-            else if (cupInterface1.cup.Taste > tasteMax)
+            else if (cupInterface.cup.Taste > tasteMax)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_SWEET);
             }
             else
             {
-                newEvaluation.scoreTaste = Mathf.Abs(cupInterface1.cup.Taste - order1.targetTaste) / tasteRange;
+                newEvaluation.scoreTaste = 1.0f;
             }
 
-            if (cupInterface1.cup.Strength < strengthMin)
+            if (cupInterface.cup.Strength < strengthMin)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_WEAK);
             }
-            else if (cupInterface1.cup.Strength > strengthMax)
+            else if (cupInterface.cup.Strength > strengthMax)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_STRONG);
             }
             else
             {
-                newEvaluation.scoreStrength = Mathf.Abs(cupInterface1.cup.Strength - order1.targetStrength) / strengthRange;
+                newEvaluation.scoreStrength = 1.0f;
             }
 
-            if (cupInterface1.cup.Temperature < temperatureMin)
+            if (cupInterface.cup.Temperature < temperatureMin)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_COLD);
             }
-            else if (cupInterface1.cup.Temperature > temperatureMax)
+            else if (cupInterface.cup.Temperature > temperatureMax)
             {
                 newEvaluation.InsertEvaluation(Evaluation.Error.TOO_HOT);
             }
             else
             {
-                newEvaluation.scoreTemperature = Mathf.Abs(cupInterface1.cup.Temperature - order1.targetTemperature) / temperatureRange;
+                newEvaluation.scoreTemperature = 1.0f;
             }
 
-            if (order1.additiveRepository.Count != 0)
+            if (openOrder.additiveRepository.Count != 0)
             {
-                foreach (Additive additive in order1.additiveRepository)
+                foreach (Additive additive in openOrder.additiveRepository)
                 {
-                    if (!cupInterface1.cup.ContainsAdditive(additive))
+                    if (cupInterface.cup.ContainsAdditive(additive))
                     {
-                        newEvaluation.InsertEvaluation(Evaluation.Error.NO_ADDITIVE, additive.Name);
-                    }
-                    else
-                    {
-                        newEvaluation.scoreAdditive += 1.0f / order1.additiveRepository.Count;
+                        newEvaluation.scoreAdditive = 1.0f / openOrder.additiveRepository.Count;
                     }
                 }
             }
+            else
+            {
+                newEvaluation.scoreAdditive = 3.0f;
+            }
         }
 
-        order1.evaluation = newEvaluation;
+        openOrder.evaluation = newEvaluation;
+
+        SetEventToComplete();
     }
 
     public void TriggerCameraZoomIn()

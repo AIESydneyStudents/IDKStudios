@@ -50,6 +50,19 @@ public class Container
         return false;
     }
 
+    public Additive GetType(Additive.Type type)
+    {
+        foreach (Additive additive in additiveRepository)
+        {
+            if (additive.additiveType == type)
+            {
+                return additive;
+            }
+        }
+
+        return null;
+    }
+
     public void InsertAdditiveToRepo(Additive additive)
     {
         additiveRepository.Add(additive);

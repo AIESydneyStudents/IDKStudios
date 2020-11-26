@@ -82,7 +82,7 @@ public class PostOrderEvaluationUI : MonoBehaviour
             star.sprite = emptyStar;
         }
 
-        Order order1 = GameEventManager.Instance.order1;
+        Order order1 = GameEventManager.Instance.openOrder;
 
         averageScoreTaste = order1.evaluation.scoreTaste;
         averageScoreStrength = order1.evaluation.scoreStrength;

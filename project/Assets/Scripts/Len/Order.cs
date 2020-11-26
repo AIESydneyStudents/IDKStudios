@@ -34,5 +34,23 @@ public class Order
         targetTemperature = temperature;
     }
 
+    public Additive GetAdditiveOfType(Additive.Type type)
+    {
+        if (additiveRepository.Count == 0)
+        {
+            return null;
+        }
+
+        foreach (Additive additive in additiveRepository)
+        {
+            if (additive.additiveType == type)
+            {
+                return additive;
+            }
+        }
+
+        return null;
+    }
+
     #endregion
 }

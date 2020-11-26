@@ -140,11 +140,8 @@ public class Teapot : Container
         {
             return false;
         }
-
-        // If tea is required for additive, check if it contains tea.
-        // Ignores check completely if it's tea in the first place.
-        if (additive.teaRequirement && 
-            !ContainsType(Additive.Type.TEA))
+        
+        if (additiveRepository.Count == 1)
         {
             return false;
         }

@@ -482,7 +482,10 @@ public class Customer : ScriptableObject
 
         foreach (Additive additive in cup.additiveRepository)
         {
-            newOrder.additiveRepository.Add(additive);
+            if (GameEventManager.Instance.randomGenerator.Next(0, 2) == 1)
+            {
+                newOrder.additiveRepository.Add(additive);
+            }
         }
 
         return newOrder;

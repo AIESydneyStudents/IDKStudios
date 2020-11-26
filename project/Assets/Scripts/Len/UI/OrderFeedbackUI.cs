@@ -10,7 +10,7 @@ public class OrderFeedbackUI : MonoBehaviour
         gameObject.SetActive(true);
         GameEventManager.Instance.timeDisplay.ShowPause(true);
 
-        Evaluation evaluation = GameEventManager.Instance.order1.evaluation.GetRandomEvaluation();
+        Evaluation evaluation = GameEventManager.Instance.openOrder.evaluation.GetRandomEvaluation();
         string customerReacton = GameEventManager.Instance.openCustomer.GetEvaluationResponse(evaluation);
         feedbackText.text = customerReacton;
     }

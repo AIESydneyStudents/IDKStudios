@@ -148,7 +148,6 @@ public class InputController : Singleton<InputController>
                     {
                         case Interface.InterfaceType.KETTLE_INTERFACE:
                             {
-                                kettleUI.ShowUI(Input.mousePosition);
 
                                 break;
                             }
@@ -156,9 +155,6 @@ public class InputController : Singleton<InputController>
                             {
                                 TeapotInterface teapotInterface =
                                     (TeapotInterface)containerController.associatedInterface;
-
-                                teapotUI.SetInterface(teapotInterface);
-                                teapotUI.ShowUI(Input.mousePosition);
 
                                 break;
                             }
@@ -179,8 +175,6 @@ public class InputController : Singleton<InputController>
 
     public void HideInformationReadout()
     {
-        kettleUI.HideUI();
-        teapotUI.HideUI();
     }
 
     public void UpdateInformationReadout()

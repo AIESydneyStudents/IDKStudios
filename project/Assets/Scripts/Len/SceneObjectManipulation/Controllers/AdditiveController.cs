@@ -37,6 +37,7 @@ public class AdditiveController : InteractionController
                             (TeapotInterface)compatibleContainerController.associatedInterface;
 
                         teapotInterface.teapot.InsertAdditive(additiveInterface.containedAdditive);
+                        GameEventManager.Instance.teapotUI.UpdateIcons();
 
                         break;
                     }
@@ -46,6 +47,7 @@ public class AdditiveController : InteractionController
                             (CupInterface)compatibleContainerController.associatedInterface;
 
                         cupInterface.cup.InsertAdditive(additiveInterface.containedAdditive);
+                        GameEventManager.Instance.cupUI.UpdateIcons();
 
                         break;
                     }

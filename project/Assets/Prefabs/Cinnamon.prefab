@@ -30,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955501016607560110}
-  m_LocalRotation: {x: -0, y: 0.76869017, z: -0, w: -0.6396214}
-  m_LocalPosition: {x: 0.39728078, y: 1.036, z: 0.3736383}
+  m_LocalRotation: {x: 0.10458429, y: 0.761542, z: 0.087023824, w: -0.63367397}
+  m_LocalPosition: {x: 0.3990044, y: 1.1292, z: 0.3736383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 259.52698, z: 0}
+  m_LocalEulerAnglesHint: {x: -15.372001, y: 259.134, z: 2.913}
 --- !u!33 &955501016607559954
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -161,8 +161,6 @@ MonoBehaviour:
   compatibleGameObject: {fileID: 0}
   compatibleController: {fileID: 0}
   menuController: {fileID: 0}
-  progressBarController: {fileID: 0}
-  progressBarOffset: {x: 0, y: 0, z: 0}
   anchorController: {fileID: 0}
   atAnchor: 0
   additiveInterface: {fileID: 955501016607559999}

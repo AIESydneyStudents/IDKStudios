@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8202855, y: 0.6531448, z: 0.7740776}
-  m_Center: {x: 0, y: 0.3265724, z: 0}
+  m_Size: {x: 0.8202855, y: 0.6531448, z: 0.06904912}
+  m_Center: {x: 0, y: 0.3265724, z: 0.3525142}
 --- !u!114 &8337846297746087106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +118,6 @@ MonoBehaviour:
   compatibleGameObject: {fileID: 0}
   compatibleController: {fileID: 0}
   menuController: {fileID: 0}
-  progressBarController: {fileID: 0}
-  progressBarOffset: {x: 0, y: 0, z: 0}
   anchorController: {fileID: 0}
   atAnchor: 0
   additiveObjectToSpawn1: {fileID: 8001752072013330062, guid: 10151ec080a9e0348a9787b355aecf04,

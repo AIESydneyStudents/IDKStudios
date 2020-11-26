@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4509202230463644501}
-  - component: {fileID: 3291173175941296041}
+  - component: {fileID: 547751812556697691}
   - component: {fileID: 8691843232732523845}
   - component: {fileID: 5993150116783331831}
   - component: {fileID: 1705785585809647021}
@@ -97,8 +97,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 135, y: 90, z: 0}
---- !u!135 &3291173175941296041
-SphereCollider:
+--- !u!136 &547751812556697691
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,9 +107,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.11877186
-  m_Center: {x: 0.00052543974, y: 0.06559342, z: 0}
+  m_Radius: 0.11387703
+  m_Height: 0.3663807
+  m_Direction: 1
+  m_Center: {x: -0.0005086263, y: -0.14495055, z: -0.059882015}
 --- !u!65 &8691843232732523845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,8 +122,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12325833, y: 0.21244496, z: 0.13584039}
-  m_Center: {x: -0.00064914423, y: 0.09094203, z: 0.0050175996}
+  m_Size: {x: 0.12325833, y: 0.22962876, z: 0.13369592}
+  m_Center: {x: -0.0006491442, y: -0.1494273, z: -0.047536064}
 --- !u!114 &5993150116783331831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,16 +152,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerType: 0
   meshRenderer: {fileID: 278780986595649072}
-  interactionTrigger: {fileID: 3291173175941296041}
+  interactionTrigger: {fileID: 547751812556697691}
   isHighlighted: 0
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
-  hoverHighlightColor: {r: 0, g: 0, b: 0, a: 0}
-  interactHightlightColor: {r: 0, g: 0, b: 0, a: 0}
+  originalColor: {r: 0.50980395, g: 0.3529412, b: 0.14117648, a: 1}
+  hoverHighlightColor: {r: 0.50980395, g: 0.3529412, b: 0.14117648, a: 1}
+  interactHightlightColor: {r: 0.50980395, g: 0.3529412, b: 0.14117648, a: 1}
   compatibleGameObject: {fileID: 0}
   compatibleController: {fileID: 0}
   menuController: {fileID: 0}
-  progressBarController: {fileID: 0}
-  progressBarOffset: {x: 0, y: 0, z: 0}
   anchorController: {fileID: 0}
   atAnchor: 0
   additiveInterface: {fileID: 5993150116783331831}

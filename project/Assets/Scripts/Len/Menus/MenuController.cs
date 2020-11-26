@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
+    public Vector3 offset;
+
     public enum MenuType
     {
         KETTLE_MENU,
@@ -14,7 +16,7 @@ public class MenuController : MonoBehaviour
 
     public void ShowMenu(Vector3 screenPosition)
     {
-        gameObject.GetComponent<RectTransform>().anchoredPosition = screenPosition;
+        gameObject.GetComponent<RectTransform>().anchoredPosition = screenPosition + offset;
         gameObject.SetActive(true);
         InputController.Instance.DisableInteraction();
     }

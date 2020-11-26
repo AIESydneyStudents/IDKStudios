@@ -10,6 +10,7 @@ public class IngredientUI : MonoBehaviour
     public AttributeSliderController strengthSlider;
     public AttributeSliderController temperatureSlider;
     public RectTransform thisRect;
+    public Vector3 offset;
 
     public void SetAdditive(Additive additive)
     {
@@ -31,6 +32,6 @@ public class IngredientUI : MonoBehaviour
 
     public void UpdatePosition(Vector3 position)
     {
-        thisRect.anchoredPosition = position;
+        thisRect.anchoredPosition = position + offset;
     }
 }

@@ -6,45 +6,16 @@ using UnityEngine.UI;
 public class BeginDayUI : MonoBehaviour
 {
     public Text splashText;
-
-    public float fadeInTime;
-    public float persistTime;
-    public float fadeOutTime;
-
-    private bool splashTriggered;
-    public float splashTimer;
-
+    public float timer;
 
     private void Update()
     {
-        if (!splashTriggered)
-        {
-            return;
-        }
+        timer += Time.deltaTime;
 
-        // Run the fade in and fade out of the graphic.
-
-        splashTimer += Time.deltaTime;
-
-        if (splashTimer < fadeInTime)
+        if (timer > 2.0f)
         {
-            Color color = splashText.color;
-            color.a = splashTimer / fadeInTime;
-            splashText.color = color;
-        }
-        else if (splashTimer > fadeInTime + persistTime)
-        {
-            Color color = splashText.color;
-            color.a = 1.0f - (splashTimer - fadeInTime - persistTime) / fadeOutTime;
-            splashText.color = color;
-        }
-
-        // End code
-        if (splashTimer > fadeInTime + persistTime + fadeOutTime)
-        {
-            splashTriggered = false;
+            timer = 0.0f;
             gameObject.SetActive(false);
-            splashTimer = 0.0f;
             GameEventManager.Instance.SetEventToComplete();
         }
     }
@@ -55,7 +26,7 @@ public class BeginDayUI : MonoBehaviour
     public void TriggerBeginDaySplash(int currentDay)
     {
         gameObject.SetActive(true);
-        splashTriggered = true;
+
         splashText.text = "DAY " + currentDay.ToString();
     }
 }

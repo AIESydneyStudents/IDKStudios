@@ -31,6 +31,8 @@ public class EndDayEvaluationUI : MonoBehaviour
     public float supStarDelay;
     public int growthDirection;
 
+    public bool alreadyFiredEnd;
+
     private void Update()
     {
         if (complete)
@@ -42,17 +44,22 @@ public class EndDayEvaluationUI : MonoBehaviour
             moveToNextGroup = false;
             currentGroupFinished = false;
 
-            if (GameEventManager.Instance.currentStoreReputation == 0)
+            if (!alreadyFiredEnd)
             {
-                GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.GAME_OVER);
-            }
-            else if (GameEventManager.Instance.currentStoreReputation == 7)
-            {
-                GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.GAME_WON);
-            }
-            else
-            {
-                GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.BEGIN_DAY);
+                if (GameEventManager.Instance.currentStoreReputation == 0)
+                {
+                    GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.GAME_OVER);
+                }
+                else if (GameEventManager.Instance.currentStoreReputation == 7)
+                {
+                    GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.GAME_WON);
+                }
+                else
+                {
+                    GameEventManager.Instance.PushToQueue(GameEventManager.GameEvent.BEGIN_DAY);
+                }
+
+                alreadyFiredEnd = true;
             }
             
 
@@ -66,6 +73,7 @@ public class EndDayEvaluationUI : MonoBehaviour
     {
         complete = false;
         continueButton.interactable = false;
+        alreadyFiredEnd = false;
 
         foreach (Image star in accuracyStars)
         {

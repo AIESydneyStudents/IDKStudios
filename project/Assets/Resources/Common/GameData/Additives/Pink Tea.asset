@@ -16,11 +16,11 @@ MonoBehaviour:
   additiveType: 0
   container: 1
   initialEffect:
-    effectTaste: 0.5
+    effectTaste: 1
     effectStrength: 0.6
     effectTemperature: 0
   steepEffect:
-    effectTaste: -0.05
+    effectTaste: 0.05
     effectStrength: 0.05
     effectTemperature: 0
   teaRequirement: 0

@@ -1,55 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TimeDisplayUI : MonoBehaviour
 {
     public Text timeText;
-    public Image pauseImage;
+    public Image faceIcon;
 
-    public bool isPaused;
+    public Sprite happyFace;
+    public Sprite normalFace;
+    public Sprite sadFace;
+
     public float counter;
-    public bool pauseShown;
 
-    public int greenTime;
-    public int yellowTime;
+    public int happyTime;
+    public int normalTime;
 
     private void OnEnable()
     {
-        isPaused = false;
+        faceIcon.sprite = happyFace;
+        counter = 0;
         timeText.text = "0:00";
     }
 
     private void Update()
     {
-        if (isPaused)
-        {
-            counter += Time.deltaTime;
+        counter += Time.deltaTime;
 
-            if (pauseShown)
-            {
-                if (counter > 0.5f)
-                {
-                    pauseShown = false;
-                    counter = 0.0f;
-                    pauseImage.gameObject.SetActive(false);
-                }
-            }
-            else
-            {
-                if (counter > 0.5f)
-                {
-                    pauseShown = true;
-                    counter = 0.0f;
-                    pauseImage.gameObject.SetActive(true);
-                }
-            }
-        }
-        else
-        {
-            UpdateTime();
-        }
+        UpdateTime();
     }
 
     public void UpdateTime()
@@ -58,34 +35,19 @@ public class TimeDisplayUI : MonoBehaviour
         int minutes = (int)(0.01667f * time);
         int seconds = time - minutes * 60;
 
-        timeText.text = minutes.ToString() + ":" + seconds.ToString();
+        timeText.text = minutes.ToString() + " : " + (seconds < 10 ? "0" : "") + seconds.ToString();
 
-        if (time < greenTime)
+        if (time < happyTime)
         {
-            timeText.color = Color.green;
+            faceIcon.sprite = happyFace;
         }
-        else if (time > greenTime + yellowTime)
+        else if (time > happyTime + normalTime)
         {
-            timeText.color = Color.red;
+            faceIcon.sprite = normalFace;
         }
         else
         {
-            timeText.color = Color.yellow;
-        }
-    }
-
-    public void ShowPause(bool value)
-    {
-        isPaused = value;
-        
-        if (!value)
-        {
-            pauseImage.gameObject.SetActive(false);
-        }
-        else
-        {
-            counter = 0.0f;
-            pauseShown = true;
+            faceIcon.sprite = sadFace;
         }
     }
 }

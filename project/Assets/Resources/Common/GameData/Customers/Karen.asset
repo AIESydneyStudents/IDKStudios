@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d64daad60573132408f4b22d894f0fe9, type: 3}
-  m_Name: Jess
+  m_Name: Karen
   m_EditorClassIdentifier: 
   customerName: Jess
   customerIndex: 0
@@ -35,17 +35,29 @@ MonoBehaviour:
   weight: 0
   customerMesh: {fileID: -6602441374692447843, guid: 81d544127e9259d4eb9ebf032dcaf059,
     type: 3}
-  customerMaterial: {fileID: 2100000, guid: 74bcaf0e04a888c4e85b9a7b04f8065a, type: 2}
-  greeting: 
-  emptyCup: []
-  justWater: []
-  tooWeak: []
-  tooStrong: []
-  tooBitter: []
-  tooSweet: []
-  tooCold: []
-  tooHot: []
-  noAdditive: []
-  resultGreat: []
-  resultMediocre: []
-  resultPoor: []
+  customerMaterial: {fileID: 2100000, guid: 571e7094bfd1e7047b5f01489ae750c6, type: 2}
+  greeting: Can I speak with the manager please?
+  emptyCup:
+  - Can I speak with the manager please?
+  justWater:
+  - Can I speak with the manager please?
+  tooWeak:
+  - Can I speak with the manager please?
+  tooStrong:
+  - Can I speak with the manager please?
+  tooBitter:
+  - Can I speak with the manager please?
+  tooSweet:
+  - Can I speak with the manager please?
+  tooCold:
+  - Can I speak with the manager please?
+  tooHot:
+  - Can I speak with the manager please?
+  noAdditive:
+  - Can I speak with the manager please?
+  resultGreat:
+  - Can I speak with the manager please?
+  resultMediocre:
+  - Can I speak with the manager please?
+  resultPoor:
+  - Can I speak with the manager please?

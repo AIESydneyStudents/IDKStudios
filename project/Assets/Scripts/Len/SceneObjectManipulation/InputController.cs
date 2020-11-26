@@ -61,6 +61,7 @@ public class InputController : Singleton<InputController>
                     pointingAtController = pointingAtGameObject.GetComponent<InteractionController>();
                     pointingAtController.HoverHighlight();
                     ShowInformationReadout();
+                    UpdateInformationReadout();
                 }
             }
             else
@@ -139,30 +140,17 @@ public class InputController : Singleton<InputController>
     {
         switch (pointingAtController.controllerType)
         {
-            case InteractionController.ControllerType.CONTAINER:
+            case InteractionController.ControllerType.ADDITIVE_SOURCE:
                 {
-                    ContainerController containerController =
-                        (ContainerController)pointingAtController;
+                    AdditiveSourceController additiveSourceController =
+                        (AdditiveSourceController)pointingAtController;
 
-                    switch (containerController.associatedInterface.interfaceType)
-                    {
-                        case Interface.InterfaceType.KETTLE_INTERFACE:
-                            {
+                    Additive containedAdditive = additiveSourceController.containedAdditive;
 
-                                break;
-                            }
-                        case Interface.InterfaceType.TEAPOT_INTERFACE:
-                            {
-                                TeapotInterface teapotInterface =
-                                    (TeapotInterface)containerController.associatedInterface;
+                    IngredientUI ingredientUI = GameEventManager.Instance.ingredientUI;
 
-                                break;
-                            }
-                        default:
-                            {
-                                break;
-                            }
-                    }
+                    ingredientUI.SetAdditive(containedAdditive);
+                    ingredientUI.ShowUI();
 
                     break;
                 }
@@ -175,10 +163,21 @@ public class InputController : Singleton<InputController>
 
     public void HideInformationReadout()
     {
+        GameEventManager.Instance.ingredientUI.HideUI();
     }
 
     public void UpdateInformationReadout()
     {
-        
+        switch (pointingAtController.controllerType)
+        {
+            case InteractionController.ControllerType.ADDITIVE_SOURCE:
+                {
+                    GameEventManager.Instance.ingredientUI.UpdatePosition(Input.mousePosition);
+
+                    break;
+                }
+            default:
+                break;
+        }
     }
 }

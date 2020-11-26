@@ -88,8 +88,8 @@ public class EndDayEvaluationUI : MonoBehaviour
         float totalDayAccuracy = GameEventManager.Instance.totalDayAccuracy / 
                                  GameEventManager.Instance.customersEachDay;
 
-        float timeTarget = GameEventManager.Instance.timeDisplay.greenTime +
-                           GameEventManager.Instance.timeDisplay.yellowTime;
+        float timeTarget = GameEventManager.Instance.timeDisplay.happyTime +
+                           GameEventManager.Instance.timeDisplay.normalTime;
 
         float totalDaySpeed = 1.0f - (GameEventManager.Instance.totalDaySpeed /
                                        GameEventManager.Instance.customersEachDay) / timeTarget;

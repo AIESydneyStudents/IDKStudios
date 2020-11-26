@@ -6,6 +6,15 @@ public class ButtonMouseOverUI : MonoBehaviour, IPointerEnterHandler, IPointerEx
 {
     public IngredientUI ingredientUI;
     public Additive additive;
+    public bool stillOverButton;
+
+    private void Update()
+    {
+        if (stillOverButton)
+        {
+            ingredientUI.UpdatePosition(Input.mousePosition);
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -13,10 +22,12 @@ public class ButtonMouseOverUI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         ingredientUI.ShowUI();
 
         ingredientUI.UpdatePosition(Input.mousePosition);
+        stillOverButton = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         ingredientUI.HideUI();
+        stillOverButton = false;
     }
 }

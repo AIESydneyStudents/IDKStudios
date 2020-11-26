@@ -87,6 +87,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public TeapotUI teapotUI;
     public CupUI cupUI;
     public KettleMenuController kettleTemperatureUI;
+    public IngredientUI ingredientUI;
     #endregion
 
     #region Objects
@@ -201,7 +202,6 @@ public class GameEventManager : Singleton<GameEventManager>
                     teapotUI.gameObject.SetActive(true);
                     cupUI.gameObject.SetActive(true);
                     InputController.Instance.EnableInteraction();
-                    timeDisplay.ShowPause(false);
                     missionTimer.ResumeTimer();
 
                     break;

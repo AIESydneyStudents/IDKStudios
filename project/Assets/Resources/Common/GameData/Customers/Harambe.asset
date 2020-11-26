@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d64daad60573132408f4b22d894f0fe9, type: 3}
-  m_Name: Jeff
+  m_Name: Harambe
   m_EditorClassIdentifier: 
-  customerName: Jeff
+  customerName: Harambe
   customerIndex: 0
   teaPreferences:
   - teaName: Blue Tea
@@ -43,8 +43,8 @@ MonoBehaviour:
   weight: 0
   customerMesh: {fileID: 2532197596911439093, guid: 399b1d5be2bddfa40aa63f837c458cf0,
     type: 3}
-  customerMaterial: {fileID: 2100000, guid: c65b1d3c73373e54b8276dc0d939dba5, type: 2}
-  greeting: 'Hey there! Can I get '
+  customerMaterial: {fileID: 2100000, guid: 392f50a0a3e65cb4882c6da6945fb8d6, type: 2}
+  greeting: Hey there!
   emptyCup:
   - My cup....it's...empty.
   - Is this some kind of joke?

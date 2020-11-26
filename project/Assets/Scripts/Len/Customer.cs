@@ -566,6 +566,11 @@ public class Customer : ScriptableObject
 
     public string GetEvaluationResponse(Evaluation evaluation)
     {
+        if (evaluation == null)
+        {
+            return "";
+        }
+
         int random = GameEventManager.Instance.randomGenerator.Next();
 
         switch (evaluation.error)

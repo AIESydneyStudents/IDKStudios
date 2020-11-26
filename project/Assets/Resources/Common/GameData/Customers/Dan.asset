@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64daad60573132408f4b22d894f0fe9, type: 3}
+  m_Name: Dan
+  m_EditorClassIdentifier: 
+  customerName: Dan
+  customerIndex: 0
+  teaPreferences:
+  - teaName: Yellow Tea
+    additiveIndex: 0
+    weighting: 0.3
+    percentile: 0
+  condimentPreferences:
+  - condimentName: Sugar
+    additiveIndex: 0
+    weighting: 0.8
+    percentile: 0
+  milkPreferences:
+  - milkName: Almond Milk
+    additiveIndex: 0
+    weighting: 0.9
+    percentile: 0
+  toleranceTaste: 0.8
+  toleranceStrength: 0.85
+  toleranceTemperature: 0.6
+  weight: 0
+  customerMesh: {fileID: 2532197596911439093, guid: 399b1d5be2bddfa40aa63f837c458cf0,
+    type: 3}
+  customerMaterial: {fileID: 2100000, guid: c65b1d3c73373e54b8276dc0d939dba5, type: 2}
+  greeting: I'm late for a meeting.
+  emptyCup:
+  - I'm not that late...
+  - My cup...it has nothing.
+  justWater:
+  - Is this a new water blend?
+  - What am I supposed to do with this?
+  tooWeak:
+  - I can taste the water.
+  - It might as well just be water.
+  tooStrong:
+  - I wanted water with my tea leaves.
+  - Is this a joke, Jim?
+  tooBitter:
+  - I hope next time, it's less bitter.
+  - It could be bitter.
+  tooSweet:
+  - Woah, far too sweet.
+  - I didn't ask for Bubble tea..
+  tooCold:
+  - Isn't tea usually hotter than this?
+  - Way too cold.
+  tooHot:
+  - I'm surprised the cup didn't melt.
+  - Way too hot.
+  noAdditive:
+  - 'I asked for '
+  - 'You must have put in too little '
+  resultGreat:
+  - This is why I come here.
+  - Awesome job.
+  resultMediocre:
+  - Not bad. Not great.
+  - Ehh....
+  resultPoor:
+  - You only sell tea, and yet you can't even get that right.
+  - This is trash.

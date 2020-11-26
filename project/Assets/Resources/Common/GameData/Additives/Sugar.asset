@@ -16,8 +16,8 @@ MonoBehaviour:
   additiveType: 1
   container: 2
   initialEffect:
-    effectTaste: 0.567
-    effectStrength: 0
+    effectTaste: 0.5
+    effectStrength: -0.1
     effectTemperature: 0
   steepEffect:
     effectTaste: 0

@@ -102,17 +102,21 @@ public class PostOrderEvaluationUI : MonoBehaviour
         float averageScore = 0.25f * (averageScoreTaste + averageScoreStrength + averageScoreTemperature + averageScoreIngredients);
         GameEventManager.Instance.totalDayAccuracy += averageScore;
 
+        Evaluation evaluation = GameEventManager.Instance.openOrder.evaluation.GetRandomEvaluation();
+        string customerReacton = GameEventManager.Instance.openCustomer.GetEvaluationResponse(evaluation);
+        customerResponseText.text = customerReacton + " ";
+
         if (averageScore < 0.33f)
         {
-            customerResponseText.text = GameEventManager.Instance.openCustomer.GetPoorResponse();
+            customerResponseText.text += GameEventManager.Instance.openCustomer.GetPoorResponse();
         }
         else if (averageScore < 0.67f)
         {
-            customerResponseText.text = GameEventManager.Instance.openCustomer.GetMediocreResponse();
+            customerResponseText.text += GameEventManager.Instance.openCustomer.GetMediocreResponse();
         }
         else
         {
-            customerResponseText.text = GameEventManager.Instance.openCustomer.GetGreatResponse();
+            customerResponseText.text += GameEventManager.Instance.openCustomer.GetGreatResponse();
         }
 
         gameObject.SetActive(true);

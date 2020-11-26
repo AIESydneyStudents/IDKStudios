@@ -3554,7 +3554,6 @@ MonoBehaviour:
   kettleInterface: {fileID: 1475812393}
   thisRect: {fileID: 777286057}
   cup1: {fileID: 893648009}
-  cup2: {fileID: 472983217}
   emptyCup: {fileID: 21300000, guid: 84d656c3a7d3ac3488d5da17fb07348f, type: 3}
   fullCup: {fileID: 21300000, guid: 0217e85523dc2654fba4e6288948c19f, type: 3}
 --- !u!1 &786375644
@@ -7965,8 +7964,6 @@ MonoBehaviour:
   openCustomer: {fileID: 0}
   missionTimer: {fileID: 1256145501}
   timeDisplay: {fileID: 2085432502}
-  orderCount: 0
-  lastToBeEvaluated: 0
   customersEachDay: 2
   completedCustomers: 0
   totalDayAccuracy: 0
@@ -7989,16 +7986,10 @@ MonoBehaviour:
   kettleObject: {fileID: 2028313702}
   kettleBaseObject: {fileID: 911057842}
   teapotObject1: {fileID: 746580418}
-  teapotObject2: {fileID: 0}
   cupObject1: {fileID: 2134641914}
-  cupObject2: {fileID: 0}
-  saucerObject1: {fileID: 206415223}
-  saucerObject2: {fileID: 0}
   kettleInterface: {fileID: 1475812393}
   teapotInterface1: {fileID: 6251759383523299606}
-  teapotInterface2: {fileID: 0}
   cupInterface1: {fileID: 2015801617383837877}
-  cupInterface2: {fileID: 0}
 --- !u!4 &1256145503
 Transform:
   m_ObjectHideFlags: 0
@@ -13541,6 +13532,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2015801617383837875}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2134641918 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2441058098598359994, guid: 21692c4c03d411e459e1873535ad435c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2015801617383837875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2143417252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14009,6 +14006,11 @@ PrefabInstance:
       propertyPath: cupIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 455044127863880483, guid: 21692c4c03d411e459e1873535ad435c,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 2134641918}
     - target: {fileID: 1119125523932345717, guid: 21692c4c03d411e459e1873535ad435c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14077,7 +14079,7 @@ PrefabInstance:
     - target: {fileID: 4169408999434323814, guid: 21692c4c03d411e459e1873535ad435c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4436037672850637716, guid: 21692c4c03d411e459e1873535ad435c,
         type: 3}

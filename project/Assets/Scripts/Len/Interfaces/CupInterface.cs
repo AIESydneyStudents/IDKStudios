@@ -6,15 +6,9 @@ public class CupInterface : Interface
 {
     public Cup cup;
 
-    public MeshRenderer renderer;
-
     private void Update()
     {
         cup.Simulate(Time.deltaTime);
-
-        Color color = renderer.material.color;
-        color.r = cup.Temperature;
-        renderer.material.color = color;
     }
 
     public CupInterface()

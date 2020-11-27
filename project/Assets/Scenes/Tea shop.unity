@@ -1814,6 +1814,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed0d2cb1343da6c4e9c2bf44483f824c, type: 3}
+--- !u!114 &227254491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1781781312036947297, guid: 706d56163228efc46a89890e1331d766,
+    type: 3}
+  m_PrefabInstance: {fileID: 1240517926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &236767951
 GameObject:
   m_ObjectHideFlags: 0
@@ -6963,6 +6975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1256145502}
@@ -6970,6 +6987,91 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetEventToComplete
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.6698113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.5518207
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.38229796
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.a
+      value: 0.5372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.74509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.20392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.a
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.5754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.47973096
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.33931115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.53333336
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1010312804}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037252067267100442, guid: a9404b4b26d42e34085f2a9354db389d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5037252067267100443, guid: a9404b4b26d42e34085f2a9354db389d,
         type: 3}
@@ -7538,12 +7640,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1010312801}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1010312804}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e84501d65a247e479790d609b739065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1010312804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5037252067967171891, guid: a9404b4b26d42e34085f2a9354db389d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1010312801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1018486697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ab4dd74ed4826cd43b35d0a643cf207f,
@@ -9060,6 +9168,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 64076910075934036, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 227254491}
     - target: {fileID: 326191964023277811, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_Sprite

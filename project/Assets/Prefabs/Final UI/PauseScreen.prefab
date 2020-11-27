@@ -216,8 +216,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2397005422145838721}
   - component: {fileID: 1466204552316673470}
-  - component: {fileID: 4913672029376184389}
-  - component: {fileID: 5738248321147860132}
   m_Layer: 5
   m_Name: PauseScreen
   m_TagString: Untagged
@@ -262,35 +260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 2397005422145838720}
---- !u!222 &4913672029376184389
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2397005422145838720}
-  m_CullTransparentMesh: 0
---- !u!223 &5738248321147860132
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2397005422145838720}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!1 &2791726251301192391
 GameObject:
   m_ObjectHideFlags: 0

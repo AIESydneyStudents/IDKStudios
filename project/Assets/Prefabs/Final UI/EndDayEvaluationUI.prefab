@@ -758,6 +758,7 @@ MonoBehaviour:
   subStarDelay: 0.5
   supStarDelay: 0
   growthDirection: 0
+  alreadyFiredEnd: 0
 --- !u!1 &5037252068018765739
 GameObject:
   m_ObjectHideFlags: 0

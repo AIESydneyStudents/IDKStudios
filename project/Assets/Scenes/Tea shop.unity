@@ -9505,6 +9505,24 @@ PrefabInstance:
       propertyPath: submitButton
       value: 
       objectReference: {fileID: 1944672713}
+    - target: {fileID: 7794326496359419494, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: anyCondiment
+      value: 
+      objectReference: {fileID: 21300000, guid: d2b31d74a0a32ae459223a3b81af3ab1,
+        type: 3}
+    - target: {fileID: 7794326496359419494, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: anyMilk
+      value: 
+      objectReference: {fileID: 21300000, guid: 891768053548f6e43b754ecb5570cb14,
+        type: 3}
+    - target: {fileID: 7794326496359419494, guid: 706d56163228efc46a89890e1331d766,
+        type: 3}
+      propertyPath: anyTea
+      value: 
+      objectReference: {fileID: 21300000, guid: b6c85c2ce29b9bf4cb80c9d9ad20e96a,
+        type: 3}
     - target: {fileID: 7794326496359419495, guid: 706d56163228efc46a89890e1331d766,
         type: 3}
       propertyPath: m_LocalPosition.x

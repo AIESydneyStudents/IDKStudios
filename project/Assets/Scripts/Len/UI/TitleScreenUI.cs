@@ -6,10 +6,9 @@ using UnityEngine.SceneManagement;
 public class TitleScreenUI : MonoBehaviour
 {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-
-    static void OnStartUp()
+    private void Start()
     {
-        //SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        Time.timeScale = 1.0f;
     }
 
     public void ContinueGame()

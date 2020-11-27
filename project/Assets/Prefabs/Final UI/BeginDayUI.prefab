@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4410095489425334517}
   - component: {fileID: 4410095489425334514}
+  - component: {fileID: 2286265076221144562}
   m_Layer: 5
   m_Name: BeginDayUI
   m_TagString: Untagged
@@ -203,10 +204,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashText: {fileID: 1111136605740576701}
-  fadeInTime: 2
-  persistTime: 2
-  fadeOutTime: 2
-  splashTimer: 0
+  timer: 0
+--- !u!111 &2286265076221144562
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410095489425334516}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 865a5837cae0bd34fb946e3e9557865d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 865a5837cae0bd34fb946e3e9557865d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5942968063574979865
 GameObject:
   m_ObjectHideFlags: 0

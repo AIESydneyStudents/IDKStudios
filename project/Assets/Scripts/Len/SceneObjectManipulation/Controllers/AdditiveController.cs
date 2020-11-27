@@ -38,6 +38,7 @@ public class AdditiveController : InteractionController
 
                         teapotInterface.teapot.InsertAdditive(additiveInterface.containedAdditive);
                         GameEventManager.Instance.teapotUI.UpdateIcons();
+                        GameEventManager.Instance.PushTeaStage(GameEventManager.TeaStage.FILL_CUP);
 
                         break;
                     }
@@ -48,6 +49,16 @@ public class AdditiveController : InteractionController
 
                         cupInterface.cup.InsertAdditive(additiveInterface.containedAdditive);
                         GameEventManager.Instance.cupUI.UpdateIcons();
+                        
+                        if (additiveInterface.containedAdditive.additiveType == Additive.Type.CONDIMENT)
+                        {
+                            GameEventManager.Instance.PushTeaStage(GameEventManager.TeaStage.ADD_MILK);
+                        }
+
+                        if (additiveInterface.containedAdditive.additiveType == Additive.Type.MILK)
+                        {
+                            GameEventManager.Instance.PushTeaStage(GameEventManager.TeaStage.SERVE);
+                        }
 
                         break;
                     }

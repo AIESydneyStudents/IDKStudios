@@ -95,6 +95,8 @@ public class ContainerController : InteractionController
                                         ReturnToAnchor();
                                         GameEventManager.Instance.kettleTemperatureUI.ShowMenu(InputController.Instance.camera.WorldToScreenPoint(kettleInterface.gameObject.transform.position));
                                         InputController.Instance.DisableInteraction();
+
+                                        GameEventManager.Instance.PushTeaStage(GameEventManager.TeaStage.FILL_TEAPOT);
                                     }
 
                                     GameEventManager.Instance.kettleUI.UpdateIcons();
@@ -152,6 +154,10 @@ public class ContainerController : InteractionController
                         GameEventManager.Instance.kettleUI.UpdateIcons();
                         GameEventManager.Instance.teapotUI.UpdateIcons();
 
+                        GameEventManager.Instance.PushTeaStage(GameEventManager.TeaStage.ADD_TEA);
+
+                        
+
                         break;
                     }
                 case Interface.InterfaceType.CUP_INTERFACE:
@@ -168,7 +174,10 @@ public class ContainerController : InteractionController
 
                         GameEventManager.Instance.teapotUI.UpdateIcons();
                         GameEventManager.Instance.cupUI.UpdateIcons();
-                        
+
+                        GameEventManager.Instance.PushTeaStage(GameEventManager.TeaStage.ADD_CONDIMENT);
+
+
                         break;
                     }
                 default:

@@ -45,9 +45,23 @@ public class GameEventManager : Singleton<GameEventManager>
         GAME_WON
     }
 
+    public enum TeaStage
+    {
+        FILL_KETTLE = 1,
+        FILL_TEAPOT = 2,
+        ADD_TEA = 3,
+        FILL_CUP = 4,
+        ADD_CONDIMENT = 5,
+        ADD_MILK = 6,
+        SERVE = 7
+    }
+
     public System.Random randomGenerator = new System.Random();
 
     public Queue<GameEvent> eventQueue = new Queue<GameEvent>();
+    public Stack<TeaStage> makingProgress = new Stack<TeaStage>();
+
+    public bool showTips;
 
     public int currentDay;
 
@@ -81,6 +95,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public bool rememberKettleUI;
     public bool rememberTimeUI;
     public bool rememberIngredientUI;
+    public bool rememberTipUI;
 
     #region UI Elements
     public BeginDayUI beginDayUI;
@@ -95,6 +110,7 @@ public class GameEventManager : Singleton<GameEventManager>
     public KettleMenuController kettleTemperatureUI;
     public IngredientUI ingredientUI;
     public TimeDisplayUI timeUI;
+    public TipUI tipUI;
     #endregion
 
     #region Objects
@@ -208,6 +224,17 @@ public class GameEventManager : Singleton<GameEventManager>
                     kettleUI.gameObject.SetActive(true);
                     teapotUI.gameObject.SetActive(true);
                     cupUI.gameObject.SetActive(true);
+
+                    if (currentDay == 1 && completedCustomers == 1)
+                    {
+                        PushTeaStage(TeaStage.FILL_KETTLE);
+                        tipUI.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        tipUI.gameObject.SetActive(false);
+                    }
+
                     InputController.Instance.EnableInteraction();
                     missionTimer.ResumeTimer();
 
@@ -234,6 +261,7 @@ public class GameEventManager : Singleton<GameEventManager>
                     teapotUI.gameObject.SetActive(false);
                     kettleUI.gameObject.SetActive(false);
                     cupUI.gameObject.SetActive(false);
+                    tipUI.gameObject.SetActive(false);
                     missionTimer.PauseTimer();
                     totalDaySpeed += missionTimer.ElapsedTime();
                     openCustomer = null;
@@ -293,6 +321,15 @@ public class GameEventManager : Singleton<GameEventManager>
     {
         eventComplete = true;
         eventFired = false;
+    }
+
+    public void PushTeaStage(TeaStage stage)
+    {
+        if (makingProgress.Count == 0 || makingProgress.Peek() == stage - 1)
+        {
+            makingProgress.Push(stage);
+            tipUI.UpdateTip();
+        }
     }
 
     public void ResetContainers()
@@ -425,6 +462,7 @@ public class GameEventManager : Singleton<GameEventManager>
             rememberKettleUI = kettleUI.gameObject.activeSelf;
             rememberTimeUI = timeUI.gameObject.activeSelf;
             rememberIngredientUI = ingredientUI.gameObject.activeSelf;
+            rememberTipUI = tipUI.gameObject.activeSelf;
 
             docketUI.gameObject.SetActive(false);
             cupUI.gameObject.SetActive(false);
@@ -432,6 +470,7 @@ public class GameEventManager : Singleton<GameEventManager>
             kettleUI.gameObject.SetActive(false);
             timeUI.gameObject.SetActive(false);
             ingredientUI.gameObject.SetActive(false);
+            tipUI.gameObject.SetActive(false);
         }
         else
         {
@@ -441,6 +480,7 @@ public class GameEventManager : Singleton<GameEventManager>
             kettleUI.gameObject.SetActive(rememberKettleUI);
             timeUI.gameObject.SetActive(rememberTimeUI);
             ingredientUI.gameObject.SetActive(rememberIngredientUI);
+            tipUI.gameObject.SetActive(rememberTipUI);
         }
     }
 
